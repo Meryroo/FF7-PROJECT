@@ -29,12 +29,13 @@ const StyledForm = styled.form`
   }
 `;
 
-const Form = ({ page, size }) => {
+const Form = ({ page, size, color }) => {
   const navigate = useNavigate();
   const { logout } = useContext(UserContext);
   return (
     <StyledForm
       size={size}
+      color={color}
       onClick={() => {
         page == 'home'
           ? navigate('/')
