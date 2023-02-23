@@ -11,8 +11,8 @@ const InputStyled = styled.input`
     color: #e8dcb6;
   }
 `;
-const Input = ({ children }) => {
-  return <InputStyled>{children}</InputStyled>;
+const Input = ({ ref, placeholder, type }) => {
+  return <InputStyled ref={ref} placeholder={placeholder} type={type}></InputStyled>;
 };
 
 export default Input;
