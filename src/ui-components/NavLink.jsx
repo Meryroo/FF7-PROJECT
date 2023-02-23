@@ -1,6 +1,8 @@
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import UserContext from '../context/UserContext';
 import Palette from '../styles/Palette';
 
 const NavLinkStyled = styled.button`
@@ -29,11 +31,16 @@ const NavLinkStyled = styled.button`
 
 const _NavLink = ({ page, size }) => {
   const navigate = useNavigate();
+  const { logout } = useContext(UserContext);
   return (
     <NavLinkStyled
       size={size}
       onClick={() => {
-        page == 'home' ? navigate('/') : navigate(`/${page}`);
+        page == 'home'
+          ? navigate('/')
+          : page == 'logout'
+          ? logout()
+          : navigate(`/${page}`);
       }}
     >
       {page}
