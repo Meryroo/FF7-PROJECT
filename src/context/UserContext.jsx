@@ -3,8 +3,9 @@ import { createContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const UserContext = createContext();
-const navigate = useNavigate();
+
 export const UserContexProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [user, setUser] = useState(() => {
     if (localStorage.getItem('user')) {
       return localStorage.getItem('user');

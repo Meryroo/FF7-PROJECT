@@ -13,9 +13,9 @@ import Login from './pages/Login';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <UserContexProvider>
-      <PageContexProvider>
-        <BrowserRouter basename="/">
+    <PageContexProvider>
+      <BrowserRouter basename="/">
+        <UserContexProvider>
           <Routes>
             <Route path="/" element={<App />}>
               <Route index element={<Home />} />
@@ -25,8 +25,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               <Route path="/about" element={<About />} />
             </Route>
           </Routes>
-        </BrowserRouter>
-      </PageContexProvider>
-    </UserContexProvider>
+        </UserContexProvider>
+      </BrowserRouter>
+    </PageContexProvider>
   </React.StrictMode>,
 );
