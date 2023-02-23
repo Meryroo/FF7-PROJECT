@@ -10,6 +10,7 @@ import Bestiary from './pages/Bestiary';
 import Data from './pages/Data';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import ProtectecRoute from './ui-components/ProtectecRoutes';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -21,7 +22,14 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               <Route index element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/bestiary" element={<Bestiary />} />
-              <Route path="/data" element={<Data />} />
+              <Route
+                path="/data"
+                element={
+                  <ProtectecRoute>
+                    <Data />
+                  </ProtectecRoute>
+                }
+              />
               <Route path="/about" element={<About />} />
             </Route>
           </Routes>
