@@ -1,12 +1,16 @@
+import '../src/App.css';
+
 import { Outlet } from 'react-router-dom';
 
 import Header from './ui-components/Header';
+import Hero from './ui-components/Hero';
 import NavBar from './ui-components/NavBar';
 
 function App() {
   return (
     <div className="App">
       <Header align={'flex-end'} height={'35vh'} color={'transparent'}>
+        <Hero />
         <NavBar
           height={'8px'}
           justify={'flex-end'}
