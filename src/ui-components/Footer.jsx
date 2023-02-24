@@ -28,14 +28,23 @@ const FooterStyled = styled.footer`
       : align === 'space-between'
       ? 'space-between'
       : 'center'};
-  background-color: ${({ color }) => (color ? color : Palette.main.background)};
+  background-color: ${({ variant }) => (variant ? variant : Palette.main.background)};
   color: ${({ color }) => (color ? color : 'inherit')};
   height: ${({ height }) => height};
   width: 100%;
   padding: ${({ padding }) => padding};
   margin: ${(margin) => margin};
 `;
-const Footer = ({ children, justify, align, color, height, padding, margin }) => {
+const Footer = ({
+  children,
+  justify,
+  align,
+  color,
+  height,
+  padding,
+  margin,
+  variant,
+}) => {
   return (
     <FooterStyled
       justify={justify}
@@ -44,6 +53,7 @@ const Footer = ({ children, justify, align, color, height, padding, margin }) =>
       height={height}
       padding={padding}
       margin={margin}
+      variant={variant}
     >
       {children}
     </FooterStyled>

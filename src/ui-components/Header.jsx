@@ -26,13 +26,13 @@ const HeaderStyled = styled.header`
       : align === 'space-between'
       ? 'space-between'
       : 'center'};
-  background-color: ${({ color }) => (color ? color : '#10101C')};
+  background-color: ${({ variant }) => (variant ? variant : '#10101C')};
   color: ${({ color }) => (color ? color : 'inherit')};
   height: ${({ height }) => height};
   width: 100%;
   padding: ${({ padding }) => padding};
 `;
-const Header = ({ children, justify, align, color, height, padding }) => {
+const Header = ({ children, justify, align, color, height, padding, variant }) => {
   return (
     <HeaderStyled
       justify={justify}
@@ -40,6 +40,7 @@ const Header = ({ children, justify, align, color, height, padding }) => {
       color={color}
       height={height}
       padding={padding}
+      variant={variant}
     >
       {children}
     </HeaderStyled>
