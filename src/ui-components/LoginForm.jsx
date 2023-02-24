@@ -6,7 +6,7 @@ const StyledForm = styled.form`
   background-color: transparent;
   border: 2px solid ${Palette.main.secondary};
   padding: ${({ size }) =>
-    size === 'lg' ? '0.6rem 1.2rem' : size === 'sm' ? '0.2rem 0.4rem' : '0.4rem 0.8rem'};
+    size === 'lg' ? '3rem 2rem' : size === 'sm' ? '1rem 0.5rem' : '2rem 1rem'};
   transition: 0.2s ease-in-out;
   display: flex;
   flex-direction: column;

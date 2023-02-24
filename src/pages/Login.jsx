@@ -23,7 +23,7 @@ const Login = () => {
   return (
     <Main>
       <h1>{page}</h1>
-      <Form>
+      <Form size="lg">
         <Input placeholder="user" type="text"></Input>
         <Input placeholder="password" type={see ? 'text' : 'password'}></Input>
         <Button
