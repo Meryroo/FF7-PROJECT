@@ -6,7 +6,8 @@ const ButtonRegisterStyled = styled.button`
   background-color: transparent;
   border: none;
   text-decoration: none;
-  color: ${({ color }) => (color === 'dark' ? Palette.main.dark : Palette.main.light)};
+  //color: ${({ color }) => (color === 'dark' ? Palette.main.dark : Palette.main.light)};
+  color: white;
   font-family: 'Helvetica';
   text-transform: capitalize;
   font-size: ${({ size }) => (size === 'lg' ? '15px' : size === 'sm' ? '8px' : '12px')};
@@ -26,12 +27,16 @@ const ButtonRegisterStyled = styled.button`
   }
   position: absolute;
   bottom: 0;
-  left: 0;
+  right: 0;
   margin-right: 0.5rem;
   margin-bottom: 0.2rem;
 `;
 
-const ButtonRegister = ({ text, action }) => {
-  return <ButtonRegisterStyled onClick={action}>{text}</ButtonRegisterStyled>;
+const ButtonRegister = ({ text, action, color }) => {
+  return (
+    <ButtonRegisterStyled color={color} onClick={action}>
+      {text}
+    </ButtonRegisterStyled>
+  );
 };
 export default ButtonRegister;
