@@ -24,6 +24,8 @@ const handleSubmit = (
       ev.currentTarget.previousSibling.previousSibling.previousSibling.previousSibling
         .previousSibling.value;
     const checkedUser = checkUser(userValue, userParams);
+    const checkedPassword = checkPassword(passwordValue, passwordParams);
+    const checkedEmail = CheckEmail(emailValue);
     if (checkedUser[0] == false) {
       if (checkedUser[1] == undefined) {
         alert('User cannot contain symbols or spaces');
@@ -32,12 +34,12 @@ const handleSubmit = (
         alert(`The word ${checkedUser[1]} is not allowed`);
       }
     }
-    if (checkPassword(passwordValue, passwordParams) == false) {
+    if (checkedPassword == false) {
       alert(
         'Password must have a lowerCase and upperCase letter, a symbol and a number and canoot contain spaces',
       );
     }
-    if (CheckEmail(emailValue) == false) {
+    if (checkedEmail == false) {
       alert('Please enter a valid email');
     }
     if (passwordValue != confirmValue) {
@@ -49,7 +51,12 @@ const handleSubmit = (
     if (passwordValue.length <= 7 || passwordValue.length >= 16) {
       alert('Password length has to be between 8 and 15 chars');
     }
-    if (emailValue && passwordValue && confirmValue == passwordValue && userValue) {
+    if (
+      checkedEmail &&
+      checkedPassword &&
+      confirmValue == passwordValue &&
+      checkedUser[0]
+    ) {
       setUser(userValue);
       setPassword(passwordValue);
       setEmail(emailValue);
