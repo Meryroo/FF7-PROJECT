@@ -15,6 +15,7 @@ const handleSubmit = (
   ev.preventDefault();
 
   if (register == 'login') {
+    let lengths = 0;
     const emailValue = ev.currentTarget.previousSibling.value;
     const confirmValue = ev.currentTarget.previousSibling.previousSibling.value;
     const passwordValue =
@@ -47,15 +48,18 @@ const handleSubmit = (
     }
     if (userValue.length <= 4 || userValue.length >= 13) {
       alert('User length has to be between 5 and 12 chars');
+      lengths++;
     }
     if (passwordValue.length <= 7 || passwordValue.length >= 16) {
       alert('Password length has to be between 8 and 15 chars');
+      lengths++;
     }
     if (
       checkedEmail &&
       checkedPassword &&
       confirmValue == passwordValue &&
-      checkedUser[0]
+      checkedUser[0] &&
+      lengths == 0
     ) {
       setUser(userValue);
       setPassword(passwordValue);
