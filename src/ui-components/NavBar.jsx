@@ -54,11 +54,11 @@ const NavBar = ({ height, justify, align, color, padding, position, gap }) => {
       gap={gap}
     >
       {page !== 'home' && <_NavLink size={'lg'} page={'home'} />}
-      {page !== 'bestiary' && <_NavLink size={'lg'} page={'Bestiary'} />}
-      {page !== 'data' && <_NavLink size={'lg'} page={'Data'} />}
-      {page !== 'about' && <_NavLink size={'lg'} page={'About'} />}
-      {!user && <_NavLink size={'lg'} page={'Login'} />}
-      {user && <_NavLink size={'lg'} page={'Logout'} />}
+      {page !== 'bestiary' && <_NavLink size={'lg'} page={'bestiary'} />}
+      {page !== 'data' && <_NavLink size={'lg'} page={'data'} />}
+      {page !== 'about' && <_NavLink size={'lg'} page={'about'} />}
+      {!user && <_NavLink size={'lg'} page={'login'} />}
+      {user && <_NavLink size={'lg'} page={'logout'} />}
     </NavBarStyled>
   );
 };
