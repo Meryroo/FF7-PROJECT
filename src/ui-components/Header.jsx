@@ -1,4 +1,7 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
+
+import { PageContext } from '../context/PageContext';
 
 const HeaderStyled = styled.header`
   display: flex;
@@ -30,22 +33,28 @@ const HeaderStyled = styled.header`
   background-color: ${({ variant }) => (variant ? variant : '#10101C')};
   color: ${({ color }) => (color ? color : 'inherit')};
   height: ${({ height }) => height};
-  width: 100%;
+  width: 100vw;
   padding: ${({ padding }) => padding};
 `;
+
 const Header = ({ children, justify, align, color, height, padding, variant }) => {
-  return (
-    <HeaderStyled
-      justify={justify}
-      align={align}
-      color={color}
-      height={height}
-      padding={padding}
-      variant={variant}
-    >
-      {children}
-    </HeaderStyled>
-  );
+  const { page } = useContext(PageContext);
+  {
+    if (page !== 'login') {
+      return (
+        <HeaderStyled
+          justify={justify}
+          align={align}
+          color={color}
+          height={height}
+          padding={padding}
+          variant={variant}
+        >
+          {children}
+        </HeaderStyled>
+      );
+    }
+  }
 };
 
 export default Header;
