@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const HeaderStyled = styled.header`
   display: flex;
+  flex-direction: column;
   justify-content: ${({ justify }) =>
     justify === 'center'
       ? 'center'
