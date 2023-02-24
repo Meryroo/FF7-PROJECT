@@ -5,6 +5,7 @@ const StyledHero = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+
   & video {
     width: 100%;
     transform: scale(1.2);
@@ -14,6 +15,16 @@ const StyledHero = styled.div`
   & .mute {
     z-index: 100;
     position: absolute;
+    background: none;
+    padding: 1rem;
+    right: 0;
+    top: 20%;
+    border: none;
+  }
+
+  & .mute-icon {
+    width: 15px;
+    filter: invert(100);
   }
 `;
 
@@ -22,14 +33,26 @@ const Video = () => {
   const toggleMute = (ev) => {
     setMuted(!muted);
     muted
-      ? (ev.currentTarget.previousSibling.muted = false)
-      : (ev.currentTarget.previousSibling.muted = true);
+      ? (ev.currentTarget.nextSibling.muted = false)
+      : (ev.currentTarget.nextSibling.muted = true);
   };
 
   return (
     <StyledHero>
       <button className="mute" onClick={(ev) => toggleMute(ev)}>
-        Mute
+        {muted ? (
+          <img
+            className="mute-icon"
+            src="https://res.cloudinary.com/dnkacmdmh/image/upload/v1677245783/mute_bt641i.png"
+            alt="muted Icon"
+          />
+        ) : (
+          <img
+            className="mute-icon"
+            src="https://res.cloudinary.com/dnkacmdmh/image/upload/v1677245778/volume_shqhai.png"
+            alt="muted Icon"
+          />
+        )}
       </button>
       <video
         muted
