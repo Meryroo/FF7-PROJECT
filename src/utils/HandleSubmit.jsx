@@ -1,50 +1,71 @@
-//import { useContext } from 'react';
-//import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-//import { EmailContext } from '../context/EmailContext';
-//import { PasswordContext } from '../context/PasswordContext';
-//import { UserContext } from '../context/UserContext';
+import { EmailContext } from '../context/EmailContext';
+import { PasswordContext } from '../context/PasswordContext';
+import { UserContext } from '../context/UserContext';
 import CheckEmail from './CheckEmail';
 import checkPassword from './CheckPassword';
 import checkUser from './CheckUser';
 import { passwordParams, userParams } from './ObjectToCheck';
 
 const handleSubmit = (ev, register) => {
-  //const navigate = useNavigate();
-  //const { setUser } = useContext(UserContext);
-  //const { password, setPassword } = useContext(PasswordContext);
-  //const { email, setEmail } = useContext(EmailContext);
+  const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
+  const { password, setPassword } = useContext(PasswordContext);
+  const { email, setEmail } = useContext(EmailContext);
   ev.preventDefault();
 
   if (register == 'login') {
-    const email = ev.currentTarget.previousSibling.value;
-    const confirm = ev.currentTarget.previousSibling.previousSibling.value;
-    const password =
+    const emailValue = ev.currentTarget.previousSibling.value;
+    const confirmValue = ev.currentTarget.previousSibling.previousSibling.value;
+    const passwordValue =
       ev.currentTarget.previousSibling.previousSibling.previousSibling.previousSibling
         .value;
-    const user =
+    const userValue =
       ev.currentTarget.previousSibling.previousSibling.previousSibling.previousSibling
         .previousSibling.value;
-    if (checkUser(user, userParams)[0] == false) {
-      alert('user');
+    const checkedUser = checkUser(userValue, userParams);
+    if (checkedUser[0] == false) {
+      if (checkedUser[1] == undefined) {
+        alert('User cannot contain symbols or spaces');
+      }
+      if (checkedUser[1] != undefined) {
+        alert(`The word ${checkedUser[1]} is not allowed`);
+      }
     }
-    if (checkPassword(password, passwordParams) == false) {
-      alert('password');
+    if (checkPassword(passwordValue, passwordParams) == false) {
+      alert(
+        'Password must have a lowerCase and upperCase letter, a symbol and a number and canoot contain spaces',
+      );
     }
-    if (CheckEmail(email) == false) {
-      alert('email');
+    if (CheckEmail(emailValue) == false) {
+      alert('Please enter a valid email');
     }
-    if (password != confirm) {
-      alert('confirm');
+    if (passwordValue != confirmValue) {
+      alert('The passwords does not match');
+    }
+    if (userValue.length <= 4 || userValue.length >= 13) {
+      alert('User length has to be between 5 and 12 chars');
+    }
+    if (passwordValue.length <= 7 || passwordValue.length >= 16) {
+      alert('Password length has to be between 8 and 15 chars');
+    }
+    if (emailValue && passwordValue && confirmValue == passwordValue && userValue) {
+      setUser(userValue);
+      setPassword(passwordValue);
+      setEmail(emailValue);
+      localStorage.setItem('user', userValue);
+      localStorage.setItem('password', passwordValue);
+      localStorage.setItem('email', emailValue);
+      navigate('/');
     }
   } else {
-    const password = ev.currentTarget.previousSibling.previousSibling.value;
-    const user = ev.currentTarget.previousSibling.previousSibling.previousSibling.value;
-    if (checkUser(user, userParams)[0] == false) {
-      alert('user');
-    }
-    if (checkPassword(password, passwordParams) == false) {
-      alert('password');
+    const passwordValue = ev.currentTarget.previousSibling.previousSibling.value;
+    const emailValue =
+      ev.currentTarget.previousSibling.previousSibling.previousSibling.value;
+    if (passwordValue == password && emailValue == email) {
+      console.log('si');
     }
   }
 };
