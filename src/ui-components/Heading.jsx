@@ -4,7 +4,7 @@ const H1 = styled.h1`
   font-family: ${({ font }) => font};
   font-weight: 700;
   letter-spacing: ${({ spacing }) => spacing};
-  color: ${({ color }) => color};
+  color: ${({ headcolor }) => headcolor};
   text-align: center;
   text-transform: uppercase;
   font-size: ${({ size }) =>
@@ -20,7 +20,7 @@ const H2 = styled.h2`
   font-family: ${({ font }) => font};
   font-weight: 700;
   letter-spacing: ${({ spacing }) => spacing};
-  color: ${({ color }) => color};
+  color: ${({ headcolor }) => headcolor};
   text-align: center;
   font-size: ${({ size }) =>
     size === 'xl'
@@ -35,7 +35,7 @@ const H3 = styled.h3`
   font-family: ${({ font }) => font};
   font-weight: 600;
   letter-spacing: ${({ spacing }) => spacing};
-  color: ${({ color }) => color};
+  color: ${({ headcolor }) => headcolor};
   text-align: center;
   font-size: ${({ size }) =>
     size === 'xl'
@@ -46,15 +46,31 @@ const H3 = styled.h3`
       ? '1.58rem'
       : '1rem'};
 `;
-const Heading = ({ children, size, as }) => {
+const Heading = ({ children, size, as, headcolor }) => {
   if (as === 'h1') {
-    return <H1 size={size}>{children}</H1>;
+    return (
+      <H1 headcolor={headcolor} size={size}>
+        {children}
+      </H1>
+    );
   } else if (as === 'h2') {
-    return <H2 size={size}>{children}</H2>;
+    return (
+      <H2 size={size} headcolor={headcolor}>
+        {children}
+      </H2>
+    );
   } else if (as === 'h3') {
-    return <H3 size={size}>{children}</H3>;
+    return (
+      <H3 size={size} headcolor={headcolor}>
+        {children}
+      </H3>
+    );
   } else {
-    return <H2 size={size}>{children}</H2>;
+    return (
+      <H2 size={size} headcolor={headcolor}>
+        {children}
+      </H2>
+    );
   }
 };
 

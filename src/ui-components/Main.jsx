@@ -5,14 +5,36 @@ import Palette from '../styles/Palette';
 const StyledMain = styled.main`
   background-color: ${Palette.main.background};
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-direction: ${({ direction }) => (direction == 'rows' ? 'rows' : 'column')};
+  align-items: ${({ justify }) =>
+    justify === 'center'
+      ? 'center'
+      : justify === 'flex-end'
+      ? 'flex-end'
+      : justify === 'flex-star'
+      ? 'flex-star'
+      : justify === 'space-around'
+      ? 'space-around'
+      : justify === 'space-between'
+      ? 'space-between'
+      : 'center'};
+  justify-content: ${({ justify }) =>
+    justify === 'center'
+      ? 'center'
+      : justify === 'flex-end'
+      ? 'flex-end'
+      : justify === 'flex-star'
+      ? 'flex-star'
+      : justify === 'space-around'
+      ? 'space-around'
+      : justify === 'space-between'
+      ? 'space-between'
+      : 'center'};
   width: 100vw;
-  height: 100vh;
+  height: ${({ homeheight }) => (homeheight ? homeheight : '100vh')};
 `;
 
-const Main = ({ children }) => {
-  return <StyledMain>{children}</StyledMain>;
+const Main = ({ children, homeheight }) => {
+  return <StyledMain homeheight={homeheight}>{children}</StyledMain>;
 };
 export default Main;
