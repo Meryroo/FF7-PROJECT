@@ -36,9 +36,10 @@ const NavBarStyled = styled.nav`
   height: ${({ height }) => height};
   width: 100%;
   padding: ${({ padding }) => padding};
+  gap: ${({ gap }) => gap};
   position: ${({ position }) => (position ? position : 'relative')};
 `;
-const NavBar = ({ height, justify, align, color, padding, position }) => {
+const NavBar = ({ height, justify, align, color, padding, position, gap }) => {
   const { user } = useContext(UserContext);
   const { page } = useContext(PageContext);
 
@@ -50,13 +51,14 @@ const NavBar = ({ height, justify, align, color, padding, position }) => {
       color={color}
       padding={padding}
       position={position}
+      gap={gap}
     >
-      {page !== 'home' && <_NavLink page={'home'} />}
-      {page !== 'bestiary' && <_NavLink page={'Bestiary'} />}
-      {page !== 'data' && <_NavLink page={'Data'} />}
-      {page !== 'about' && <_NavLink page={'About'} />}
-      {!user && <_NavLink page={'Login'} />}
-      {user && <_NavLink page={'Logout'} />}
+      {page !== 'home' && <_NavLink size={'lg'} page={'home'} />}
+      {page !== 'bestiary' && <_NavLink size={'lg'} page={'Bestiary'} />}
+      {page !== 'data' && <_NavLink size={'lg'} page={'Data'} />}
+      {page !== 'about' && <_NavLink size={'lg'} page={'About'} />}
+      {!user && <_NavLink size={'lg'} page={'Login'} />}
+      {user && <_NavLink size={'lg'} page={'Logout'} />}
     </NavBarStyled>
   );
 };
