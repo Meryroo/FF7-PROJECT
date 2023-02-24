@@ -4,7 +4,9 @@ const H1 = styled.h1`
   font-family: ${({ font }) => font};
   font-weight: 700;
   letter-spacing: ${({ spacing }) => spacing};
-  color: inherit;
+  color: '#E8DCB6';
+  text-align: center;
+  text-transform: uppercase;
   font-size: ${({ size }) =>
     size === 'xl'
       ? '2.81rem'
@@ -18,7 +20,8 @@ const H2 = styled.h2`
   font-family: ${({ font }) => font};
   font-weight: 700;
   letter-spacing: ${({ spacing }) => spacing};
-  color: inherit;
+  color: '#E8DCB6';
+  text-align: center;
   font-size: ${({ size }) =>
     size === 'xl'
       ? '2.81rem'
@@ -32,7 +35,8 @@ const H3 = styled.h3`
   font-family: ${({ font }) => font};
   font-weight: 600;
   letter-spacing: ${({ spacing }) => spacing};
-  color: inherit;
+  color: '#E8DCB6';
+  text-align: center;
   font-size: ${({ size }) =>
     size === 'xl'
       ? '2.81rem'
