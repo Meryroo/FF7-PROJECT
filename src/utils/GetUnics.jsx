@@ -1,22 +1,7 @@
-const GetUnics = (list, filtro) => {
+const unicos = (dinos, filtro) => {
   const listaSinRepetir = [];
-  const lista = [];
   let index = 0;
-  if (filtro == 'items' || filtro == 'strategy') {
-    const lis = list.map((enemy) => enemy[filtro]);
-    lis.forEach((filtro) => {
-      for (const key in filtro) {
-        lista.push(...filtro[key]);
-      }
-    });
-  } else {
-    list
-      .map((enemy) => enemy[filtro])
-      .forEach((cosa) => {
-        lista.push(...cosa);
-      });
-  }
-
+  const lista = dinos.map((dino) => dino[filtro]);
   lista.sort();
   lista.forEach((element) => {
     index++;
@@ -24,7 +9,6 @@ const GetUnics = (list, filtro) => {
       listaSinRepetir.push(element);
     }
   });
-  console.log(listaSinRepetir);
   return listaSinRepetir;
 };
-export default GetUnics;
+export default unicos;
