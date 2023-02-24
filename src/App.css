@@ -5,13 +5,3 @@
   list-style-type: none;
   text-decoration: none;
 }
-.maxInput{
-  position: absolute;
-  top: 0px;
-  right: 0px;
-}
-.minInput {
-  position: absolute;
-  top: 5px;
-  left: 0px;
-}
