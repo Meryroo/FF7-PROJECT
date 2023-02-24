@@ -1,19 +1,17 @@
-import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { EmailContext } from '../context/EmailContext';
-import { PasswordContext } from '../context/PasswordContext';
-import { UserContext } from '../context/UserContext';
 import CheckEmail from './CheckEmail';
 import checkPassword from './CheckPassword';
 import checkUser from './CheckUser';
 import { passwordParams, userParams } from './ObjectToCheck';
 
-const handleSubmit = (ev, register) => {
-  const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
-  const { password, setPassword } = useContext(PasswordContext);
-  const { email, setEmail } = useContext(EmailContext);
+const handleSubmit = (
+  ev,
+  register,
+  navigate,
+  setUser,
+  setPassword,
+  setEmail,
+  password,
+) => {
   ev.preventDefault();
 
   if (register == 'login') {
@@ -55,6 +53,7 @@ const handleSubmit = (ev, register) => {
       setUser(userValue);
       setPassword(passwordValue);
       setEmail(emailValue);
+      localStorage.setItem('prevUser', userValue);
       localStorage.setItem('user', userValue);
       localStorage.setItem('password', passwordValue);
       localStorage.setItem('email', emailValue);
@@ -62,10 +61,14 @@ const handleSubmit = (ev, register) => {
     }
   } else {
     const passwordValue = ev.currentTarget.previousSibling.previousSibling.value;
-    const emailValue =
+    const userValue =
       ev.currentTarget.previousSibling.previousSibling.previousSibling.value;
-    if (passwordValue == password && emailValue == email) {
-      console.log('si');
+    if (passwordValue == password && userValue == localStorage.getItem('prevUser')) {
+      setUser(userValue);
+      localStorage.setItem('user', userValue);
+      navigate('/');
+    } else {
+      alert('Wrong user or password');
     }
   }
 };
