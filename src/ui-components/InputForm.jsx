@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import Palette from '../styles/Palette';
+
 const InputStyled = styled.input`
   font-size: 18px;
   padding: 10px;
@@ -7,12 +9,13 @@ const InputStyled = styled.input`
   background: transparent;
   border: none;
   border-radius: 3px;
+  color: ${Palette.main.highlight};
   ::placeholder {
     color: #e8dcb6;
   }
 `;
-const Input = ({ ref, placeholder, type }) => {
-  return <InputStyled ref={ref} placeholder={placeholder} type={type}></InputStyled>;
+const Input = ({ placeholder, type }) => {
+  return <InputStyled placeholder={placeholder} type={type}></InputStyled>;
 };
 
 export default Input;

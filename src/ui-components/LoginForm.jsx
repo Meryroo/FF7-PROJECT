@@ -18,66 +18,11 @@ const StyledForm = styled.form`
   position: relative;
 `;
 
-const Form = ({ size, ref, children, action }) => {
+const Form = ({ size, children, action }) => {
   return (
-    <StyledForm size={size} ref={ref} onSubmit={action}>
+    <StyledForm size={size} onSubmit={action}>
       {children}
     </StyledForm>
   );
 };
 export default Form;
-
-/* const navigate = useNavigate();
-  const { setUser, logout } = useContext(UserContext);
-  const { password, setPassword } = useContext(PasswordContext);
-  const { email, setEmail } = useContext(EmailContext);
-  const userInput = useRef();
-  const passwordInput = useRef();
-  const passwordConfirmInput = useRef();
-  const emailInput = useRef();
-  const handleSubmit = () => {};
-  const handleClick = () => {};
-  const [see, setSee] = useState(false);
-  const [register, setRegister] = useState(() => {
-    email == null ? 'login' : 'register';
-  }); */
-/*   import { EmailContext } from '../context/EmailContext';
-import { PasswordContext } from '../context/PasswordContext';
-import UserContext from '../context/UserContext';
-import { useContext, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Button from './Button';
-import Input from './InputForm';
-import ButtonRegister from './Register'; */
-{
-  /* <Input ref={userInput} placeholder="user" type="text"></Input>
-      <Input
-        ref={passwordInput}
-        placeholder="password"
-        type={see ? 'text' : password}
-      ></Input>
-      <Button
-        size="sm"
-        action={() => {
-          setSee(!see);
-        }}
-      >
-        See password
-      </Button>
-      {email == null ?? (
-        <Input
-          ref={passwordConfirmInput}
-          placeholder="confirm password"
-          type={see ? 'text' : password}
-        ></Input>
-      )}
-      {email == null ?? <Input ref={emailInput} placeholder="email" type="text"></Input>}
-      <Button></Button>
-      <ButtonRegister
-        action={() => {
-          email == null ? setEmail(localStorage.getItem('email')) : setEmail(null);
-        }}
-      >
-        {register}
-      </ButtonRegister> */
-}

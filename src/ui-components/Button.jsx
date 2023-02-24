@@ -7,13 +7,20 @@ const ButtonStyled = styled.button`
   color: ${({ color }) => (color === 'white' ? 'white' : 'black')};
   width: fit-content;
   font-family: 'Helvetica';
-  font-size: ${({ size }) => (size === 'lg' ? '25px' : size === 'sm' ? '14px' : '20px')};
+  font-size: ${({ size }) =>
+    size === 'lg' ? '25px' : size === 'sm' ? '14px' : size === 'xm' ? '10px' : '20px'};
 
   font-weight: 700;
   letter-spacing: 0.5px;
   outline: none;
   padding: ${({ size }) =>
-    size === 'lg' ? '1.3rem 4.5rem' : size === 'sm' ? '8px 16px' : '0.8rem 4.3rem'};
+    size === 'lg'
+      ? '1.3rem 4.5rem'
+      : size === 'sm'
+      ? '8px 16px'
+      : size === 'xm'
+      ? '0.2rem 0.3rem'
+      : '0.8rem 4.3rem'};
   text-transform: uppercase;
   transition: 0.5s ease-in-out;
   &:hover {
@@ -21,9 +28,10 @@ const ButtonStyled = styled.button`
   }
 `;
 
-const Button = ({ action, variant, color, border, text, size }) => {
+const Button = ({ action, variant, color, border, text, size, type }) => {
   return (
     <ButtonStyled
+      type={type}
       onClick={action}
       variant={variant}
       color={color}
