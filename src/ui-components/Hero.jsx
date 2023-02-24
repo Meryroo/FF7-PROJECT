@@ -22,7 +22,8 @@ const Video = () => {
   const toggleMute = (ev) => {
     setMuted(!muted);
     muted
-
+      ? (ev.currentTarget.previousSibling.muted = false)
+      : (ev.currentTarget.previousSibling.muted = true);
   };
 
   return (
@@ -37,7 +38,7 @@ const Video = () => {
         src="https://res.cloudinary.com/di0zpa5yw/video/upload/v1677165627/ff7/SnapSave.io-FINAL_FANTASY_VII___The_Famous_Opening___HD_online-video-cutter.com_smtht6.mp4"
         type="video/mp4"
       ></video>
-
+    </StyledHero>
   );
 };
 
