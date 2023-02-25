@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const HomeTextStyled = styled.div`
-  background-color: ${({ variant }) => (variant === 'dark' ? 'black' : 'yellow')};
+  background-color: ${({ variant }) => (variant === 'dark' ? 'black' : 'transparent')};
   color: ${(color) => (color === 'white' ? 'white' : 'black')};
   display: flex;
   justify-content: center;
@@ -13,7 +13,7 @@ const HomeTextStyled = styled.div`
   margin: ${(margin) => margin};
 `;
 
-const HomeText = ({ variant, color, heigh, width, padding, margin, children }) => {
+const HomeText = ({ text, variant, color, heigh, width, padding, margin, children }) => {
   return (
     <HomeTextStyled
       variant={variant}
@@ -23,7 +23,7 @@ const HomeText = ({ variant, color, heigh, width, padding, margin, children }) =
       padding={padding}
       margin={margin}
     >
-      {children}
+      {children} {text}
     </HomeTextStyled>
   );
 };
