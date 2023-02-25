@@ -1,8 +1,9 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 //useState
 import { PageContext } from '../context/PageContext';
 import FilterFunction from '../utils/FilterFunction';
+import GetUnics from '../utils/GetUnics';
 //import FilterFunction from '../utils/FilterFunction';
 import mock from '../utils/Mock';
 //import MinMaxFilter from '../ui-components/MinMaxFilter';
@@ -44,7 +45,7 @@ const Bestiary = () => {
     enemy_skill: [],
     location: [],
   };
-  const newObject = {
+  const [newObject, setNewObject] = useState({
     name: '',
     level: [0, 100],
     HP: [0, 100],
@@ -55,16 +56,101 @@ const Bestiary = () => {
     items: [],
     strategy: [],
     enemy_skill: [],
-    location: ['Corel prison'],
-  };
+    location: [],
+  });
   const list = mock;
-  const unalteredList = mock;
-  const bothList = FilterFunction(list, unalteredList, object, newObject);
-  const finalList = bothList[1];
-
+  const [unalteredList, setUnalteredList] = useState([]); //allnumberslist
+  const [bothList, setBothList] = useState(
+    FilterFunction(list, unalteredList, object, newObject),
+  ); //resultado del filter
+  const [finalList, setFinalList] = useState(bothList[1]); //finallist
+  const items = GetUnics(list, 'items');
+  const strategy = GetUnics(list, 'strategy');
+  const enemy_skill = GetUnics(list, 'enemy_skill');
+  const location = GetUnics(list, 'location');
   return (
     <div>
       <h1>{page}</h1>
+      <div name="items" id="items">
+        {items.map((item) => (
+          <div key={item}>
+            <input
+              type="checkbox"
+              id={item}
+              onChange={(ev) => {
+                if (ev.target.checked) {
+                  const actulizedObject = {
+                    ...newObject,
+                    items: [...newObject.items, ev.target.id],
+                  };
+                  setNewObject({
+                    ...newObject,
+                    items: [...newObject.items, ev.target.id],
+                  });
+                  const filtered = FilterFunction(
+                    list,
+                    unalteredList,
+                    newObject,
+                    actulizedObject,
+                  );
+                  setBothList(filtered);
+                  setUnalteredList(filtered[0]);
+                  setFinalList(filtered[1]);
+                } else {
+                  const removed = [];
+                  newObject.items.forEach((item) => {
+                    if (item != ev.target.id) {
+                      removed.push(item);
+                    }
+                  });
+                  const actulizedObject = {
+                    ...newObject,
+                    items: removed,
+                  };
+                  setNewObject({
+                    ...newObject,
+                    items: removed,
+                  });
+                  const filtered = FilterFunction(
+                    list,
+                    unalteredList,
+                    newObject,
+                    actulizedObject,
+                  );
+                  setBothList(filtered);
+                  setUnalteredList(filtered[0]);
+                  setFinalList(filtered[1]);
+                }
+              }}
+            />
+            <h4>{item}</h4>
+          </div>
+        ))}
+      </div>
+      <div name="strategy" id="strategy">
+        {strategy.map((item) => (
+          <div key={item}>
+            <input type="checkbox" />
+            <h4>{item}</h4>
+          </div>
+        ))}
+      </div>
+      <div name="enemy_skill" id="enemy_skill">
+        {enemy_skill.map((item) => (
+          <div key={item}>
+            <input type="checkbox" />
+            <h4>{item}</h4>
+          </div>
+        ))}
+      </div>
+      <div name="location" id="location">
+        {location.map((item) => (
+          <div key={item}>
+            <input type="checkbox" />
+            <h4>{item}</h4>
+          </div>
+        ))}
+      </div>
       <div>
         {finalList.map((enemy) => (
           <div key={enemy.id}>

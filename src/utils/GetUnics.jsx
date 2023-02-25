@@ -24,7 +24,6 @@ const GetUnics = (list, filtro) => {
       listaSinRepetir.push(element);
     }
   });
-  console.log(listaSinRepetir);
   return listaSinRepetir;
 };
 export default GetUnics;
