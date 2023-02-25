@@ -13,6 +13,7 @@ const StyledDiv = styled.div`
   width: ${({ width }) => width};
   gap: ${({ gap }) => gap};
   border: ${({ border }) => (border === 'yes' ? '2px solid black' : 'none')};
+  flex-wrap: wrap;
 `;
 
 const DivFlex = ({
