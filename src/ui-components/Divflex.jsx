@@ -6,7 +6,7 @@ const StyledDiv = styled.div`
   align-items: center;
   flex-direction: ${({ direction }) => (direction === 'column' ? 'column' : 'row')};
   background-color: ${({ variant }) => (variant ? variant : 'none')};
-  color: ${({ color }) => (color === 'white' ? 'white' : 'black')};
+  color: ${({ color }) => (color === 'white' ? 'white' : '#E8DCB6')};
   margin: ${({ margin }) => margin};
   padding: ${({ padding }) => padding};
   height: ${({ height }) => height};
