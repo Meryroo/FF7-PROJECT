@@ -4,6 +4,9 @@ import Palette from '../styles/Palette';
 
 const StyledMain = styled.main`
   background-color: ${Palette.main.background};
+  background-image: ${({ image }) => image};
+  background-size: cover;
+  background-attachment: fixed;
   display: flex;
   flex-direction: ${({ direction }) => (direction == 'rows' ? 'rows' : 'column')};
   align-items: ${({ align }) =>
@@ -34,13 +37,14 @@ const StyledMain = styled.main`
   height: ${({ homeheight }) => (homeheight ? homeheight : '100vh')};
 `;
 
-const Main = ({ children, homeheight, direction, justify, align }) => {
+const Main = ({ children, homeheight, direction, justify, align, image }) => {
   return (
     <StyledMain
       direction={direction}
       justify={justify}
       align={align}
       homeheight={homeheight}
+      image={image}
     >
       {children}
     </StyledMain>
