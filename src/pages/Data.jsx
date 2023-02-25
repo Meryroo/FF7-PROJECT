@@ -7,17 +7,27 @@ const Data = () => {
   const [enemies, setEnemies] = useState([]);
   const [loaded, setloaded] = useState(false);
   const [newEnemy, setNewEnemy] = useState({
-    image: '',
+    img: '',
     name: '',
-    subname: '',
-    cc: '',
+    level: '',
+    atributes: '',
+    earned: '',
+    items: '',
+    strategy: '',
+    enemy_skill: '',
+    location: '',
   });
   const [error, setError] = useState(null);
   const [editEnemy, setEditEnemy] = useState({
-    image: '',
+    img: '',
     name: '',
-    subname: '',
-    cc: '',
+    level: '',
+    atributes: '',
+    earned: '',
+    items: '',
+    strategy: '',
+    enemy_skill: '',
+    location: '',
   });
 
   const getEnemies = async () => {
@@ -29,7 +39,7 @@ const Data = () => {
 
   const createEnemies = (ev) => {
     ev.preventDefault();
-    if (!newEnemy.image || !newEnemy.name || !newEnemy.subname || !newEnemy.cc) {
+    if (!newEnemy.img || !newEnemy.name || !newEnemy.level || !newEnemy.location) {
       setError('Formulario imcompleto');
     } else {
       setError(null);
@@ -79,10 +89,9 @@ const Data = () => {
       {loaded ? (
         enemies.map((enemy) => (
           <div className="enemycard" key={enemy.id}>
-            <img src={enemy.image} alt={enemy.name} />
+            <img src={enemy.img} alt={enemy.name} />
             <h3>{enemy.name}</h3>
-            <h3>{enemy.subname}</h3>
-            <h3>{enemy.cc}</h3>
+            <h3>{enemy.level}</h3>
             <button onClick={() => setEditEnemy(enemy)}>Edit</button>
             <button onClick={() => deleteEnemies(enemy.id)}>Delete</button>
           </div>
@@ -95,21 +104,21 @@ const Data = () => {
         <input
           type="text"
           placeholder="Image URL"
-          onChange={(ev) => setNewEnemy({ ...newEnemy, image: ev.target.value })}
+          onChange={(ev) => setNewEnemy({ ...newEnemy, img: ev.target.value })}
         />
         <input
           type="text"
-          placeholder="Brand"
+          placeholder="Name"
           onChange={(ev) => setNewEnemy({ ...newEnemy, name: ev.target.value })}
         />
         <input
-          type="text"
-          placeholder="Model"
-          onChange={(ev) => setNewEnemy({ ...newEnemy, subname: ev.target.value })}
+          type="number"
+          placeholder="Level"
+          onChange={(ev) => setNewEnemy({ ...newEnemy, level: ev.target.value })}
         />
         <input
-          type="number"
-          placeholder="CC"
+          type="text"
+          placeholder="Location"
           onChange={(ev) => setNewEnemy({ ...newEnemy, cc: ev.target.value })}
         />
         <button type="submit">Create Enemy</button>
@@ -120,8 +129,8 @@ const Data = () => {
         <input
           type="text"
           placeholder="Image URL"
-          value={editEnemy.image}
-          onChange={(ev) => setEditEnemy({ ...editEnemy, image: ev.target.value })}
+          value={editEnemy.img}
+          onChange={(ev) => setEditEnemy({ ...editEnemy, img: ev.target.value })}
         />
         <input
           type="text"
@@ -131,15 +140,15 @@ const Data = () => {
         />
         <input
           type="text"
-          placeholder="Model"
-          value={editEnemy.subname}
+          placeholder="Level"
+          value={editEnemy.level}
           onChange={(ev) => setEditEnemy({ ...editEnemy, subname: ev.target.value })}
         />
         <input
-          type="number"
-          placeholder="CC"
+          type="text"
+          placeholder="Location"
           value={editEnemy.cc}
-          onChange={(ev) => setEditEnemy({ ...editEnemy, cc: ev.target.value })}
+          onChange={(ev) => setEditEnemy({ ...editEnemy, location: ev.target.value })}
         />
         <button type="submit">Edit Enemy</button>
       </form>
