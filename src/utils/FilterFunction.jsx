@@ -1,41 +1,123 @@
 const FilterFunction = (list, unalteredList, object, newObject) => {
   const filter = CompareObjects(object, newObject);
-  if (filter.method === 'add') {
-    return filter.key === 'name'
-      ? filterName(unalteredList, filter.value)
-      : filter.key === 'enemy_skill' || filter.key === 'location'
-      ? FilterArrays(unalteredList, filter.key, filter.value[filter.value.length - 1])
-      : FilterObjects(unalteredList, filter.key, filter.value[filter.value.length - 1]);
+  let finalList = [];
+  let allNumbersList = [];
+  if (filter.method === 'numberOrName') {
+    finalList = FilterNumberOrName(unalteredList, filter);
+    allNumbersList = unalteredList;
+    return [allNumbersList, finalList];
   }
-  if (filter.method === 'remove') {
-    const listName = filter.name == '' ? list : filterName(list, filter.name);
-    const listLevel = filter.level == [] ? listName : FilterLevel(listName, filter.level);
-    const listHP =
-      filter.HP == []
-        ? listLevel
-        : FilterNumbers(listLevel, ['atributes', 'HP'], filter.HP);
-    const listMP =
-      filter.MP == [] ? listHP : FilterNumbers(listLevel, ['atributes', 'MP'], filter.MP);
-    const listExp =
-      filter.exp == [] ? listMP : FilterNumbers(listMP, ['earned', 'exp'], filter.exp);
-    const listAP =
-      filter.AP == [] ? listExp : FilterNumbers(listExp, ['earned', 'AP'], filter.AP);
-    const listGil =
-      filter.gil == [] ? listAP : FilterNumbers(listAP, ['earned', 'gil'], filter.gil);
-    return listGil;
+  if (filter.method === 'addArray') {
+    allNumbersList = [...unalteredList, ...FilterArrays(list, filter.key, filter.value)];
+    allNumbersList = removeDuplicates(allNumbersList);
+    finalList = FilterNumberOrName(allNumbersList, filter);
+    return [allNumbersList, finalList];
+  }
+  if (filter.method === 'removeArray') {
+    filter.value.forEach((value) =>
+      allNumbersList.push(...FilterArrays(unalteredList, filter.key, value)),
+    );
+    allNumbersList = removeDuplicates(allNumbersList);
+    finalList = FilterNumberOrName(allNumbersList, filter);
+    return [allNumbersList, finalList];
+  }
+  if (filter.method === 'addObject') {
+    allNumbersList = [...unalteredList, ...FilterObjects(list, filter.key, filter.value)];
+    allNumbersList = removeDuplicates(allNumbersList);
+    finalList = FilterNumberOrName(allNumbersList, filter);
+    return [allNumbersList, finalList];
+  }
+  if (filter.method === 'removeObject') {
+    filter.value.forEach((value) =>
+      allNumbersList.push(...FilterObjects(unalteredList, filter.key, value)),
+    );
+    allNumbersList = removeDuplicates(allNumbersList);
+    finalList = FilterNumberOrName(allNumbersList, filter);
+    return [allNumbersList, finalList];
+  } else {
+    return [list, unalteredList];
   }
 };
 export default FilterFunction;
+
+const FilterNumberOrName = (list, filter) => {
+  const listName = filter.name == '' ? list : filterName(list, filter.name);
+  const listLevel =
+    filter.level[0] == 0 && filter.level[1] == 100
+      ? listName
+      : FilterLevel(listName, filter.level);
+  const listHP =
+    filter.HP[0] == 0 && filter.HP[1] == 100
+      ? listLevel
+      : FilterNumbers(listLevel, ['atributes', 'HP'], filter.HP);
+  const listMP =
+    filter.MP[0] == 0 && filter.MP[1] == 100
+      ? listHP
+      : FilterNumbers(listLevel, ['atributes', 'MP'], filter.MP);
+
+  const listExp =
+    filter.exp[0] == 0 && filter.exp[1] == 100
+      ? listMP
+      : FilterNumbers(listMP, ['earned', 'exp'], filter.exp);
+  const listAP =
+    filter.AP[0] == 0 && filter.AP[1] == 100
+      ? listExp
+      : FilterNumbers(listExp, ['earned', 'AP'], filter.AP);
+  const listGil =
+    filter.gil[0] == 0 && filter.gil[1] == 100
+      ? listAP
+      : FilterNumbers(listAP, ['earned', 'gil'], filter.gil);
+
+  return listGil;
+};
 const CompareObjects = (object, newObject) => {
   let finalObject = {};
   for (const key in object) {
-    if (object[key] !== newObject[key]) {
-      object[key].length < newObject[key].length
-        ? (finalObject = { key: [key], value: newObject[key], method: 'add' })
-        : (finalObject = { ...newObject, method: 'remove' });
+    if (
+      object[key][0] != newObject[key][0] ||
+      object[key][object[key].length - 1] != newObject[key][[newObject[key].length - 1]]
+    ) {
+      if (
+        key != 'items' &&
+        key != 'strategy' &&
+        key != 'enemy_skill' &&
+        key != 'location'
+      ) {
+        finalObject = { ...newObject, method: 'numberOrName' };
+      }
+      if (key == 'enemy_skill' || key == 'location') {
+        object[key].length < newObject[key].length
+          ? (finalObject = {
+              ...newObject,
+              key: key,
+              value: newObject[key][newObject[key].length - 1],
+              method: 'addArray',
+            })
+          : (finalObject = {
+              ...newObject,
+              key: key,
+              value: object[key][object[key].length - 1],
+              method: 'removeArray',
+            });
+      }
+      if (key == 'items' || key == 'strategy') {
+        object[key].length < newObject[key].length
+          ? (finalObject = {
+              ...newObject,
+              key: key,
+              value: newObject[key][newObject[key].length - 1],
+              method: 'addObject',
+            })
+          : (finalObject = {
+              ...newObject,
+              key: key,
+              value: object[key][object[key].length - 1],
+              method: 'removeObject',
+            });
+      }
     }
-    return finalObject;
   }
+  return finalObject;
 };
 const filterName = (list, value) => {
   return list.filter((enemy) => enemy.name.toLowerCase().includes(value.toLowerCase()));
@@ -58,7 +140,8 @@ const FilterObjects = (list, key, value) => {
   return array;
 };
 const FilterArrays = (list, key, value) => {
-  return list.filter((enemy) => value === enemy[key].map((val) => val === value)[0]);
+  console.log(list[0][key].find((val) => val === value));
+  return list.filter((enemy) => value == enemy[key].find((val) => val === value));
 };
 const FilterNumbers = (list, keys, value) => {
   return list.filter(
@@ -67,4 +150,21 @@ const FilterNumbers = (list, keys, value) => {
 };
 const FilterLevel = (list, value) => {
   return list.filter((enemy) => enemy.level >= value[0] && enemy.level <= value[1]);
+};
+const removeDuplicates = (list) => {
+  const idList = list.map((enemy) => enemy.id);
+  idList.sort((a, b) => a - b);
+  const noRepeatIds = [];
+  const noRepeatEnemies = [];
+  let index = 0;
+  idList.forEach((id) => {
+    index++;
+    if (id !== idList[index]) {
+      noRepeatIds.push(id);
+    }
+  });
+  noRepeatIds.forEach((id) => {
+    noRepeatEnemies.push(list.find((enemy) => enemy.id === id));
+  });
+  return noRepeatEnemies;
 };
