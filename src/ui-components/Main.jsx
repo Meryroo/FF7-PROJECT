@@ -6,16 +6,16 @@ const StyledMain = styled.main`
   background-color: ${Palette.main.background};
   display: flex;
   flex-direction: ${({ direction }) => (direction == 'rows' ? 'rows' : 'column')};
-  align-items: ${({ justify }) =>
-    justify === 'center'
+  align-items: ${({ align }) =>
+    align === 'center'
       ? 'center'
-      : justify === 'flex-end'
+      : align === 'flex-end'
       ? 'flex-end'
-      : justify === 'flex-star'
+      : align === 'flex-star'
       ? 'flex-star'
-      : justify === 'space-around'
+      : align === 'space-around'
       ? 'space-around'
-      : justify === 'space-between'
+      : align === 'space-between'
       ? 'space-between'
       : 'center'};
   justify-content: ${({ justify }) =>
@@ -34,7 +34,16 @@ const StyledMain = styled.main`
   height: ${({ homeheight }) => (homeheight ? homeheight : '100vh')};
 `;
 
-const Main = ({ children, homeheight }) => {
-  return <StyledMain homeheight={homeheight}>{children}</StyledMain>;
+const Main = ({ children, homeheight, direction, justify, align }) => {
+  return (
+    <StyledMain
+      direction={direction}
+      justify={justify}
+      align={align}
+      homeheight={homeheight}
+    >
+      {children}
+    </StyledMain>
+  );
 };
 export default Main;
