@@ -31,7 +31,7 @@ const NavBarStyled = styled.nav`
       : align === 'space-between'
       ? 'space-between'
       : 'center'};
-  background-color: ${({ color }) => (color ? color : '#10101C')};
+  background-color: ${({ color }) => (color ? color : '#2d3e48')};
   color: ${({ color }) => (color ? color : 'inherit')};
   height: ${({ height }) => height};
   width: 100%;
