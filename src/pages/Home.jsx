@@ -3,11 +3,11 @@ import { useContext, useEffect } from 'react';
 import { PageContext } from '../context/PageContext';
 import Palette from '../styles/Palette';
 import DivFlex from '../ui-components/Divflex';
+import Footer from '../ui-components/Footer';
 import Heading from '../ui-components/Heading';
 import Image from '../ui-components/Image';
 import Main from '../ui-components/Main';
 import TextHome from '../ui-components/TextHome';
-import Footer from '../ui-components/Footer';
 
 const Home = () => {
   const { page, setPage } = useContext(PageContext);
