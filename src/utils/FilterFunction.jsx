@@ -1,6 +1,9 @@
 const FilterFunction = (list, unalteredList, object, newObject) => {
-  const filter = CompareObjects(object, newObject);
-  let finalList = [];
+  const filter =
+    CompareObjects(object, newObject).length == 0
+      ? object
+      : CompareObjects(object, newObject);
+  let finalList = list;
   let allNumbersList = [];
   if (filter.method === 'numberOrName') {
     finalList = FilterNumberOrName(unalteredList, filter);
@@ -13,7 +16,7 @@ const FilterFunction = (list, unalteredList, object, newObject) => {
     finalList = FilterNumberOrName(allNumbersList, filter);
     return [allNumbersList, finalList];
   }
-  if (filter.method === 'removeArray') {
+  if (filter.method === 'removeArray' && filter.value.length != 0) {
     filter.value.forEach((value) =>
       allNumbersList.push(...FilterArrays(unalteredList, filter.key, value)),
     );
@@ -27,7 +30,7 @@ const FilterFunction = (list, unalteredList, object, newObject) => {
     finalList = FilterNumberOrName(allNumbersList, filter);
     return [allNumbersList, finalList];
   }
-  if (filter.method === 'removeObject') {
+  if (filter.method === 'removeObject' && filter.value.length != 0) {
     filter.value.forEach((value) =>
       allNumbersList.push(...FilterObjects(unalteredList, filter.key, value)),
     );
@@ -35,7 +38,7 @@ const FilterFunction = (list, unalteredList, object, newObject) => {
     finalList = FilterNumberOrName(allNumbersList, filter);
     return [allNumbersList, finalList];
   } else {
-    return [list, unalteredList];
+    return [allNumbersList, finalList];
   }
 };
 export default FilterFunction;
@@ -96,7 +99,7 @@ const CompareObjects = (object, newObject) => {
           : (finalObject = {
               ...newObject,
               key: key,
-              value: object[key][object[key].length - 1],
+              value: newObject[key],
               method: 'removeArray',
             });
       }
@@ -111,7 +114,7 @@ const CompareObjects = (object, newObject) => {
           : (finalObject = {
               ...newObject,
               key: key,
-              value: object[key][object[key].length - 1],
+              value: newObject[key],
               method: 'removeObject',
             });
       }
@@ -140,7 +143,6 @@ const FilterObjects = (list, key, value) => {
   return array;
 };
 const FilterArrays = (list, key, value) => {
-  console.log(list[0][key].find((val) => val === value));
   return list.filter((enemy) => value == enemy[key].find((val) => val === value));
 };
 const FilterNumbers = (list, keys, value) => {
