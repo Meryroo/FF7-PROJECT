@@ -15,7 +15,7 @@ import handleSubmit from '../utils/HandleSubmit';
 const Login = () => {
   const { setUser } = useContext(UserContext);
   const { password, setPassword } = useContext(PasswordContext);
-  const { page, setPage } = useContext(PageContext);
+  const { setPage } = useContext(PageContext);
   useEffect(() => {
     setPage('login');
   }, []);
@@ -27,8 +27,7 @@ const Login = () => {
   const [see, setSee] = useState(false);
   const [register, setRegister] = useState(email == null ? 'login' : 'register');
   return (
-    <Main>
-      <h1>{page}</h1>
+    <Main image="url(https://res.cloudinary.com/dysog0ybg/image/upload/v1677166232/de4nhhn-2e6aa750-cab6-4a2d-9155-2147aaa877a8_ow4ui8.jpg)">
       <Form
         size="lg"
         action={(ev) => {
