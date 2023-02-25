@@ -5,14 +5,14 @@ const StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: ${({ direction }) => (direction === 'column' ? 'column' : 'row')};
-  background-color: ${({ variant }) => (variant ? variant : 'yellow')};
+  background-color: ${({ variant }) => (variant ? variant : 'none')};
   color: ${({ color }) => (color === 'white' ? 'white' : 'black')};
   margin: ${({ margin }) => margin};
   padding: ${({ padding }) => padding};
   height: ${({ height }) => height};
   width: ${({ width }) => width};
-  border: 2px solid black;
-  border-radius: 15%;
+  gap: ${({ gap }) => gap};
+  border: ${({ border }) => (border === 'yes' ? '2px solid black' : 'none')};
 `;
 
 const DivFlex = ({
@@ -24,6 +24,8 @@ const DivFlex = ({
   color,
   height,
   width,
+  gap,
+  border,
 }) => {
   return (
     <StyledDiv
@@ -34,6 +36,8 @@ const DivFlex = ({
       color={color}
       height={height}
       width={width}
+      gap={gap}
+      border={border}
     >
       {children}
     </StyledDiv>
