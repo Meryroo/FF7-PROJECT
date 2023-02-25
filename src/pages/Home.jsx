@@ -19,7 +19,12 @@ const Home = () => {
         {page}
       </Heading>
       <DivFlex>
-        <Image />
+        <Image
+          height={'300px'}
+          width={'600px'}
+          src="https://res.cloudinary.com/dysog0ybg/image/upload/v1677166204/1366_2000_exzuxa.jpg"
+          alt="character"
+        />
         <TextHome />
       </DivFlex>
     </Main>
