@@ -11,11 +11,23 @@ const HomeTextStyled = styled.div`
   width: ${(width) => width};
   padding: ${(padding) => padding};
   margin: ${(margin) => margin};
+  font-size: ${(size) => size};
 `;
 
-const HomeText = ({ text, variant, color, heigh, width, padding, margin, children }) => {
+const HomeText = ({
+  size,
+  text,
+  variant,
+  color,
+  heigh,
+  width,
+  padding,
+  margin,
+  children,
+}) => {
   return (
     <HomeTextStyled
+      size={size}
       variant={variant}
       color={color}
       heigh={heigh}

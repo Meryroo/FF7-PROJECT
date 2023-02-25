@@ -32,6 +32,7 @@ const Data = () => {
     enemy_skill: '',
     location: [],
   });
+  const [editAppear, setEditAppear] = useState(false);
 
   const getEnemies = async () => {
     const res = await fetch('https://63f9da57beec322c57e8bc1d.mockapi.io/prueba');
@@ -260,7 +261,9 @@ const Data = () => {
               <p>Immune: {enemy.strategy.immune}</p>
               <p>Absorbs: {enemy.strategy.absorbs}</p>
               <h4>{enemy.enemy_skill}</h4>
-              <button onClick={() => setEditEnemy(enemy)}>Edit</button>
+              <button onClick={() => setEditEnemy(enemy) & setEditAppear(true)}>
+                Edit
+              </button>
               <button onClick={() => deleteEnemies(enemy.id)}>Delete</button>
             </div>
           ))
@@ -268,159 +271,166 @@ const Data = () => {
           <h2>Loading...</h2>
         )}
       </section>
-      <div className="editform">
-        <h2>EDIT ENEMY</h2>
-        <form onSubmit={(ev) => handleEditEnemy(ev, editEnemy.id)}>
-          <input
-            type="text"
-            placeholder="Imagen URL"
-            value={editEnemy.img}
-            onChange={(ev) => setEditEnemy({ ...editEnemy, img: ev.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Name"
-            value={editEnemy.name}
-            onChange={(ev) => setEditEnemy({ ...editEnemy, name: ev.target.value })}
-          />
-          <input
-            type="number"
-            placeholder="Level"
-            value={editEnemy.level}
-            onChange={(ev) => setEditEnemy({ ...editEnemy, level: ev.target.value })}
-          />
-          <input
-            type="number"
-            placeholder="HP"
-            value={editEnemy.atributes.HP}
-            onChange={(ev) =>
-              setEditEnemy({
-                ...editEnemy,
-                atributes: { ...editEnemy.atributes, HP: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="number"
-            placeholder="MP"
-            value={editEnemy.atributes.MP}
-            onChange={(ev) =>
-              setEditEnemy({
-                ...editEnemy,
-                atributes: { ...editEnemy.atributes, MP: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="number"
-            placeholder="Exp"
-            value={editEnemy.earned.exp}
-            onChange={(ev) =>
-              setEditEnemy({
-                ...editEnemy,
-                earned: { ...editEnemy.earned, exp: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="number"
-            placeholder="AP"
-            value={editEnemy.earned.AP}
-            onChange={(ev) =>
-              setEditEnemy({
-                ...editEnemy,
-                earned: { ...editEnemy.earned, AP: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="number"
-            placeholder="gil"
-            value={editEnemy.earned.gil}
-            onChange={(ev) =>
-              editEnemy({
-                ...editEnemy,
-                earned: { ...editEnemy.earned, gil: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="text"
-            placeholder="drop"
-            value={editEnemy.items.drop}
-            onChange={(ev) =>
-              setEditEnemy({
-                ...editEnemy,
-                items: { ...editEnemy.items, drop: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="text"
-            placeholder="morph"
-            value={editEnemy.items.morph}
-            onChange={(ev) =>
-              editEnemy({
-                ...editEnemy,
-                items: { ...editEnemy.items, morph: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Steal"
-            value={editEnemy.items.steal}
-            onChange={(ev) =>
-              setEditEnemy({
-                ...editEnemy,
-                items: { ...editEnemy.items, steal: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Weakness"
-            value={editEnemy.strategy.steal}
-            onChange={(ev) =>
-              setEditEnemy({
-                ...editEnemy,
-                strategy: { ...editEnemy.strategy, weakness: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Immune"
-            value={editEnemy.strategy.immune}
-            onChange={(ev) =>
-              setEditEnemy({
-                ...editEnemy,
-                strategy: { ...editEnemy.strategy, immune: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Absorbs"
-            value={editEnemy.strategy.absorbs}
-            onChange={(ev) =>
-              setEditEnemy({
-                ...editEnemy,
-                strategy: { ...editEnemy.strategy, absorbs: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Enemy Skill"
-            value={editEnemy.enemy_skill}
-            onChange={(ev) =>
-              setEditEnemy({ ...editEnemy, enemy_skill: ev.target.value })
-            }
-          />
-          <button type="submit">Edit Enemy</button>
-        </form>
-      </div>
+      {editAppear && (
+        <div className="modal-overlay">
+          <div className="editform">
+            <h2>EDIT ENEMY</h2>
+            <form onSubmit={(ev) => handleEditEnemy(ev, editEnemy.id)}>
+              <input
+                type="text"
+                placeholder="Imagen URL"
+                value={editEnemy.img}
+                onChange={(ev) => setEditEnemy({ ...editEnemy, img: ev.target.value })}
+              />
+              <input
+                type="text"
+                placeholder="Name"
+                value={editEnemy.name}
+                onChange={(ev) => setEditEnemy({ ...editEnemy, name: ev.target.value })}
+              />
+              <input
+                type="number"
+                placeholder="Level"
+                value={editEnemy.level}
+                onChange={(ev) => setEditEnemy({ ...editEnemy, level: ev.target.value })}
+              />
+              <input
+                type="number"
+                placeholder="HP"
+                value={editEnemy.atributes.HP}
+                onChange={(ev) =>
+                  setEditEnemy({
+                    ...editEnemy,
+                    atributes: { ...editEnemy.atributes, HP: ev.target.value },
+                  })
+                }
+              />
+              <input
+                type="number"
+                placeholder="MP"
+                value={editEnemy.atributes.MP}
+                onChange={(ev) =>
+                  setEditEnemy({
+                    ...editEnemy,
+                    atributes: { ...editEnemy.atributes, MP: ev.target.value },
+                  })
+                }
+              />
+              <input
+                type="number"
+                placeholder="Exp"
+                value={editEnemy.earned.exp}
+                onChange={(ev) =>
+                  setEditEnemy({
+                    ...editEnemy,
+                    earned: { ...editEnemy.earned, exp: ev.target.value },
+                  })
+                }
+              />
+              <input
+                type="number"
+                placeholder="AP"
+                value={editEnemy.earned.AP}
+                onChange={(ev) =>
+                  setEditEnemy({
+                    ...editEnemy,
+                    earned: { ...editEnemy.earned, AP: ev.target.value },
+                  })
+                }
+              />
+              <input
+                type="number"
+                placeholder="gil"
+                value={editEnemy.earned.gil}
+                onChange={(ev) =>
+                  editEnemy({
+                    ...editEnemy,
+                    earned: { ...editEnemy.earned, gil: ev.target.value },
+                  })
+                }
+              />
+              <input
+                type="text"
+                placeholder="drop"
+                value={editEnemy.items.drop}
+                onChange={(ev) =>
+                  setEditEnemy({
+                    ...editEnemy,
+                    items: { ...editEnemy.items, drop: ev.target.value },
+                  })
+                }
+              />
+              <input
+                type="text"
+                placeholder="morph"
+                value={editEnemy.items.morph}
+                onChange={(ev) =>
+                  editEnemy({
+                    ...editEnemy,
+                    items: { ...editEnemy.items, morph: ev.target.value },
+                  })
+                }
+              />
+              <input
+                type="text"
+                placeholder="Steal"
+                value={editEnemy.items.steal}
+                onChange={(ev) =>
+                  setEditEnemy({
+                    ...editEnemy,
+                    items: { ...editEnemy.items, steal: ev.target.value },
+                  })
+                }
+              />
+              <input
+                type="text"
+                placeholder="Weakness"
+                value={editEnemy.strategy.steal}
+                onChange={(ev) =>
+                  setEditEnemy({
+                    ...editEnemy,
+                    strategy: { ...editEnemy.strategy, weakness: ev.target.value },
+                  })
+                }
+              />
+              <input
+                type="text"
+                placeholder="Immune"
+                value={editEnemy.strategy.immune}
+                onChange={(ev) =>
+                  setEditEnemy({
+                    ...editEnemy,
+                    strategy: { ...editEnemy.strategy, immune: ev.target.value },
+                  })
+                }
+              />
+              <input
+                type="text"
+                placeholder="Absorbs"
+                value={editEnemy.strategy.absorbs}
+                onChange={(ev) =>
+                  setEditEnemy({
+                    ...editEnemy,
+                    strategy: { ...editEnemy.strategy, absorbs: ev.target.value },
+                  })
+                }
+              />
+              <input
+                type="text"
+                placeholder="Enemy Skill"
+                value={editEnemy.enemy_skill}
+                onChange={(ev) =>
+                  setEditEnemy({ ...editEnemy, enemy_skill: ev.target.value })
+                }
+              />
+            </form>
+            <button type="submit" onClick={() => setEditAppear(false)}>
+              Edit Enemy
+            </button>
+            <button onClick={() => setEditAppear(false)}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
