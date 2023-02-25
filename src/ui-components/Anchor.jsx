@@ -13,10 +13,10 @@ const AnchorStyled = styled.a`
   }
 `;
 
-const Anchor = ({ text, link, color, size, underline }) => {
+const Anchor = ({ text, link, color, size, underline, children }) => {
   return (
     <AnchorStyled href={link} color={color} size={size} underline={underline}>
-      {text}
+      {text} {children}
     </AnchorStyled>
   );
 };
