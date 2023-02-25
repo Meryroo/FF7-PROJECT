@@ -53,6 +53,19 @@ const Header = ({ children, justify, align, color, height, padding, variant }) =
           {children}
         </HeaderStyled>
       );
+    } else {
+      return (
+        <HeaderStyled
+          justify={justify}
+          align={align}
+          color={color}
+          height={height}
+          padding={padding}
+          variant={variant}
+        >
+          {children}
+        </HeaderStyled>
+      );
     }
   }
 };
