@@ -72,7 +72,187 @@ const Bestiary = () => {
     <div>
       <h1>{page}</h1>
       <div name="items" id="items">
-        {items.map((item) => (
+        {items.map((item) =>
+          item != 'None' ? (
+            <div key={item}>
+              <input
+                type="checkbox"
+                id={item}
+                onChange={(ev) => {
+                  if (ev.target.checked) {
+                    const actulizedObject = {
+                      ...newObject,
+                      items: [...newObject.items, ev.target.id],
+                    };
+                    setNewObject({
+                      ...newObject,
+                      items: [...newObject.items, ev.target.id],
+                    });
+                    const filtered = FilterFunction(
+                      list,
+                      unalteredList,
+                      newObject,
+                      actulizedObject,
+                    );
+                    setBothList(filtered);
+                    setUnalteredList(filtered[0]);
+                    setFinalList(filtered[1]);
+                  } else {
+                    const removed = [];
+                    newObject.items.forEach((item) => {
+                      if (item != ev.target.id) {
+                        removed.push(item);
+                      }
+                    });
+                    const actulizedObject = {
+                      ...newObject,
+                      items: removed,
+                    };
+                    setNewObject({
+                      ...newObject,
+                      items: removed,
+                    });
+                    const filtered = FilterFunction(
+                      list,
+                      unalteredList,
+                      newObject,
+                      actulizedObject,
+                    );
+                    setBothList(filtered);
+                    setUnalteredList(filtered[0]);
+                    setFinalList(filtered[1]);
+                  }
+                }}
+              />
+              <h4>{item}</h4>
+            </div>
+          ) : (
+            <div key={item}></div>
+          ),
+        )}
+      </div>
+      <div name="strategy" id="strategy">
+        {strategy.map((item) =>
+          item != 'None' ? (
+            <div key={item}>
+              <input
+                type="checkbox"
+                id={item}
+                onChange={(ev) => {
+                  if (ev.target.checked) {
+                    const actulizedObject = {
+                      ...newObject,
+                      strategy: [...newObject.strategy, ev.target.id],
+                    };
+                    setNewObject({
+                      ...newObject,
+                      strategy: [...newObject.strategy, ev.target.id],
+                    });
+                    const filtered = FilterFunction(
+                      list,
+                      unalteredList,
+                      newObject,
+                      actulizedObject,
+                    );
+                    setBothList(filtered);
+                    setUnalteredList(filtered[0]);
+                    setFinalList(filtered[1]);
+                  } else {
+                    const removed = [];
+                    newObject.strategy.forEach((item) => {
+                      if (item != ev.target.id) {
+                        removed.push(item);
+                      }
+                    });
+                    const actulizedObject = {
+                      ...newObject,
+                      strategy: removed,
+                    };
+                    setNewObject({
+                      ...newObject,
+                      strategy: removed,
+                    });
+                    const filtered = FilterFunction(
+                      list,
+                      unalteredList,
+                      newObject,
+                      actulizedObject,
+                    );
+                    setBothList(filtered);
+                    setUnalteredList(filtered[0]);
+                    setFinalList(filtered[1]);
+                  }
+                }}
+              />
+              <h4>{item}</h4>
+            </div>
+          ) : (
+            <div key={item}></div>
+          ),
+        )}
+      </div>
+      <div name="enemy_skill" id="enemy_skill">
+        {enemy_skill.map((item) =>
+          item != 'None' ? (
+            <div key={item}>
+              <input
+                type="checkbox"
+                id={item}
+                onChange={(ev) => {
+                  if (ev.target.checked) {
+                    const actulizedObject = {
+                      ...newObject,
+                      enemy_skill: [...newObject.enemy_skill, ev.target.id],
+                    };
+                    setNewObject({
+                      ...newObject,
+                      enemy_skill: [...newObject.enemy_skill, ev.target.id],
+                    });
+                    const filtered = FilterFunction(
+                      list,
+                      unalteredList,
+                      newObject,
+                      actulizedObject,
+                    );
+                    setBothList(filtered);
+                    setUnalteredList(filtered[0]);
+                    setFinalList(filtered[1]);
+                  } else {
+                    const removed = [];
+                    newObject.enemy_skill.forEach((item) => {
+                      if (item != ev.target.id) {
+                        removed.push(item);
+                      }
+                    });
+                    const actulizedObject = {
+                      ...newObject,
+                      enemy_skill: removed,
+                    };
+                    setNewObject({
+                      ...newObject,
+                      enemy_skill: removed,
+                    });
+                    const filtered = FilterFunction(
+                      list,
+                      unalteredList,
+                      newObject,
+                      actulizedObject,
+                    );
+                    setBothList(filtered);
+                    setUnalteredList(filtered[0]);
+                    setFinalList(filtered[1]);
+                  }
+                }}
+              />
+              <h4>{item}</h4>
+            </div>
+          ) : (
+            <div key={item}></div>
+          ),
+        )}
+      </div>
+      <div name="location" id="location">
+        {location.map((item) => (
           <div key={item}>
             <input
               type="checkbox"
@@ -81,11 +261,11 @@ const Bestiary = () => {
                 if (ev.target.checked) {
                   const actulizedObject = {
                     ...newObject,
-                    items: [...newObject.items, ev.target.id],
+                    location: [...newObject.location, ev.target.id],
                   };
                   setNewObject({
                     ...newObject,
-                    items: [...newObject.items, ev.target.id],
+                    location: [...newObject.location, ev.target.id],
                   });
                   const filtered = FilterFunction(
                     list,
@@ -98,18 +278,18 @@ const Bestiary = () => {
                   setFinalList(filtered[1]);
                 } else {
                   const removed = [];
-                  newObject.items.forEach((item) => {
+                  newObject.location.forEach((item) => {
                     if (item != ev.target.id) {
                       removed.push(item);
                     }
                   });
                   const actulizedObject = {
                     ...newObject,
-                    items: removed,
+                    location: removed,
                   };
                   setNewObject({
                     ...newObject,
-                    items: removed,
+                    location: removed,
                   });
                   const filtered = FilterFunction(
                     list,
@@ -123,30 +303,6 @@ const Bestiary = () => {
                 }
               }}
             />
-            <h4>{item}</h4>
-          </div>
-        ))}
-      </div>
-      <div name="strategy" id="strategy">
-        {strategy.map((item) => (
-          <div key={item}>
-            <input type="checkbox" />
-            <h4>{item}</h4>
-          </div>
-        ))}
-      </div>
-      <div name="enemy_skill" id="enemy_skill">
-        {enemy_skill.map((item) => (
-          <div key={item}>
-            <input type="checkbox" />
-            <h4>{item}</h4>
-          </div>
-        ))}
-      </div>
-      <div name="location" id="location">
-        {location.map((item) => (
-          <div key={item}>
-            <input type="checkbox" />
             <h4>{item}</h4>
           </div>
         ))}
