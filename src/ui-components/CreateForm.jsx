@@ -2,23 +2,15 @@ import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { PageContext } from '../context/PageContext';
-import Palette from '../styles/Palette';
 
 const CreateFormStyled = styled.div`
-  background-color: ${Palette.main.background};
-  color: ${Palette.main.primary};
+  background-color: none;
   display: flex;
   flex-direction: column;
-  align-items: flex-star;
-  width: 100%;
+
   & .createform {
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
     flex-direction: column;
-  }
-  & .containerdata {
-    display: flex;
   }
 `;
 

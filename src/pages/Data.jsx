@@ -1,9 +1,11 @@
+import '../pages/Data.css';
+
 import { useContext, useEffect, useState } from 'react';
 
 import { PageContext } from '../context/PageContext';
 
 const Data = () => {
-  const { page, setPage } = useContext(PageContext);
+  const { setPage } = useContext(PageContext);
   const [enemies, setEnemies] = useState([]);
   const [loaded, setloaded] = useState(false);
   const [locationInput, setLocationInput] = useState([]);
@@ -85,184 +87,187 @@ const Data = () => {
 
   return (
     <div className="Api">
-      <h1>{page}</h1>
-      {loaded ? (
-        enemies.map((enemy) => (
-          <div className="enemycard" key={enemy.id}>
-            <img src={enemy.img} alt={enemy.name} />
-            <h3>{enemy.name}</h3>
-            <h3>{enemy.level}</h3>
-            <h4>Atributes</h4>
-            <p>HP: {enemy.atributes.HP}</p>
-            <p>MP: {enemy.atributes.MP}</p>
-            <h4>Earned</h4>
-            <p>Exp: {enemy.earned.exp}</p>
-            <p>AP: {enemy.earned.AP}</p>
-            <p>gil: {enemy.earned.gil}</p>
-            <h4>Items</h4>
-            <p>Drop: {enemy.items.drop}</p>
-            <p>Morph: {enemy.items.morph}</p>
-            <p>Steal: {enemy.items.steal}</p>
-            <h4>Strategy</h4>
-            <p>Weakness: {enemy.strategy.weakness}</p>
-            <p>Immune: {enemy.strategy.immune}</p>
-            <p>Absorbs: {enemy.strategy.absorbs}</p>
-            <h4>{enemy.enemy_skill}</h4>
-            <button onClick={() => setEditEnemy(enemy)}>Edit</button>
-            <button onClick={() => deleteEnemies(enemy.id)}>Delete</button>
-          </div>
-        ))
-      ) : (
-        <h2>Loading...</h2>
-      )}
-      <div className="Createform">
-        <h2>CREATE ENEMY</h2>
-        <form onSubmit={(ev) => createEnemies(ev)}>
-          <input
-            type="text"
-            placeholder="Imagen URL"
-            onChange={(ev) => setNewEnemy({ ...newEnemy, img: ev.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="name"
-            onChange={(ev) => setNewEnemy({ ...newEnemy, name: ev.target.value })}
-          />
-          <input
-            type="number"
-            placeholder="level"
-            onChange={(ev) => setNewEnemy({ ...newEnemy, level: ev.target.value })}
-          />
-          <input
-            type="number"
-            placeholder="HP"
-            onChange={(ev) =>
-              setNewEnemy({
-                ...newEnemy,
-                atributes: { ...newEnemy.atributes, HP: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="number"
-            placeholder="MP"
-            onChange={(ev) =>
-              setNewEnemy({
-                ...newEnemy,
-                atributes: { ...newEnemy.atributes, MP: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="number"
-            placeholder="exp"
-            onChange={(ev) =>
-              setNewEnemy({
-                ...newEnemy,
-                earned: { ...newEnemy.earned, exp: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="number"
-            placeholder="AP"
-            onChange={(ev) =>
-              setNewEnemy({
-                ...newEnemy,
-                earned: { ...newEnemy.earned, AP: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="number"
-            placeholder="gil"
-            onChange={(ev) =>
-              setNewEnemy({
-                ...newEnemy,
-                earned: { ...newEnemy.earned, gil: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="text"
-            placeholder="drop"
-            onChange={(ev) =>
-              setNewEnemy({
-                ...newEnemy,
-                items: { ...newEnemy.items, drop: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="text"
-            placeholder="morph"
-            onChange={(ev) =>
-              setNewEnemy({
-                ...newEnemy,
-                items: { ...newEnemy.items, morph: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="text"
-            placeholder="steal"
-            onChange={(ev) =>
-              setNewEnemy({
-                ...newEnemy,
-                items: { ...newEnemy.items, steal: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Weakness"
-            onChange={(ev) =>
-              setNewEnemy({
-                ...newEnemy,
-                strategy: { ...newEnemy.strategy, weakness: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Immune"
-            onChange={(ev) =>
-              setNewEnemy({
-                ...newEnemy,
-                strategy: { ...newEnemy.strategy, immune: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Absorbs"
-            onChange={(ev) =>
-              setNewEnemy({
-                ...newEnemy,
-                strategy: { ...newEnemy.strategy, absorbs: ev.target.value },
-              })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Enemy Skill"
-            onChange={(ev) => setNewEnemy({ ...newEnemy, enemy_skill: ev.target.value })}
-          />
-          <input type="text" placeholder="Location" />
-          <button
-            type="button"
-            onClick={(ev) => {
-              setLocationInput([...locationInput, ev.target.previousSibling.value]);
-              const updateInput = [...locationInput, ev.target.previousSibling.value];
-              setNewEnemy({ ...newEnemy, location: updateInput });
-            }}
-          >
-            add Location
-          </button>
-          <button type="submit">Create Enemy</button>
-        </form>
-        {error && <h3>{error}</h3>}
-      </div>
+      <section className="data-container">
+        <div className="Createform">
+          <h2>CREATE ENEMY</h2>
+          <form onSubmit={(ev) => createEnemies(ev)}>
+            <input
+              type="text"
+              placeholder="Imagen URL"
+              onChange={(ev) => setNewEnemy({ ...newEnemy, img: ev.target.value })}
+            />
+            <input
+              type="text"
+              placeholder="name"
+              onChange={(ev) => setNewEnemy({ ...newEnemy, name: ev.target.value })}
+            />
+            <input
+              type="number"
+              placeholder="level"
+              onChange={(ev) => setNewEnemy({ ...newEnemy, level: ev.target.value })}
+            />
+            <input
+              type="number"
+              placeholder="HP"
+              onChange={(ev) =>
+                setNewEnemy({
+                  ...newEnemy,
+                  atributes: { ...newEnemy.atributes, HP: ev.target.value },
+                })
+              }
+            />
+            <input
+              type="number"
+              placeholder="MP"
+              onChange={(ev) =>
+                setNewEnemy({
+                  ...newEnemy,
+                  atributes: { ...newEnemy.atributes, MP: ev.target.value },
+                })
+              }
+            />
+            <input
+              type="number"
+              placeholder="exp"
+              onChange={(ev) =>
+                setNewEnemy({
+                  ...newEnemy,
+                  earned: { ...newEnemy.earned, exp: ev.target.value },
+                })
+              }
+            />
+            <input
+              type="number"
+              placeholder="AP"
+              onChange={(ev) =>
+                setNewEnemy({
+                  ...newEnemy,
+                  earned: { ...newEnemy.earned, AP: ev.target.value },
+                })
+              }
+            />
+            <input
+              type="number"
+              placeholder="gil"
+              onChange={(ev) =>
+                setNewEnemy({
+                  ...newEnemy,
+                  earned: { ...newEnemy.earned, gil: ev.target.value },
+                })
+              }
+            />
+            <input
+              type="text"
+              placeholder="drop"
+              onChange={(ev) =>
+                setNewEnemy({
+                  ...newEnemy,
+                  items: { ...newEnemy.items, drop: ev.target.value },
+                })
+              }
+            />
+            <input
+              type="text"
+              placeholder="morph"
+              onChange={(ev) =>
+                setNewEnemy({
+                  ...newEnemy,
+                  items: { ...newEnemy.items, morph: ev.target.value },
+                })
+              }
+            />
+            <input
+              type="text"
+              placeholder="steal"
+              onChange={(ev) =>
+                setNewEnemy({
+                  ...newEnemy,
+                  items: { ...newEnemy.items, steal: ev.target.value },
+                })
+              }
+            />
+            <input
+              type="text"
+              placeholder="Weakness"
+              onChange={(ev) =>
+                setNewEnemy({
+                  ...newEnemy,
+                  strategy: { ...newEnemy.strategy, weakness: ev.target.value },
+                })
+              }
+            />
+            <input
+              type="text"
+              placeholder="Immune"
+              onChange={(ev) =>
+                setNewEnemy({
+                  ...newEnemy,
+                  strategy: { ...newEnemy.strategy, immune: ev.target.value },
+                })
+              }
+            />
+            <input
+              type="text"
+              placeholder="Absorbs"
+              onChange={(ev) =>
+                setNewEnemy({
+                  ...newEnemy,
+                  strategy: { ...newEnemy.strategy, absorbs: ev.target.value },
+                })
+              }
+            />
+            <input
+              type="text"
+              placeholder="Enemy Skill"
+              onChange={(ev) =>
+                setNewEnemy({ ...newEnemy, enemy_skill: ev.target.value })
+              }
+            />
+            <input type="text" placeholder="Location" />
+            <button
+              type="button"
+              onClick={(ev) => {
+                setLocationInput([...locationInput, ev.target.previousSibling.value]);
+                const updateInput = [...locationInput, ev.target.previousSibling.value];
+                setNewEnemy({ ...newEnemy, location: updateInput });
+              }}
+            >
+              add Location
+            </button>
+            <button type="submit">Create Enemy</button>
+          </form>
+          {error && <h3>{error}</h3>}
+        </div>
+        {loaded ? (
+          enemies.map((enemy) => (
+            <div className="enemycard" key={enemy.id}>
+              <img src={enemy.img} alt={enemy.name} />
+              <h3>{enemy.name}</h3>
+              <h3>{enemy.level}</h3>
+              <h4>Atributes</h4>
+              <p>HP: {enemy.atributes.HP}</p>
+              <p>MP: {enemy.atributes.MP}</p>
+              <h4>Earned</h4>
+              <p>Exp: {enemy.earned.exp}</p>
+              <p>AP: {enemy.earned.AP}</p>
+              <p>gil: {enemy.earned.gil}</p>
+              <h4>Items</h4>
+              <p>Drop: {enemy.items.drop}</p>
+              <p>Morph: {enemy.items.morph}</p>
+              <p>Steal: {enemy.items.steal}</p>
+              <h4>Strategy</h4>
+              <p>Weakness: {enemy.strategy.weakness}</p>
+              <p>Immune: {enemy.strategy.immune}</p>
+              <p>Absorbs: {enemy.strategy.absorbs}</p>
+              <h4>{enemy.enemy_skill}</h4>
+              <button onClick={() => setEditEnemy(enemy)}>Edit</button>
+              <button onClick={() => deleteEnemies(enemy.id)}>Delete</button>
+            </div>
+          ))
+        ) : (
+          <h2>Loading...</h2>
+        )}
+      </section>
       <div className="editform">
         <h2>EDIT ENEMY</h2>
         <form onSubmit={(ev) => handleEditEnemy(ev, editEnemy.id)}>
