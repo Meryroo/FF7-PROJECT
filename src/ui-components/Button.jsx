@@ -1,8 +1,14 @@
 import styled from 'styled-components';
 
+import Palette from '../styles/Palette';
+
 const ButtonStyled = styled.button`
   background-color: ${({ variant }) =>
-    variant === 'dark' ? '#517388' : variant === 'light' ? '#E8DCB6' : 'white'};
+    variant === 'dark'
+      ? Palette.main.highlight
+      : variant === 'light'
+      ? Palette.main.primary
+      : 'white'};
   border: ${({ border }) => (border === 'yes' ? '2px solid black' : 'none')};
   color: ${({ color }) => (color === 'white' ? 'white' : 'black')};
   width: fit-content;
