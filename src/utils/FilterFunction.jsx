@@ -1,7 +1,6 @@
 const FilterFunction = (list, filter) => {
-  const filterNumberList = FilterNumberOrName(list, filter);
-  console.log(filterNumberList);
-  const finalList = FilterObjectorArray(filterNumberList, filter);
+  const arrayObjectList = FilterObjectorArray(list, filter);
+  const finalList = FilterNumberOrName(arrayObjectList, filter);
   return finalList;
 };
 export default FilterFunction;
@@ -56,7 +55,7 @@ const FilterObjectorArray = (list, filter) => {
   const listLocation = [...listEnemy_skill];
   if (filter.location.length != 0) {
     filter.location.forEach((value) => {
-      listEnemy_skill.push(...FilterArrays(list, 'location', value));
+      listLocation.push(...FilterArrays(list, 'location', value));
     });
   }
   return listLocation.length == 0 ? list : removeDuplicates(listLocation);

@@ -20,6 +20,8 @@ const MinMaxFilter = ({ width, height, action, minMin, maxMin, minMax, maxMax })
       minMax={minMax}
       maxMax={maxMax}
     >
+      <h4>{minMax}</h4>
+      <h4>{maxMin}</h4>
       <input
         className="maxInput"
         type="range"
@@ -27,7 +29,7 @@ const MinMaxFilter = ({ width, height, action, minMin, maxMin, minMax, maxMax })
         max={maxMax}
         defaultValue={maxMax}
         onChange={action}
-        style={{ width: `${100 - minMax}%` }}
+        /* style={{ width: `${100 - (minMax * 100) / maxMax}%` }} */
       />
       <input
         className="minInput"
@@ -36,7 +38,7 @@ const MinMaxFilter = ({ width, height, action, minMin, maxMin, minMax, maxMax })
         max={maxMin - 1}
         defaultValue={minMin}
         onChange={action}
-        style={{ width: `${maxMin}%` }}
+        /* style={{ width: `${maxMin * (100 / maxMin)}%` }} */
       />
     </MinMaxFilterStyled>
   );
