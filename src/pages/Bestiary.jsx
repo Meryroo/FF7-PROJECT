@@ -232,7 +232,13 @@ const Bestiary = () => {
           </div>
           <div>
             <Divflex gap={'1.5rem'}>
-              <Divflex direction={'column'} name="items" id="items">
+              <Divflex
+                justify={'center'}
+                align={'flex-start'}
+                direction={'column'}
+                name="items"
+                id="items"
+              >
                 {items.map((item) =>
                   item != 'None' ? (
                     <Divflex gap={'0.8rem'} key={item}>
@@ -276,7 +282,13 @@ const Bestiary = () => {
                   ),
                 )}
               </Divflex>
-              <Divflex direction={'column'} name="strategy" id="strategy">
+              <Divflex
+                justify={'center'}
+                align={'flex-start'}
+                direction={'column'}
+                name="strategy"
+                id="strategy"
+              >
                 {strategy.map((item) =>
                   item != 'None' ? (
                     <Divflex key={item}>
@@ -316,7 +328,13 @@ const Bestiary = () => {
                   ),
                 )}
               </Divflex>
-              <Divflex direction={'column'} name="enemy_skill" id="enemy_skill">
+              <Divflex
+                justify={'center'}
+                align={'flex-start'}
+                direction={'column'}
+                name="enemy_skill"
+                id="enemy_skill"
+              >
                 {enemy_skill.map((item) =>
                   item != 'None' ? (
                     <div key={item}>
@@ -360,7 +378,13 @@ const Bestiary = () => {
                   ),
                 )}
               </Divflex>
-              <Divflex direction={'column'} name="location" id="location">
+              <Divflex
+                justify={'center'}
+                align={'flex-start'}
+                direction={'column'}
+                name="location"
+                id="location"
+              >
                 {location.map((item) => (
                   <Divflex key={item}>
                     <input
