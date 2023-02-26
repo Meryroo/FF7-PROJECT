@@ -3,7 +3,6 @@ import '../pages/Data.css';
 import { useContext, useEffect, useState } from 'react';
 
 import { PageContext } from '../context/PageContext';
-
 const Data = () => {
   const { setPage } = useContext(PageContext);
   const [enemies, setEnemies] = useState([]);
@@ -71,7 +70,7 @@ const Data = () => {
 
   const handleEditEnemy = (ev, id) => {
     ev.preventDefault();
-    fetch(`https://63f26f29f28929a9df5a9085.mockapi.io/enemies/${id}`, {
+    fetch(`https://63f9da57beec322c57e8bc1d.mockapi.io/prueba/${id}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json',
@@ -226,6 +225,7 @@ const Data = () => {
             />
             <input type="text" placeholder="Location" />
             <button
+              className="btnform"
               type="button"
               onClick={(ev) => {
                 setLocationInput([...locationInput, ev.target.previousSibling.value]);
@@ -233,43 +233,54 @@ const Data = () => {
                 setNewEnemy({ ...newEnemy, location: updateInput });
               }}
             >
-              add Location
+              Add Location
             </button>
-            <button type="submit">Create Enemy</button>
+            <button className="btnform" type="submit">
+              Create Enemy
+            </button>
           </form>
           {error && <h3>{error}</h3>}
         </div>
-        {loaded ? (
-          enemies.map((enemy) => (
-            <div className="enemycard" key={enemy.id}>
-              <img src={enemy.img} alt={enemy.name} />
-              <h3>{enemy.name}</h3>
-              <h3>{enemy.level}</h3>
-              <h4>Atributes</h4>
-              <p>HP: {enemy.atributes.HP}</p>
-              <p>MP: {enemy.atributes.MP}</p>
-              <h4>Earned</h4>
-              <p>Exp: {enemy.earned.exp}</p>
-              <p>AP: {enemy.earned.AP}</p>
-              <p>gil: {enemy.earned.gil}</p>
-              <h4>Items</h4>
-              <p>Drop: {enemy.items.drop}</p>
-              <p>Morph: {enemy.items.morph}</p>
-              <p>Steal: {enemy.items.steal}</p>
-              <h4>Strategy</h4>
-              <p>Weakness: {enemy.strategy.weakness}</p>
-              <p>Immune: {enemy.strategy.immune}</p>
-              <p>Absorbs: {enemy.strategy.absorbs}</p>
-              <h4>{enemy.enemy_skill}</h4>
-              <button onClick={() => setEditEnemy(enemy) & setEditAppear(true)}>
-                Edit
-              </button>
-              <button onClick={() => deleteEnemies(enemy.id)}>Delete</button>
-            </div>
-          ))
-        ) : (
-          <h2>Loading...</h2>
-        )}
+        <div className="enemies-container">
+          {loaded ? (
+            enemies.map((enemy) => (
+              <div className="enemycard" key={enemy.id}>
+                <img src={enemy.img} alt={enemy.name} />
+                <h3>{enemy.name}</h3>
+                <h3>{enemy.level}</h3>
+                <h4>Atributes</h4>
+                <p>HP: {enemy.atributes.HP}</p>
+                <p>MP: {enemy.atributes.MP}</p>
+                <h4>Earned</h4>
+                <p>Exp: {enemy.earned.exp}</p>
+                <p>AP: {enemy.earned.AP}</p>
+                <p>gil: {enemy.earned.gil}</p>
+                <h4>Items</h4>
+                <p>Drop: {enemy.items.drop}</p>
+                <p>Morph: {enemy.items.morph}</p>
+                <p>Steal: {enemy.items.steal}</p>
+                <h4>Strategy</h4>
+                <p>Weakness: {enemy.strategy.weakness}</p>
+                <p>Immune: {enemy.strategy.immune}</p>
+                <p>Absorbs: {enemy.strategy.absorbs}</p>
+                <h4>{enemy.enemy_skill}</h4>
+                <span className="btncard">
+                  <button
+                    className="btnform"
+                    onClick={() => setEditEnemy(enemy) & setEditAppear(true)}
+                  >
+                    Edit
+                  </button>
+                  <button className="btnform" onClick={() => deleteEnemies(enemy.id)}>
+                    Delete
+                  </button>
+                </span>
+              </div>
+            ))
+          ) : (
+            <h2>Loading...</h2>
+          )}
+        </div>
       </section>
       {editAppear && (
         <div className="modal-overlay">
@@ -424,10 +435,16 @@ const Data = () => {
                 }
               />
             </form>
-            <button type="submit" onClick={() => setEditAppear(false)}>
+            <button
+              className="btnform"
+              type="submit"
+              onClick={() => setEditAppear(false)}
+            >
               Edit Enemy
             </button>
-            <button onClick={() => setEditAppear(false)}>Close</button>
+            <button className="btnform" onClick={() => setEditAppear(false)}>
+              Close
+            </button>
           </div>
         </div>
       )}

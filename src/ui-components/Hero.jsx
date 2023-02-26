@@ -23,8 +23,7 @@ const StyledHero = styled.div`
   }
 
   & .mute-icon {
-    width: 15px;
-    filter: invert(100);
+    width: 18px;
   }
 `;
 
@@ -43,14 +42,14 @@ const Video = () => {
         {muted ? (
           <img
             className="mute-icon"
-            src="https://res.cloudinary.com/dnkacmdmh/image/upload/v1677245783/mute_bt641i.png"
+            src="https://res.cloudinary.com/dnkacmdmh/image/upload/v1677361546/muted_wkfsl8.png"
             alt="muted Icon"
           />
         ) : (
           <img
             className="mute-icon"
-            src="https://res.cloudinary.com/dnkacmdmh/image/upload/v1677245778/volume_shqhai.png"
-            alt="muted Icon"
+            src="https://res.cloudinary.com/dnkacmdmh/image/upload/v1677361541/sound_c3f3jx.png"
+            alt="sound Icon"
           />
         )}
       </button>

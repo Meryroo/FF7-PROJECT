@@ -1,25 +1,27 @@
-.data-container {
+  
+  .data-container {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #10101c;
-  color: #e8dcb6;
-  width: 100%;
+  color:#526F80;
+  width: 100vw;
   padding: 4rem;
   gap: 15rem;
 }
 
 .data-container form {
   display: flex;
-  flex-direction: column;
+  flex-direction: rows;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   padding: 5rem;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color:rgba(45, 62, 72, 0.5);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 1rem;
-  width: 400px;
+  width: 70%;
 }
 
 .Createform {
@@ -33,15 +35,36 @@
 .data-container form input {
   border-radius: 0.5rem;
   padding: 0.5rem;
+  background: none;
+  
+}
+.data-container form input::placeholder {
+  color: #526F80;
+  
 }
 
-.data-container form button {
+.btnform {
   width: auto;
+  background-color: #526F80 ;
+  padding: 0.5rem;
+  border: 1px solid #526F80 ;
+  border-radius: 0.5rem;
+  color:#10101C;
 }
+.data-container form button:hover{
+  background-color: #10101C;
+  color: #526F80;
+}
+
 
 .enemycard {
-  border: 2px solid cornflowerblue;
-  background-color: #83847e;
+  display: flex;
+flex-wrap: wrap;
+  border: 2px solid hsl(202, 22%, 41%);
+  border-radius: 0.5rem;
+  padding: 1rem;
+
+  
 }
 
 .modal-overlay {
@@ -52,6 +75,8 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.918);
   z-index: 999;
+
+  
 }
 
 .editform {
@@ -63,20 +88,39 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #e8dcb6;
-  gap: 32px;
+  background-color:#526F80;
   border-radius: 5%;
-  padding: 1rem;
-  width: 400px;
+gap: 2rem;
+  width: 50%;
+  height: 90%;
+  
 }
+.editform h2{
+  color: #163435;
+  font-size: 1.8rem;
+}
+
 .editform > form {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+gap: 2rem;
+flex-wrap: wrap;
+  
 }
 
 .editform > form > input {
   border-radius: 0.5rem;
   padding: 0.5rem;
+  background-color: #526F80;
+  color:#10101c;
+}
+.editform button{
+border: #163435;
+}
+
+.enemies-container{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
