@@ -36,6 +36,9 @@ const StyledDiv = styled.div`
   gap: ${({ gap }) => gap};
   border: ${({ border }) => (border === 'yes' ? '2px solid black' : 'none')};
   flex-wrap: wrap;
+  position: ${({ position }) => position};
+  overflow-x: ${({ flowx }) => flowx};
+  overflow-y: ${({ flowy }) => flowy};
 `;
 
 const DivFlex = ({
@@ -49,9 +52,14 @@ const DivFlex = ({
   width,
   gap,
   border,
+  position,
+  flowx,
+  flowy,
 }) => {
   return (
     <StyledDiv
+      flowx={flowx}
+      flowy={flowy}
       direction={direction}
       margin={margin}
       padding={padding}
@@ -61,6 +69,7 @@ const DivFlex = ({
       width={width}
       gap={gap}
       border={border}
+      position={position}
     >
       {children}
     </StyledDiv>
