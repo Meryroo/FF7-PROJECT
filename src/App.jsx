@@ -5,15 +5,18 @@ import { Outlet } from 'react-router-dom';
 import LayaoutGeneral from './Layout/LayoutGeneral';
 import Footer from './ui-components/Footer';
 import Header from './ui-components/Header';
-import Hero from './ui-components/Hero';
+import Image from './ui-components/Image';
 import NavBar from './ui-components/NavBar';
 
 function App() {
   return (
     <div className="App">
       <LayaoutGeneral>
-        <Header align={'flex-end'} height={'35vh'} color={'transparent'}>
-          <Hero />
+        <Header align={'center'} height={'35vh'} color={'transparent'}>
+          <Image
+            src="https://res.cloudinary.com/dysog0ybg/image/upload/v1677165723/cropped-FFVII_logo_w4hdry.png"
+            alt="logo"
+          />
           <NavBar
             height={'8px'}
             justify={'flex-end'}
