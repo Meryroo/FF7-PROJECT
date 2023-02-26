@@ -9,8 +9,8 @@ const StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: yellow;
-  color: black;
+  background-color: transparent;
+  color: #b8b8b8;
   margin: 0rem;
   padding: 0rem;
   height: 350px;
@@ -19,7 +19,7 @@ const StyledDiv = styled.div`
   border: none;
   border-radius: 10px;
   box-shadow: 0 0 15px;
-  & :hover {
+  :hover {
     transform: scale(1.2);
     transition: all 0.5s ease-in-out;
   }

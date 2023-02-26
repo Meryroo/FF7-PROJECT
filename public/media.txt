@@ -14,4 +14,4 @@ img character1 -> `https://res.cloudinary.com/dysog0ybg/image/upload/v1677166274
 img character2 -> `https://res.cloudinary.com/dysog0ybg/image/upload/v1677166274/show_dkoitj.jpg`
 img character3 -> `https://res.cloudinary.com/dysog0ybg/image/upload/v1677166274/f8fad369a92a53453e91fc205f9d63c6_jvguv0.jpg`
 img character4 -> `https://res.cloudinary.com/dysog0ybg/image/upload/v1677166204/1366_2000_exzuxa.jpg`
-
+img sword background -> 'https://res.cloudinary.com/dvdoak5et/image/upload/v1677431074/Bestiary/ff-sword-hero_1_tnzvmn.jpg'

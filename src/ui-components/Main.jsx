@@ -5,8 +5,11 @@ import Palette from '../styles/Palette';
 const StyledMain = styled.main`
   background-color: ${Palette.main.background};
   background-image: ${({ image }) => image};
+  background: linear-gradient(transparent, #264a5f),
+    url(https://res.cloudinary.com/dvdoak5et/image/upload/v1677431074/Bestiary/ff-sword-hero_1_tnzvmn.jpg);
   background-size: cover;
   background-attachment: fixed;
+  color: #b8b8b8;
   display: flex;
   flex-direction: ${({ direction }) => (direction == 'rows' ? 'rows' : 'column')};
   align-items: ${({ align }) =>
