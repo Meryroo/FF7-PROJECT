@@ -1,4 +1,4 @@
-import '.Bestiary.css';
+import './Bestiary.css';
 
 import { useContext, useEffect, useState } from 'react';
 
