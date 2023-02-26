@@ -1,11 +1,18 @@
 import { useContext, useEffect, useState } from 'react';
 
 import { PageContext } from '../context/PageContext';
+import DivFlex from '../ui-components/Divflex';
+import DivGrid from '../ui-components/DivGrid';
+import Heading from '../ui-components/Heading';
+import Image from '../ui-components/Image';
+import InputData from '../ui-components/InputData';
+import Main from '../ui-components/Main';
 import MinMaxFilter from '../ui-components/MinMaxFilter';
 import FilterFunction from '../utils/FilterFunction';
 import GetMinMax from '../utils/GetMinMax';
 import GetUnics from '../utils/GetUnics';
 import mock from '../utils/Mock';
+
 /* const object = {
     name: '',
     level: [0, 100],
@@ -86,299 +93,316 @@ const Bestiary = () => {
     location: [],
   });
   return (
-    <div style={{ display: 'flex' }}>
-      <div>
-        <input
-          type="text"
-          placeholder="name"
-          onChange={(ev) => {
-            setNewObject({ ...newObject, name: ev.target.value });
-            const actulizedObject = { ...newObject, name: ev.target.value };
-            setFinalList(FilterFunction(list, actulizedObject));
-          }}
-        />
-        <h4>Level</h4>
-        <MinMaxFilter
-          action={(ev) => {
-            const minmax = handleChange(ev);
-            setMinLevel(minmax[0]);
-            setMaxLevel(minmax[1]);
-            setNewObject({ ...newObject, level: [minmax[0], minmax[1]] });
-            const actulizedObject = { ...newObject, level: [minmax[0], minmax[1]] };
-            setFinalList(FilterFunction(list, actulizedObject));
-          }}
-          minMin={minMinLevel}
-          maxMin={maxMinLevel}
-          minMax={minMaxLevel}
-          maxMax={maxMaxLevel}
-        />
-        <h4>HP</h4>
-        <MinMaxFilter
-          action={(ev) => {
-            const minmax = handleChange(ev);
-            setMinHP(minmax[0]);
-            setMaxHP(minmax[1]);
-            setNewObject({ ...newObject, HP: [minmax[0], minmax[1]] });
-            const actulizedObject = { ...newObject, HP: [minmax[0], minmax[1]] };
-            setFinalList(FilterFunction(list, actulizedObject));
-          }}
-          minMin={minMinHP}
-          maxMin={maxMinHP}
-          minMax={minMaxHP}
-          maxMax={maxMaxHP}
-        />
-        <h4>MP</h4>
-        <MinMaxFilter
-          action={(ev) => {
-            const minmax = handleChange(ev);
-            setMinMP(minmax[0]);
-            setMaxMP(minmax[1]);
-            setNewObject({ ...newObject, MP: [minmax[0], minmax[1]] });
-            const actulizedObject = { ...newObject, MP: [minmax[0], minmax[1]] };
-            setFinalList(FilterFunction(list, actulizedObject));
-          }}
-          minMin={minMinMP}
-          maxMin={maxMinMP}
-          minMax={minMaxMP}
-          maxMax={maxMaxMP}
-        />
-        <h4>exp</h4>
-        <MinMaxFilter
-          action={(ev) => {
-            const minmax = handleChange(ev);
-            setMinExp(minmax[0]);
-            setMaxExp(minmax[1]);
-            setNewObject({ ...newObject, exp: [minmax[0], minmax[1]] });
-            const actulizedObject = { ...newObject, exp: [minmax[0], minmax[1]] };
-            setFinalList(FilterFunction(list, actulizedObject));
-          }}
-          minMin={minMinExp}
-          maxMin={maxMinExp}
-          minMax={minMaxExp}
-          maxMax={maxMaxExp}
-        />
-        <h4>AP</h4>
-        <MinMaxFilter
-          action={(ev) => {
-            const minmax = handleChange(ev);
-            setMinAP(minmax[0]);
-            setMaxAP(minmax[1]);
-            setNewObject({ ...newObject, AP: [minmax[0], minmax[1]] });
-            const actulizedObject = { ...newObject, AP: [minmax[0], minmax[1]] };
-            setFinalList(FilterFunction(list, actulizedObject));
-          }}
-          minMin={minMinAP}
-          maxMin={maxMinAP}
-          minMax={minMaxAP}
-          maxMax={maxMaxAP}
-        />
-        <h4>Gil</h4>
-        <MinMaxFilter
-          action={(ev) => {
-            const minmax = handleChange(ev);
-            setMinGil(minmax[0]);
-            setMaxGil(minmax[1]);
-            setNewObject({ ...newObject, gil: [minmax[0], minmax[1]] });
-            const actulizedObject = { ...newObject, gil: [minmax[0], minmax[1]] };
-            setFinalList(FilterFunction(list, actulizedObject));
-          }}
-          minMin={minMinGil}
-          maxMin={maxMinGil}
-          minMax={minMaxGil}
-          maxMax={maxMaxGil}
-        />
-        <div name="items" id="items">
-          {items.map((item) =>
-            item != 'None' ? (
-              <div key={item}>
-                <input
-                  type="checkbox"
-                  id={item}
-                  onChange={(ev) => {
-                    if (ev.target.checked) {
-                      const actulizedObject = {
-                        ...newObject,
-                        items: [...newObject.items, ev.target.id],
-                      };
-                      setNewObject({
-                        ...newObject,
-                        items: [...newObject.items, ev.target.id],
-                      });
-                      setFinalList(FilterFunction(list, actulizedObject));
-                    } else {
-                      const removed = [];
-                      newObject.items.forEach((item) => {
-                        if (item != ev.target.id) {
-                          removed.push(item);
-                        }
-                      });
-                      const actulizedObject = {
-                        ...newObject,
-                        items: removed,
-                      };
-                      setNewObject({
-                        ...newObject,
-                        items: removed,
-                      });
-                      setFinalList(FilterFunction(list, actulizedObject));
-                    }
-                  }}
-                />
-                <h4>{item}</h4>
-              </div>
-            ) : (
-              <div key={item}></div>
-            ),
-          )}
-        </div>
-        <div name="strategy" id="strategy">
-          {strategy.map((item) =>
-            item != 'None' ? (
-              <div key={item}>
-                <input
-                  type="checkbox"
-                  id={item}
-                  onChange={(ev) => {
-                    if (ev.target.checked) {
-                      const actulizedObject = {
-                        ...newObject,
-                        strategy: [...newObject.strategy, ev.target.id],
-                      };
-                      setNewObject({
-                        ...newObject,
-                        strategy: [...newObject.strategy, ev.target.id],
-                      });
-                      setFinalList(FilterFunction(list, actulizedObject));
-                    } else {
-                      const removed = [];
-                      newObject.strategy.forEach((item) => {
-                        if (item != ev.target.id) {
-                          removed.push(item);
-                        }
-                      });
-                      const actulizedObject = {
-                        ...newObject,
-                        strategy: removed,
-                      };
-                      setFinalList(FilterFunction(list, actulizedObject));
-                    }
-                  }}
-                />
-                <h4>{item}</h4>
-              </div>
-            ) : (
-              <div key={item}></div>
-            ),
-          )}
-        </div>
-        <div name="enemy_skill" id="enemy_skill">
-          {enemy_skill.map((item) =>
-            item != 'None' ? (
-              <div key={item}>
-                <input
-                  type="checkbox"
-                  id={item}
-                  onChange={(ev) => {
-                    if (ev.target.checked) {
-                      const actulizedObject = {
-                        ...newObject,
-                        enemy_skill: [...newObject.enemy_skill, ev.target.id],
-                      };
-                      setNewObject({
-                        ...newObject,
-                        enemy_skill: [...newObject.enemy_skill, ev.target.id],
-                      });
-                      setFinalList(FilterFunction(list, actulizedObject));
-                    } else {
-                      const removed = [];
-                      newObject.enemy_skill.forEach((item) => {
-                        if (item != ev.target.id) {
-                          removed.push(item);
-                        }
-                      });
-                      const actulizedObject = {
-                        ...newObject,
-                        enemy_skill: removed,
-                      };
-                      setNewObject({
-                        ...newObject,
-                        enemy_skill: removed,
-                      });
-                      setFinalList(FilterFunction(list, actulizedObject));
-                    }
-                  }}
-                />
-                <h4>{item}</h4>
-              </div>
-            ) : (
-              <div key={item}></div>
-            ),
-          )}
-        </div>
-        <div name="location" id="location">
-          {location.map((item) => (
-            <div key={item}>
-              <input
-                type="checkbox"
-                id={item}
+    <Main>
+      <DivGrid width={'100%'} height={'100%'}>
+        <div style={{ display: 'flex' }}>
+          <DivFlex padding={'2rem 4rem'}>
+            <DivFlex padding={'2rem 0'} justify={'space-between'} gap={'7.6rem'}>
+              <Image
+                filter={'invert(90%)'}
+                src={
+                  'https://res.cloudinary.com/dnkacmdmh/image/upload/v1674482623/ICONOS/magnifying-glass_va1k1c.png'
+                }
+                alt={'search logo'}
+                width={'12%'}
+              />
+              <InputData
+                color={'#526F80'}
+                type={'text'}
+                placeholder={'name'}
                 onChange={(ev) => {
-                  if (ev.target.checked) {
-                    const actulizedObject = {
-                      ...newObject,
-                      location: [...newObject.location, ev.target.id],
-                    };
-                    setNewObject({
-                      ...newObject,
-                      location: [...newObject.location, ev.target.id],
-                    });
-                    setFinalList(FilterFunction(list, actulizedObject));
-                  } else {
-                    const removed = [];
-                    newObject.location.forEach((item) => {
-                      if (item != ev.target.id) {
-                        removed.push(item);
-                      }
-                    });
-                    const actulizedObject = {
-                      ...newObject,
-                      location: [...removed],
-                    };
-                    setNewObject({
-                      ...newObject,
-                      location: [...removed],
-                    });
-                    setFinalList(FilterFunction(list, actulizedObject));
-                  }
+                  setNewObject({ ...newObject, name: ev.target.value });
+                  const actulizedObject = { ...newObject, name: ev.target.value };
+                  setFinalList(FilterFunction(list, actulizedObject));
                 }}
               />
-              <h4>{item}</h4>
+            </DivFlex>
+            <DivFlex>
+              <Heading as={'h4'}>Level</Heading>
+              <MinMaxFilter
+                action={(ev) => {
+                  const minmax = handleChange(ev);
+                  setMinLevel(minmax[0]);
+                  setMaxLevel(minmax[1]);
+                  setNewObject({ ...newObject, level: [minmax[0], minmax[1]] });
+                  const actulizedObject = { ...newObject, level: [minmax[0], minmax[1]] };
+                  setFinalList(FilterFunction(list, actulizedObject));
+                }}
+                minMin={minMinLevel}
+                maxMin={maxMinLevel}
+                minMax={minMaxLevel}
+                maxMax={maxMaxLevel}
+              />
+            </DivFlex>
+            <Heading as={'h4'}>HP</Heading>
+            <MinMaxFilter
+              action={(ev) => {
+                const minmax = handleChange(ev);
+                setMinHP(minmax[0]);
+                setMaxHP(minmax[1]);
+                setNewObject({ ...newObject, HP: [minmax[0], minmax[1]] });
+                const actulizedObject = { ...newObject, HP: [minmax[0], minmax[1]] };
+                setFinalList(FilterFunction(list, actulizedObject));
+              }}
+              minMin={minMinHP}
+              maxMin={maxMinHP}
+              minMax={minMaxHP}
+              maxMax={maxMaxHP}
+            />
+            <Heading as={'h4'}>MP</Heading>
+            <MinMaxFilter
+              action={(ev) => {
+                const minmax = handleChange(ev);
+                setMinMP(minmax[0]);
+                setMaxMP(minmax[1]);
+                setNewObject({ ...newObject, MP: [minmax[0], minmax[1]] });
+                const actulizedObject = { ...newObject, MP: [minmax[0], minmax[1]] };
+                setFinalList(FilterFunction(list, actulizedObject));
+              }}
+              minMin={minMinMP}
+              maxMin={maxMinMP}
+              minMax={minMaxMP}
+              maxMax={maxMaxMP}
+            />
+            <Heading as={'h4'}>exp</Heading>
+            <MinMaxFilter
+              action={(ev) => {
+                const minmax = handleChange(ev);
+                setMinExp(minmax[0]);
+                setMaxExp(minmax[1]);
+                setNewObject({ ...newObject, exp: [minmax[0], minmax[1]] });
+                const actulizedObject = { ...newObject, exp: [minmax[0], minmax[1]] };
+                setFinalList(FilterFunction(list, actulizedObject));
+              }}
+              minMin={minMinExp}
+              maxMin={maxMinExp}
+              minMax={minMaxExp}
+              maxMax={maxMaxExp}
+            />
+            <Heading as={'h4'}>AP</Heading>
+            <MinMaxFilter
+              action={(ev) => {
+                const minmax = handleChange(ev);
+                setMinAP(minmax[0]);
+                setMaxAP(minmax[1]);
+                setNewObject({ ...newObject, AP: [minmax[0], minmax[1]] });
+                const actulizedObject = { ...newObject, AP: [minmax[0], minmax[1]] };
+                setFinalList(FilterFunction(list, actulizedObject));
+              }}
+              minMin={minMinAP}
+              maxMin={maxMinAP}
+              minMax={minMaxAP}
+              maxMax={maxMaxAP}
+            />
+            <Heading as={'h4'}>Gil</Heading>
+            <MinMaxFilter
+              action={(ev) => {
+                const minmax = handleChange(ev);
+                setMinGil(minmax[0]);
+                setMaxGil(minmax[1]);
+                setNewObject({ ...newObject, gil: [minmax[0], minmax[1]] });
+                const actulizedObject = { ...newObject, gil: [minmax[0], minmax[1]] };
+                setFinalList(FilterFunction(list, actulizedObject));
+              }}
+              minMin={minMinGil}
+              maxMin={maxMinGil}
+              minMax={minMaxGil}
+              maxMax={maxMaxGil}
+            />
+            <div name="items" id="items">
+              {items.map((item) =>
+                item != 'None' ? (
+                  <div key={item}>
+                    <input
+                      type="checkbox"
+                      id={item}
+                      onChange={(ev) => {
+                        if (ev.target.checked) {
+                          const actulizedObject = {
+                            ...newObject,
+                            items: [...newObject.items, ev.target.id],
+                          };
+                          setNewObject({
+                            ...newObject,
+                            items: [...newObject.items, ev.target.id],
+                          });
+                          setFinalList(FilterFunction(list, actulizedObject));
+                        } else {
+                          const removed = [];
+                          newObject.items.forEach((item) => {
+                            if (item != ev.target.id) {
+                              removed.push(item);
+                            }
+                          });
+                          const actulizedObject = {
+                            ...newObject,
+                            items: removed,
+                          };
+                          setNewObject({
+                            ...newObject,
+                            items: removed,
+                          });
+                          setFinalList(FilterFunction(list, actulizedObject));
+                        }
+                      }}
+                    />
+                    <h4>{item}</h4>
+                  </div>
+                ) : (
+                  <div key={item}></div>
+                ),
+              )}
             </div>
-          ))}
+            <div name="strategy" id="strategy">
+              {strategy.map((item) =>
+                item != 'None' ? (
+                  <div key={item}>
+                    <input
+                      type="checkbox"
+                      id={item}
+                      onChange={(ev) => {
+                        if (ev.target.checked) {
+                          const actulizedObject = {
+                            ...newObject,
+                            strategy: [...newObject.strategy, ev.target.id],
+                          };
+                          setNewObject({
+                            ...newObject,
+                            strategy: [...newObject.strategy, ev.target.id],
+                          });
+                          setFinalList(FilterFunction(list, actulizedObject));
+                        } else {
+                          const removed = [];
+                          newObject.strategy.forEach((item) => {
+                            if (item != ev.target.id) {
+                              removed.push(item);
+                            }
+                          });
+                          const actulizedObject = {
+                            ...newObject,
+                            strategy: removed,
+                          };
+                          setFinalList(FilterFunction(list, actulizedObject));
+                        }
+                      }}
+                    />
+                    <h4>{item}</h4>
+                  </div>
+                ) : (
+                  <div key={item}></div>
+                ),
+              )}
+            </div>
+            <div name="enemy_skill" id="enemy_skill">
+              {enemy_skill.map((item) =>
+                item != 'None' ? (
+                  <div key={item}>
+                    <input
+                      type="checkbox"
+                      id={item}
+                      onChange={(ev) => {
+                        if (ev.target.checked) {
+                          const actulizedObject = {
+                            ...newObject,
+                            enemy_skill: [...newObject.enemy_skill, ev.target.id],
+                          };
+                          setNewObject({
+                            ...newObject,
+                            enemy_skill: [...newObject.enemy_skill, ev.target.id],
+                          });
+                          setFinalList(FilterFunction(list, actulizedObject));
+                        } else {
+                          const removed = [];
+                          newObject.enemy_skill.forEach((item) => {
+                            if (item != ev.target.id) {
+                              removed.push(item);
+                            }
+                          });
+                          const actulizedObject = {
+                            ...newObject,
+                            enemy_skill: removed,
+                          };
+                          setNewObject({
+                            ...newObject,
+                            enemy_skill: removed,
+                          });
+                          setFinalList(FilterFunction(list, actulizedObject));
+                        }
+                      }}
+                    />
+                    <h4>{item}</h4>
+                  </div>
+                ) : (
+                  <div key={item}></div>
+                ),
+              )}
+            </div>
+            <div name="location" id="location">
+              {location.map((item) => (
+                <div key={item}>
+                  <input
+                    type="checkbox"
+                    id={item}
+                    onChange={(ev) => {
+                      if (ev.target.checked) {
+                        const actulizedObject = {
+                          ...newObject,
+                          location: [...newObject.location, ev.target.id],
+                        };
+                        setNewObject({
+                          ...newObject,
+                          location: [...newObject.location, ev.target.id],
+                        });
+                        setFinalList(FilterFunction(list, actulizedObject));
+                      } else {
+                        const removed = [];
+                        newObject.location.forEach((item) => {
+                          if (item != ev.target.id) {
+                            removed.push(item);
+                          }
+                        });
+                        const actulizedObject = {
+                          ...newObject,
+                          location: [...removed],
+                        };
+                        setNewObject({
+                          ...newObject,
+                          location: [...removed],
+                        });
+                        setFinalList(FilterFunction(list, actulizedObject));
+                      }
+                    }}
+                  />
+                  <h4>{item}</h4>
+                </div>
+              ))}
+            </div>
+          </DivFlex>
+          <DivFlex>
+            {finalList.map((enemy) => (
+              <div key={enemy.id}>
+                <h4>{enemy.name}</h4>
+                <h4>{enemy.level}</h4>
+                <h4>{enemy.atributes.HP}</h4>
+                <h4>{enemy.atributes.MP}</h4>
+                <h4>{enemy.earned.exp}</h4>
+                <h4>{enemy.earned.AP}</h4>
+                <h4>{enemy.earned.gil}</h4>
+                <h4>{enemy.items.drop}</h4>
+                <h4>{enemy.items.morph}</h4>
+                <h4>{enemy.items.steal}</h4>
+                <h4>{enemy.strategy.weakness}</h4>
+                <h4>{enemy.strategy.immune}</h4>
+                <h4>{enemy.strategy.absorbs}</h4>
+                <h4>{enemy.enemy_skill}</h4>
+                <h4>{enemy.location}</h4>
+                <p>---------</p>
+              </div>
+            ))}
+          </DivFlex>
         </div>
-      </div>
-      <div>
-        {finalList.map((enemy) => (
-          <div key={enemy.id}>
-            <h4>{enemy.name}</h4>
-            <h4>{enemy.level}</h4>
-            <h4>{enemy.atributes.HP}</h4>
-            <h4>{enemy.atributes.MP}</h4>
-            <h4>{enemy.earned.exp}</h4>
-            <h4>{enemy.earned.AP}</h4>
-            <h4>{enemy.earned.gil}</h4>
-            <h4>{enemy.items.drop}</h4>
-            <h4>{enemy.items.morph}</h4>
-            <h4>{enemy.items.steal}</h4>
-            <h4>{enemy.strategy.weakness}</h4>
-            <h4>{enemy.strategy.inmune}</h4>
-            <h4>{enemy.strategy.absorbs}</h4>
-            <h4>{enemy.enemy_skill}</h4>
-            <h4>{enemy.location}</h4>
-            <p>---------</p>
-          </div>
-        ))}
-      </div>
-    </div>
+      </DivGrid>
+    </Main>
   );
 };
 export default Bestiary;

@@ -46,6 +46,21 @@ const H3 = styled.h3`
       ? '1.58rem'
       : '1rem'};
 `;
+const H4 = styled.h4`
+  font-family: ${({ font }) => font};
+  font-weight: 600;
+  letter-spacing: ${({ spacing }) => spacing};
+  color: ${({ headcolor }) => headcolor};
+  text-align: center;
+  font-size: ${({ size }) =>
+    size === 'xl'
+      ? '2.81rem'
+      : size === 'lg'
+      ? '2.11rem'
+      : size === 'md'
+      ? '1.58rem'
+      : '1rem'};
+`;
 const Heading = ({ children, size, as, headcolor }) => {
   if (as === 'h1') {
     return (
@@ -64,6 +79,12 @@ const Heading = ({ children, size, as, headcolor }) => {
       <H3 size={size} headcolor={headcolor}>
         {children}
       </H3>
+    );
+  } else if (as === 'h4') {
+    return (
+      <H4 size={size} headcolor={headcolor}>
+        {children}
+      </H4>
     );
   } else {
     return (
