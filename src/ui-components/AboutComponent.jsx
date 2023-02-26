@@ -14,14 +14,21 @@ const StyledDiv = styled.div`
   margin: 0rem;
   padding: 0rem;
   height: 350px;
-  width: 300px;
+  width: 280px;
   gap: 20px;
   border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 15px;
+  & :hover {
+    transform: scale(1.2);
+    transition: all 0.5s ease-in-out;
+  }
 `;
 
-const AboutComponents = ({ img, imgname, link1, link2 }) => {
+const AboutComponents = ({ img, imgname, link1, link2, name }) => {
   return (
     <StyledDiv>
+      <h2>{name}</h2>
       <Image src={img} alt={imgname} width="100%" />
       <DivFlex gap="1rem">
         <Anchor link={link1}>
