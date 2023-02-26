@@ -1,16 +1,12 @@
 import styled from 'styled-components';
 
-const TextComponentStyled = styled.p`
-  color: ${(color) => color};
-  size: ${(size) => size};
+const TextComponentStyled = styled.span`
+  color: #e8dcb6;
+  size: 20px;
 `;
 
-const TextComponent = ({ color, size, text }) => {
-  return (
-    <TextComponentStyled color={color} size={size}>
-      {text}
-    </TextComponentStyled>
-  );
+const TextComponent = ({ size, text }) => {
+  return <TextComponentStyled size={size}>{text}</TextComponentStyled>;
 };
 
 export default TextComponent;
