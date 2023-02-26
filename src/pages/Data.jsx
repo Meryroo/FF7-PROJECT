@@ -1,8 +1,17 @@
-import '../pages/Data.css';
-
 import { useContext, useEffect, useState } from 'react';
 
 import { PageContext } from '../context/PageContext';
+import Button from '../ui-components/Button';
+import DataDivModal from '../ui-components/DataDivModal';
+import DataEnemyCard from '../ui-components/DataEnemyCard';
+import DataForm from '../ui-components/DataForm';
+import DataFormModal from '../ui-components/DataFormModal';
+import DataModal from '../ui-components/DataModal';
+import DivFlex from '../ui-components/Divflex';
+import DivGrid from '../ui-components/DivGrid';
+import InputData from '../ui-components/InputData';
+import SectionFlex from '../ui-components/SectionFlex';
+
 const Data = () => {
   const { setPage } = useContext(PageContext);
   const [enemies, setEnemies] = useState([]);
@@ -87,28 +96,28 @@ const Data = () => {
 
   return (
     <div className="Api">
-      <section className="data-container">
-        <div className="Createform">
+      <SectionFlex>
+        <DivFlex direction="column" gap="2rem">
           <h2>CREATE ENEMY</h2>
-          <form onSubmit={(ev) => createEnemies(ev)}>
-            <input
+          <DataForm onSubmit={(ev) => createEnemies(ev)}>
+            <InputData
               type="text"
-              placeholder="Imagen URL"
+              ph="Imagen URL"
               onChange={(ev) => setNewEnemy({ ...newEnemy, img: ev.target.value })}
             />
-            <input
+            <InputData
               type="text"
-              placeholder="name"
+              ph="name"
               onChange={(ev) => setNewEnemy({ ...newEnemy, name: ev.target.value })}
             />
-            <input
+            <InputData
               type="number"
-              placeholder="level"
+              ph="level"
               onChange={(ev) => setNewEnemy({ ...newEnemy, level: ev.target.value })}
             />
-            <input
+            <InputData
               type="number"
-              placeholder="HP"
+              ph="HP"
               onChange={(ev) =>
                 setNewEnemy({
                   ...newEnemy,
@@ -116,9 +125,9 @@ const Data = () => {
                 })
               }
             />
-            <input
+            <InputData
               type="number"
-              placeholder="MP"
+              ph="MP"
               onChange={(ev) =>
                 setNewEnemy({
                   ...newEnemy,
@@ -126,9 +135,9 @@ const Data = () => {
                 })
               }
             />
-            <input
+            <InputData
               type="number"
-              placeholder="exp"
+              ph="exp"
               onChange={(ev) =>
                 setNewEnemy({
                   ...newEnemy,
@@ -136,9 +145,9 @@ const Data = () => {
                 })
               }
             />
-            <input
+            <InputData
               type="number"
-              placeholder="AP"
+              ph="AP"
               onChange={(ev) =>
                 setNewEnemy({
                   ...newEnemy,
@@ -146,9 +155,9 @@ const Data = () => {
                 })
               }
             />
-            <input
+            <InputData
               type="number"
-              placeholder="gil"
+              ph="gil"
               onChange={(ev) =>
                 setNewEnemy({
                   ...newEnemy,
@@ -156,9 +165,9 @@ const Data = () => {
                 })
               }
             />
-            <input
+            <InputData
               type="text"
-              placeholder="drop"
+              ph="drop"
               onChange={(ev) =>
                 setNewEnemy({
                   ...newEnemy,
@@ -166,9 +175,9 @@ const Data = () => {
                 })
               }
             />
-            <input
+            <InputData
               type="text"
-              placeholder="morph"
+              ph="morph"
               onChange={(ev) =>
                 setNewEnemy({
                   ...newEnemy,
@@ -176,9 +185,9 @@ const Data = () => {
                 })
               }
             />
-            <input
+            <InputData
               type="text"
-              placeholder="steal"
+              ph="steal"
               onChange={(ev) =>
                 setNewEnemy({
                   ...newEnemy,
@@ -186,9 +195,9 @@ const Data = () => {
                 })
               }
             />
-            <input
+            <InputData
               type="text"
-              placeholder="Weakness"
+              ph="Weakness"
               onChange={(ev) =>
                 setNewEnemy({
                   ...newEnemy,
@@ -196,9 +205,9 @@ const Data = () => {
                 })
               }
             />
-            <input
+            <InputData
               type="text"
-              placeholder="Immune"
+              ph="Immune"
               onChange={(ev) =>
                 setNewEnemy({
                   ...newEnemy,
@@ -206,9 +215,9 @@ const Data = () => {
                 })
               }
             />
-            <input
+            <InputData
               type="text"
-              placeholder="Absorbs"
+              ph="Absorbs"
               onChange={(ev) =>
                 setNewEnemy({
                   ...newEnemy,
@@ -216,35 +225,37 @@ const Data = () => {
                 })
               }
             />
-            <input
+            <InputData
               type="text"
-              placeholder="Enemy Skill"
+              ph="Enemy Skill"
               onChange={(ev) =>
                 setNewEnemy({ ...newEnemy, enemy_skill: ev.target.value })
               }
             />
-            <input type="text" placeholder="Location" />
-            <button
-              className="btnform"
+            <InputData type="text" ph="Location" />
+            <Button
               type="button"
-              onClick={(ev) => {
+              text="Add Location"
+              action={(ev) => {
                 setLocationInput([...locationInput, ev.target.previousSibling.value]);
                 const updateInput = [...locationInput, ev.target.previousSibling.value];
                 setNewEnemy({ ...newEnemy, location: updateInput });
               }}
-            >
-              Add Location
-            </button>
-            <button className="btnform" type="submit">
-              Create Enemy
-            </button>
-          </form>
+            />
+
+            <Button type="submit" text="Create Enemy" />
+            <Button
+              type="button"
+              text="Reset Data"
+              action={() => setNewEnemy(...newEnemy, newEnemy)}
+            />
+          </DataForm>
           {error && <h3>{error}</h3>}
-        </div>
-        <div className="enemies-container">
+        </DivFlex>
+        <DivGrid>
           {loaded ? (
             enemies.map((enemy) => (
-              <div className="enemycard" key={enemy.id}>
+              <DataEnemyCard key={enemy.id}>
                 <img src={enemy.img} alt={enemy.name} />
                 <h3>{enemy.name}</h3>
                 <h3>{enemy.level}</h3>
@@ -264,50 +275,46 @@ const Data = () => {
                 <p>Immune: {enemy.strategy.immune}</p>
                 <p>Absorbs: {enemy.strategy.absorbs}</p>
                 <h4>{enemy.enemy_skill}</h4>
-                <span className="btncard">
-                  <button
-                    className="btnform"
-                    onClick={() => setEditEnemy(enemy) & setEditAppear(true)}
-                  >
-                    Edit
-                  </button>
-                  <button className="btnform" onClick={() => deleteEnemies(enemy.id)}>
-                    Delete
-                  </button>
-                </span>
-              </div>
+
+                <Button
+                  size="sm"
+                  text="Edit"
+                  action={() => setEditEnemy(enemy) & setEditAppear(true)}
+                />
+                <Button size="sm" text="delete" action={() => deleteEnemies(enemy.id)} />
+              </DataEnemyCard>
             ))
           ) : (
             <h2>Loading...</h2>
           )}
-        </div>
-      </section>
+        </DivGrid>
+      </SectionFlex>
       {editAppear && (
-        <div className="modal-overlay">
-          <div className="editform">
-            <h2>EDIT ENEMY</h2>
-            <form onSubmit={(ev) => handleEditEnemy(ev, editEnemy.id)}>
-              <input
+        <DataModal>
+          <DataDivModal>
+            <h2 className="h2data">EDIT ENEMY</h2>
+            <DataFormModal onSubmit={(ev) => handleEditEnemy(ev, editEnemy.id)}>
+              <InputData
                 type="text"
-                placeholder="Imagen URL"
+                ph="Imagen URL"
                 value={editEnemy.img}
                 onChange={(ev) => setEditEnemy({ ...editEnemy, img: ev.target.value })}
               />
-              <input
+              <InputData
                 type="text"
-                placeholder="Name"
+                ph="Name"
                 value={editEnemy.name}
                 onChange={(ev) => setEditEnemy({ ...editEnemy, name: ev.target.value })}
               />
-              <input
+              <InputData
                 type="number"
-                placeholder="Level"
+                ph="Level"
                 value={editEnemy.level}
                 onChange={(ev) => setEditEnemy({ ...editEnemy, level: ev.target.value })}
               />
-              <input
+              <InputData
                 type="number"
-                placeholder="HP"
+                ph="HP"
                 value={editEnemy.atributes.HP}
                 onChange={(ev) =>
                   setEditEnemy({
@@ -316,9 +323,9 @@ const Data = () => {
                   })
                 }
               />
-              <input
+              <InputData
                 type="number"
-                placeholder="MP"
+                ph="MP"
                 value={editEnemy.atributes.MP}
                 onChange={(ev) =>
                   setEditEnemy({
@@ -327,9 +334,9 @@ const Data = () => {
                   })
                 }
               />
-              <input
+              <InputData
                 type="number"
-                placeholder="Exp"
+                ph="Exp"
                 value={editEnemy.earned.exp}
                 onChange={(ev) =>
                   setEditEnemy({
@@ -338,9 +345,9 @@ const Data = () => {
                   })
                 }
               />
-              <input
+              <InputData
                 type="number"
-                placeholder="AP"
+                ph="AP"
                 value={editEnemy.earned.AP}
                 onChange={(ev) =>
                   setEditEnemy({
@@ -349,9 +356,9 @@ const Data = () => {
                   })
                 }
               />
-              <input
+              <InputData
                 type="number"
-                placeholder="gil"
+                ph="gil"
                 value={editEnemy.earned.gil}
                 onChange={(ev) =>
                   editEnemy({
@@ -360,9 +367,9 @@ const Data = () => {
                   })
                 }
               />
-              <input
+              <InputData
                 type="text"
-                placeholder="drop"
+                ph="drop"
                 value={editEnemy.items.drop}
                 onChange={(ev) =>
                   setEditEnemy({
@@ -371,9 +378,9 @@ const Data = () => {
                   })
                 }
               />
-              <input
+              <InputData
                 type="text"
-                placeholder="morph"
+                ph="morph"
                 value={editEnemy.items.morph}
                 onChange={(ev) =>
                   editEnemy({
@@ -382,9 +389,9 @@ const Data = () => {
                   })
                 }
               />
-              <input
+              <InputData
                 type="text"
-                placeholder="Steal"
+                ph="Steal"
                 value={editEnemy.items.steal}
                 onChange={(ev) =>
                   setEditEnemy({
@@ -393,9 +400,9 @@ const Data = () => {
                   })
                 }
               />
-              <input
+              <InputData
                 type="text"
-                placeholder="Weakness"
+                ph="Weakness"
                 value={editEnemy.strategy.steal}
                 onChange={(ev) =>
                   setEditEnemy({
@@ -404,9 +411,9 @@ const Data = () => {
                   })
                 }
               />
-              <input
+              <InputData
                 type="text"
-                placeholder="Immune"
+                ph="Immune"
                 value={editEnemy.strategy.immune}
                 onChange={(ev) =>
                   setEditEnemy({
@@ -415,9 +422,9 @@ const Data = () => {
                   })
                 }
               />
-              <input
+              <InputData
                 type="text"
-                placeholder="Absorbs"
+                ph="Absorbs"
                 value={editEnemy.strategy.absorbs}
                 onChange={(ev) =>
                   setEditEnemy({
@@ -426,27 +433,19 @@ const Data = () => {
                   })
                 }
               />
-              <input
+              <InputData
                 type="text"
-                placeholder="Enemy Skill"
+                ph="Enemy Skill"
                 value={editEnemy.enemy_skill}
                 onChange={(ev) =>
                   setEditEnemy({ ...editEnemy, enemy_skill: ev.target.value })
                 }
               />
-            </form>
-            <button
-              className="btnform"
-              type="submit"
-              onClick={() => setEditAppear(false)}
-            >
-              Edit Enemy
-            </button>
-            <button className="btnform" onClick={() => setEditAppear(false)}>
-              Close
-            </button>
-          </div>
-        </div>
+            </DataFormModal>
+            <Button text="Edit Enemy" type="submit" action={() => setEditAppear(false)} />
+            <Button text="Close" action={() => setEditAppear(false)} />
+          </DataDivModal>
+        </DataModal>
       )}
     </div>
   );
