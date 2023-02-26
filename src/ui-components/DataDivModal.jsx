@@ -9,7 +9,6 @@ const DivModalDataStyled = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #464c4b;
   border-radius: 5%;
   gap: 2rem;
   width: 50%;

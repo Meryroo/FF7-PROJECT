@@ -10,7 +10,6 @@ import DataMain from '../ui-components/DataMain';
 import DataModal from '../ui-components/DataModal';
 import DivFlex from '../ui-components/Divflex';
 import InputData from '../ui-components/InputData';
-import Main from '../ui-components/Main';
 import Spinner from '../ui-components/Spinner';
 import TextComponent from '../ui-components/TextComponent';
 
@@ -131,7 +130,7 @@ const Data = () => {
   }, []);
 
   return (
-    <Main>
+    <div>
       <DataMain>
         <DivFlex gap="2rem" direction="column">
           <h2>
@@ -356,9 +355,12 @@ const Data = () => {
       {editAppear && (
         <DataModal>
           <DataDivModal>
-            <h2>EDIT ENEMY</h2>
+            <h2>
+              <TextComponent text="EDIT ENEMY" />
+            </h2>
             <DataFormModal>
               <InputData
+                color="white"
                 type="text"
                 ph="Imagen URL"
                 value={editEnemy.img}
@@ -367,18 +369,21 @@ const Data = () => {
                 }}
               />
               <InputData
+                color="white"
                 type="text"
                 ph="Name"
                 value={editEnemy.name}
                 onChange={(ev) => setEditEnemy({ ...editEnemy, name: ev.target.value })}
               />
               <InputData
+                color="white"
                 type="number"
                 ph="Level"
                 value={editEnemy.level}
                 onChange={(ev) => setEditEnemy({ ...editEnemy, level: ev.target.value })}
               />
               <InputData
+                color="white"
                 type="number"
                 ph="HP"
                 value={editEnemy.atributes.HP}
@@ -390,6 +395,7 @@ const Data = () => {
                 }
               />
               <InputData
+                color="white"
                 type="number"
                 ph="MP"
                 value={editEnemy.atributes.MP}
@@ -401,6 +407,7 @@ const Data = () => {
                 }
               />
               <InputData
+                color="white"
                 type="number"
                 ph="Exp"
                 value={editEnemy.earned.exp}
@@ -412,6 +419,7 @@ const Data = () => {
                 }
               />
               <InputData
+                color="white"
                 type="number"
                 ph="AP"
                 value={editEnemy.earned.AP}
@@ -423,6 +431,7 @@ const Data = () => {
                 }
               />
               <InputData
+                color="white"
                 type="number"
                 ph="gil"
                 value={editEnemy.earned.gil}
@@ -434,6 +443,7 @@ const Data = () => {
                 }
               />
               <InputData
+                color="white"
                 type="text"
                 ph="drop"
                 value={editEnemy.items.drop}
@@ -445,6 +455,7 @@ const Data = () => {
                 }
               />
               <InputData
+                color="white"
                 type="text"
                 ph="morph"
                 value={editEnemy.items.morph}
@@ -456,6 +467,7 @@ const Data = () => {
                 }
               />
               <InputData
+                color="white"
                 type="text"
                 ph="Steal"
                 value={editEnemy.items.steal}
@@ -467,6 +479,7 @@ const Data = () => {
                 }
               />
               <InputData
+                color="white"
                 type="text"
                 ph="Weakness"
                 value={editEnemy.strategy.weakness}
@@ -478,6 +491,7 @@ const Data = () => {
                 }
               />
               <InputData
+                color="white"
                 type="text"
                 ph="Immune"
                 value={editEnemy.strategy.immune}
@@ -489,6 +503,7 @@ const Data = () => {
                 }
               />
               <InputData
+                color="white"
                 type="text"
                 ph="Absorbs"
                 value={editEnemy.strategy.absorbs}
@@ -500,6 +515,7 @@ const Data = () => {
                 }
               />
               <InputData
+                color="white"
                 type="text"
                 ph="Enemy Skill"
                 value={editEnemy.enemy_skill}
@@ -522,7 +538,7 @@ const Data = () => {
           </DataDivModal>
         </DataModal>
       )}
-    </Main>
+    </div>
   );
 };
 

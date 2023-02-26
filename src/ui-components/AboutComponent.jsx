@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Anchor from './Anchor';
 import DivFlex from './Divflex';
 import Image from './Image';
+import TextComponent from './TextComponent';
 
 const StyledDiv = styled.div`
   display: flex;
@@ -28,7 +29,9 @@ const StyledDiv = styled.div`
 const AboutComponents = ({ img, imgname, link1, link2, name }) => {
   return (
     <StyledDiv>
-      <h2>{name}</h2>
+      <h2>
+        <TextComponent text={name} />
+      </h2>
       <Image src={img} alt={imgname} width="100%" />
       <DivFlex gap="1rem">
         <Anchor link={link1}>

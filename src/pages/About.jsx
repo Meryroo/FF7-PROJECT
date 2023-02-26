@@ -10,21 +10,26 @@ const About = () => {
     setPage('about');
   }, []);
   return (
-    <Main justify={'center'} align="center">
-      <h1>EQUIPO</h1>
+    <Main
+      justify={'center'}
+      align="center"
+      homeheight="1fr"
+      margin="2rem 0 0 0"
+      padding="2rem"
+    >
       <DivFlex direction="column" padding="1rem" gap="30px">
         <DivFlex gap="3rem">
           <AboutComponents
             link1=""
             link2="https://github.com/Meryroo"
-            img="https://res.cloudinary.com/dysog0ybg/image/upload/v1677166274/9JM2umQBwkZPwTXA3vvWdf_myjjft.jpg"
+            img="https://res.cloudinary.com/dysog0ybg/image/upload/v1677166274/f8fad369a92a53453e91fc205f9d63c6_jvguv0.jpg"
             alt="mery"
             name="Maria"
           />
           <AboutComponents
             link1="https://www.linkedin.com/in/rafael-garc%C3%ADa-rivas-9b5303264/"
             link2="https://github.com/Rgrivas9"
-            img="https://res.cloudinary.com/dysog0ybg/image/upload/v1677166274/9JM2umQBwkZPwTXA3vvWdf_myjjft.jpg"
+            img="https://res.cloudinary.com/dysog0ybg/image/upload/v1677452413/rafafff_j26z2x.webp"
             alt="rafa"
             name="Rafa"
           />
@@ -38,7 +43,7 @@ const About = () => {
           <AboutComponents
             link1="https://www.linkedin.com/in/carlos-olano-gonz%C3%A1lez-338b3b68/"
             link2="https://github.com/olanovich3?tab=repositories"
-            img="https://res.cloudinary.com/dysog0ybg/image/upload/v1677166274/9JM2umQBwkZPwTXA3vvWdf_myjjft.jpg"
+            img="https://res.cloudinary.com/dysog0ybg/image/upload/v1677452339/personajeff_hvks2l.jpg"
             alt="carlos"
             name="Carlos"
           />
