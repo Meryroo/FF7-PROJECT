@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 
+import MapModal from '../3dComponents/MapModal';
 import { PageContext } from '../context/PageContext';
 import Divflex from '../ui-components/Divflex';
 import DivGrid from '../ui-components/DivGrid';
@@ -100,6 +101,7 @@ const Bestiary = () => {
     enemy_skill: [],
     location: [],
   });
+  const [map, setMap] = useState(false);
   return (
     <Divflex variant={'#10101C'} gap={'5rem'}>
       <div>
@@ -114,6 +116,27 @@ const Bestiary = () => {
             }}
           />
         </Divflex>
+        {map == false && (
+          <button
+            className="openMap"
+            onClick={() => {
+              setMap(!map);
+            }}
+          >
+            Map
+          </button>
+        )}
+        {map && (
+          <button
+            className="openMap"
+            onClick={() => {
+              setMap(!map);
+            }}
+          >
+            Close
+          </button>
+        )}
+        {map && <MapModal />}
         <DivGrid gridgap={'15rem'} padding={'r1em 8rem'}>
           <div>
             <h4>Level</h4>
