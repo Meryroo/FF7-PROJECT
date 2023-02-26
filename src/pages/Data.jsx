@@ -95,9 +95,9 @@ const Data = () => {
   }, []);
 
   return (
-    <div className="Api">
+    <div>
       <SectionFlex>
-        <DivFlex direction="column" gap="2rem">
+        <DivFlex gap="2rem" direction="column">
           <h2>CREATE ENEMY</h2>
           <DataForm onSubmit={(ev) => createEnemies(ev)}>
             <InputData
@@ -258,11 +258,11 @@ const Data = () => {
               <DataEnemyCard key={enemy.id}>
                 <img src={enemy.img} alt={enemy.name} />
                 <h3>{enemy.name}</h3>
-                <h3>{enemy.level}</h3>
+                <h3>Level: {enemy.level}</h3>
                 <h4>Atributes</h4>
                 <p>HP: {enemy.atributes.HP}</p>
                 <p>MP: {enemy.atributes.MP}</p>
-                <h4>Earned</h4>
+                {/* <h4>Earned</h4>
                 <p>Exp: {enemy.earned.exp}</p>
                 <p>AP: {enemy.earned.AP}</p>
                 <p>gil: {enemy.earned.gil}</p>
@@ -274,14 +274,19 @@ const Data = () => {
                 <p>Weakness: {enemy.strategy.weakness}</p>
                 <p>Immune: {enemy.strategy.immune}</p>
                 <p>Absorbs: {enemy.strategy.absorbs}</p>
-                <h4>{enemy.enemy_skill}</h4>
-
-                <Button
-                  size="sm"
-                  text="Edit"
-                  action={() => setEditEnemy(enemy) & setEditAppear(true)}
-                />
-                <Button size="sm" text="delete" action={() => deleteEnemies(enemy.id)} />
+                <h4>{enemy.enemy_skill}</h4> */}
+                <DivFlex gap="1rem">
+                  <Button
+                    size="sm"
+                    text="Edit"
+                    action={() => setEditEnemy(enemy) & setEditAppear(true)}
+                  />
+                  <Button
+                    size="sm"
+                    text="delete"
+                    action={() => deleteEnemies(enemy.id)}
+                  />
+                </DivFlex>
               </DataEnemyCard>
             ))
           ) : (

@@ -4,11 +4,11 @@ const SectionFlexStyled = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #10101c;
+  background-color: cadetblue;
   color: #526f80;
   width: 100vw;
   padding: 4rem;
-  gap: 15rem;
+  gap: 5rem;
 `;
 
 const SectionFlex = ({ children }) => {

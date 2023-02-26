@@ -7,7 +7,7 @@ const FormDataStyled = styled.form`
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1rem;
-  padding: 5rem;
+  padding: 2rem;
   background-color: rgba(45, 62, 72, 0.5);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 1rem;
