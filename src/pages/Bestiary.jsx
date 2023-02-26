@@ -58,16 +58,25 @@ const Bestiary = () => {
     enemy_skill: [],
     location: [],
   });
-  const list = mock;
+  const list = [];
+  mock.forEach((enemy) => {
+    list.push({
+      ...enemy,
+      i: false,
+      l: false,
+      e: false,
+      s: false,
+    });
+  });
   const [unalteredList, setUnalteredList] = useState([]); //allnumberslist
   const [bothList, setBothList] = useState(
     FilterFunction(list, unalteredList, object, newObject),
   ); //resultado del filter
   const [finalList, setFinalList] = useState(bothList[1]); //finallist
-  const items = GetUnics(list, 'items');
-  const strategy = GetUnics(list, 'strategy');
-  const enemy_skill = GetUnics(list, 'enemy_skill');
-  const location = GetUnics(list, 'location');
+  const items = GetUnics(mock, 'items');
+  const strategy = GetUnics(mock, 'strategy');
+  const enemy_skill = GetUnics(mock, 'enemy_skill');
+  const location = GetUnics(mock, 'location');
   return (
     <div>
       <h1>{page}</h1>
@@ -278,19 +287,21 @@ const Bestiary = () => {
                   setFinalList(filtered[1]);
                 } else {
                   const removed = [];
+                  let toRemove = ev.target.id;
                   newObject.location.forEach((item) => {
                     if (item != ev.target.id) {
                       removed.push(item);
                     }
                   });
-                  const actulizedObject = {
-                    ...newObject,
-                    location: removed,
-                  };
                   setNewObject({
                     ...newObject,
-                    location: removed,
+                    location: [...removed],
                   });
+                  removed.push(toRemove);
+                  const actulizedObject = {
+                    ...newObject,
+                    location: [...removed],
+                  };
                   const filtered = FilterFunction(
                     list,
                     unalteredList,
