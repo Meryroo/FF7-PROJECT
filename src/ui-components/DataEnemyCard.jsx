@@ -5,9 +5,12 @@ const EnemyCardDataStyled = styled.div`
   flex-wrap: wrap;
   height: 350px;
   width: 350px;
-  border: 3px solid hsl(202, 22%, 41%);
+  border: none;
+  background-color: transparent;
   padding: 1rem;
   gap: 1rem;
+  box-shadow: 0 0 15px;
+  border-radius: 10px;
 `;
 
 const DataEnemyCard = ({ children }) => {

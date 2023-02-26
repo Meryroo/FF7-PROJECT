@@ -11,6 +11,7 @@ const StyledMain = styled.main`
   background-attachment: fixed;
   color: #b8b8b8;
   display: flex;
+  gap: ${({ gap }) => gap};
   flex-direction: ${({ direction }) => (direction == 'rows' ? 'rows' : 'column')};
   align-items: ${({ align }) =>
     align === 'center'
@@ -38,9 +39,21 @@ const StyledMain = styled.main`
       : 'center'};
   width: 100vw;
   height: ${({ homeheight }) => (homeheight ? homeheight : '100vh')};
+  margin: ${({ margin }) => margin};
+  padding: ${({ padding }) => padding};
 `;
 
-const Main = ({ children, homeheight, direction, justify, align, image }) => {
+const Main = ({
+  margin,
+  gap,
+  children,
+  homeheight,
+  direction,
+  justify,
+  align,
+  image,
+  padding,
+}) => {
   return (
     <StyledMain
       direction={direction}
@@ -48,6 +61,9 @@ const Main = ({ children, homeheight, direction, justify, align, image }) => {
       align={align}
       homeheight={homeheight}
       image={image}
+      gap={gap}
+      margin={margin}
+      padding={padding}
     >
       {children}
     </StyledMain>
