@@ -1,77 +1,8 @@
-const FilterFunction = (list, unalteredList, object, newObject) => {
-  const filter =
-    CompareObjects(object, newObject).length == 0
-      ? object
-      : CompareObjects(object, newObject);
-  let finalList = list;
-  let allNumbersList = [];
-  if (filter.method === 'numberOrName') {
-    finalList = FilterNumberOrName(unalteredList, filter);
-    allNumbersList = unalteredList;
-    return [allNumbersList, finalList];
-  }
-  if (filter.method === 'addArray') {
-    const added = FilterArrays(list, filter.key, filter.value);
-    const lis = [];
-    added.forEach((enemy) => {
-      lis.push({ ...enemy, [filter.key[0]]: true });
-    });
-    allNumbersList = [...unalteredList, ...lis];
-    allNumbersList = removeDuplicates(allNumbersList);
-    finalList = FilterNumberOrName(allNumbersList, filter);
-    return [allNumbersList, finalList];
-  }
-  if (filter.method === 'removeArray') {
-    const lis = [];
-    const idLis = [];
-    const removed = FilterArrays(unalteredList, filter.key, filter.value);
-    removed.forEach((enemy) => {
-      lis.push({ ...enemy, [filter.key[0]]: false });
-    });
-    lis.forEach((enemy) => {
-      if (enemy.i == false && enemy.l == false && enemy.e == false && enemy.s == false) {
-        idLis.push(enemy.id);
-      }
-    });
-    unalteredList.forEach((enemy) => {
-      let x = 0;
-      idLis.forEach((id) => {
-        if (id == enemy.id) {
-          x = 1;
-        }
-      });
-      if (x == 0) {
-        allNumbersList.push(enemy);
-      }
-    });
-    allNumbersList = allNumbersList.length == 0 ? list : allNumbersList;
-    finalList = FilterNumberOrName(allNumbersList, filter);
-    return [allNumbersList, finalList];
-  }
-  /* if (filter.method === 'removeArray' && filter.value.length != 0) {
-    filter.value.forEach((value) =>
-      allNumbersList.push(...FilterArrays(unalteredList, filter.key, value)),
-    );
-    allNumbersList = removeDuplicates(allNumbersList);
-    finalList = FilterNumberOrName(allNumbersList, filter);
-    return [allNumbersList, finalList];
-  } */
-  if (filter.method === 'addObject') {
-    allNumbersList = [...unalteredList, ...FilterObjects(list, filter.key, filter.value)];
-    allNumbersList = removeDuplicates(allNumbersList);
-    finalList = FilterNumberOrName(allNumbersList, filter);
-    return [allNumbersList, finalList];
-  }
-  if (filter.method === 'removeObject' && filter.value.length != 0) {
-    filter.value.forEach((value) =>
-      allNumbersList.push(...FilterObjects(unalteredList, filter.key, value)),
-    );
-    allNumbersList = removeDuplicates(allNumbersList);
-    finalList = FilterNumberOrName(allNumbersList, filter);
-    return [allNumbersList, finalList];
-  } else {
-    return [allNumbersList, finalList];
-  }
+const FilterFunction = (list, filter) => {
+  const filterNumberList = FilterNumberOrName(list, filter);
+  console.log(filterNumberList);
+  const finalList = FilterObjectorArray(filterNumberList, filter);
+  return finalList;
 };
 export default FilterFunction;
 
@@ -89,7 +20,6 @@ const FilterNumberOrName = (list, filter) => {
     filter.MP[0] == 0 && filter.MP[1] == 100
       ? listHP
       : FilterNumbers(listLevel, ['atributes', 'MP'], filter.MP);
-
   const listExp =
     filter.exp[0] == 0 && filter.exp[1] == 100
       ? listMP
@@ -102,60 +32,36 @@ const FilterNumberOrName = (list, filter) => {
     filter.gil[0] == 0 && filter.gil[1] == 100
       ? listAP
       : FilterNumbers(listAP, ['earned', 'gil'], filter.gil);
-
   return listGil;
 };
-const CompareObjects = (object, newObject) => {
-  let finalObject = {};
-  for (const key in object) {
-    if (
-      object[key][0] != newObject[key][0] ||
-      object[key][object[key].length - 1] !=
-        newObject[key][[newObject[key].length - 1] || key == 'location']
-    ) {
-      if (
-        key != 'items' &&
-        key != 'strategy' &&
-        key != 'enemy_skill' &&
-        key != 'location'
-      ) {
-        finalObject = { ...newObject, method: 'numberOrName' };
-      }
-      if (key == 'enemy_skill' || key == 'location') {
-        object[key].length < newObject[key].length
-          ? (finalObject = {
-              ...newObject,
-              key: key,
-              value: newObject[key][newObject[key].length - 1],
-              method: 'addArray',
-            })
-          : (finalObject = {
-              ...newObject,
-              key: key,
-              value: newObject[key][newObject[key].length - 1],
-              method: 'removeArray',
-            });
-      }
-      if (key == 'items' || key == 'strategy') {
-        object[key].length < newObject[key].length
-          ? (finalObject = {
-              ...newObject,
-              key: key,
-              value: newObject[key][newObject[key].length - 1],
-              method: 'addObject',
-            })
-          : (finalObject = {
-              ...newObject,
-              key: key,
-              value: newObject[key],
-              method: 'removeObject',
-            });
-      }
-    }
+const FilterObjectorArray = (list, filter) => {
+  const listItems = [];
+  if (filter.items.length != 0) {
+    filter.items.forEach((value) => {
+      listItems.push(...FilterObjects(list, 'items', value));
+    });
   }
-  //console.log(finalObject);
-  return finalObject;
+  const listStrategy = [...listItems];
+  if (filter.strategy.length != 0) {
+    filter.strategy.forEach((value) => {
+      listStrategy.push(...FilterObjects(list, 'strategy', value));
+    });
+  }
+  const listEnemy_skill = [...listStrategy];
+  if (filter.enemy_skill.length != 0) {
+    filter.enemy_skill.forEach((value) => {
+      listEnemy_skill.push(...FilterArrays(list, 'enemy_skill', value));
+    });
+  }
+  const listLocation = [...listEnemy_skill];
+  if (filter.location.length != 0) {
+    filter.location.forEach((value) => {
+      listEnemy_skill.push(...FilterArrays(list, 'location', value));
+    });
+  }
+  return listLocation.length == 0 ? list : removeDuplicates(listLocation);
 };
+
 const filterName = (list, value) => {
   return list.filter((enemy) => enemy.name.toLowerCase().includes(value.toLowerCase()));
 };
@@ -183,7 +89,6 @@ const FilterObjects = (list, key, value) => {
 const FilterArrays = (list, key, value) => {
   return list.filter((enemy) => value == enemy[key].find((val) => val === value));
 };
-
 const FilterNumbers = (list, keys, value) => {
   return list.filter(
     (enemy) => enemy[keys[0]][keys[1]] >= value[0] && enemy[keys[0]][keys[1]] <= value[1],

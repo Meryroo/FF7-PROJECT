@@ -1,10 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 
-//useState
 import { PageContext } from '../context/PageContext';
 import FilterFunction from '../utils/FilterFunction';
 import GetUnics from '../utils/GetUnics';
-//import FilterFunction from '../utils/FilterFunction';
 import mock from '../utils/Mock';
 //import MinMaxFilter from '../ui-components/MinMaxFilter';
 const Bestiary = () => {
@@ -32,7 +30,7 @@ const Bestiary = () => {
         minMax={minMax}
         maxMax={maxMax}
       />*/
-  const object = {
+  /* const object = {
     name: '',
     level: [0, 100],
     HP: [0, 100],
@@ -44,7 +42,7 @@ const Bestiary = () => {
     strategy: [],
     enemy_skill: [],
     location: [],
-  };
+  }; */
   const [newObject, setNewObject] = useState({
     name: '',
     level: [0, 100],
@@ -58,25 +56,12 @@ const Bestiary = () => {
     enemy_skill: [],
     location: [],
   });
-  const list = [];
-  mock.forEach((enemy) => {
-    list.push({
-      ...enemy,
-      i: false,
-      l: false,
-      e: false,
-      s: false,
-    });
-  });
-  const [unalteredList, setUnalteredList] = useState([]); //allnumberslist
-  const [bothList, setBothList] = useState(
-    FilterFunction(list, unalteredList, object, newObject),
-  ); //resultado del filter
-  const [finalList, setFinalList] = useState(bothList[1]); //finallist
-  const items = GetUnics(mock, 'items');
-  const strategy = GetUnics(mock, 'strategy');
-  const enemy_skill = GetUnics(mock, 'enemy_skill');
-  const location = GetUnics(mock, 'location');
+  const list = mock.slice(0, 5); //resultado del filter
+  const [finalList, setFinalList] = useState(list); //finallist
+  const items = GetUnics(list, 'items');
+  const strategy = GetUnics(list, 'strategy');
+  const enemy_skill = GetUnics(list, 'enemy_skill');
+  const location = GetUnics(list, 'location');
   return (
     <div>
       <h1>{page}</h1>
@@ -97,15 +82,8 @@ const Bestiary = () => {
                       ...newObject,
                       items: [...newObject.items, ev.target.id],
                     });
-                    const filtered = FilterFunction(
-                      list,
-                      unalteredList,
-                      newObject,
-                      actulizedObject,
-                    );
-                    setBothList(filtered);
-                    setUnalteredList(filtered[0]);
-                    setFinalList(filtered[1]);
+                    const filtered = FilterFunction(list, actulizedObject);
+                    setFinalList(filtered);
                   } else {
                     const removed = [];
                     newObject.items.forEach((item) => {
@@ -121,15 +99,7 @@ const Bestiary = () => {
                       ...newObject,
                       items: removed,
                     });
-                    const filtered = FilterFunction(
-                      list,
-                      unalteredList,
-                      newObject,
-                      actulizedObject,
-                    );
-                    setBothList(filtered);
-                    setUnalteredList(filtered[0]);
-                    setFinalList(filtered[1]);
+                    setFinalList(setFinalList(FilterFunction(list, actulizedObject)));
                   }
                 }}
               />
@@ -157,15 +127,7 @@ const Bestiary = () => {
                       ...newObject,
                       strategy: [...newObject.strategy, ev.target.id],
                     });
-                    const filtered = FilterFunction(
-                      list,
-                      unalteredList,
-                      newObject,
-                      actulizedObject,
-                    );
-                    setBothList(filtered);
-                    setUnalteredList(filtered[0]);
-                    setFinalList(filtered[1]);
+                    setFinalList(FilterFunction(list, actulizedObject));
                   } else {
                     const removed = [];
                     newObject.strategy.forEach((item) => {
@@ -177,19 +139,7 @@ const Bestiary = () => {
                       ...newObject,
                       strategy: removed,
                     };
-                    setNewObject({
-                      ...newObject,
-                      strategy: removed,
-                    });
-                    const filtered = FilterFunction(
-                      list,
-                      unalteredList,
-                      newObject,
-                      actulizedObject,
-                    );
-                    setBothList(filtered);
-                    setUnalteredList(filtered[0]);
-                    setFinalList(filtered[1]);
+                    setFinalList(FilterFunction(list, actulizedObject));
                   }
                 }}
               />
@@ -217,15 +167,7 @@ const Bestiary = () => {
                       ...newObject,
                       enemy_skill: [...newObject.enemy_skill, ev.target.id],
                     });
-                    const filtered = FilterFunction(
-                      list,
-                      unalteredList,
-                      newObject,
-                      actulizedObject,
-                    );
-                    setBothList(filtered);
-                    setUnalteredList(filtered[0]);
-                    setFinalList(filtered[1]);
+                    setFinalList(FilterFunction(list, actulizedObject));
                   } else {
                     const removed = [];
                     newObject.enemy_skill.forEach((item) => {
@@ -241,15 +183,7 @@ const Bestiary = () => {
                       ...newObject,
                       enemy_skill: removed,
                     });
-                    const filtered = FilterFunction(
-                      list,
-                      unalteredList,
-                      newObject,
-                      actulizedObject,
-                    );
-                    setBothList(filtered);
-                    setUnalteredList(filtered[0]);
-                    setFinalList(filtered[1]);
+                    setFinalList(FilterFunction(list, actulizedObject));
                   }
                 }}
               />
@@ -276,41 +210,23 @@ const Bestiary = () => {
                     ...newObject,
                     location: [...newObject.location, ev.target.id],
                   });
-                  const filtered = FilterFunction(
-                    list,
-                    unalteredList,
-                    newObject,
-                    actulizedObject,
-                  );
-                  setBothList(filtered);
-                  setUnalteredList(filtered[0]);
-                  setFinalList(filtered[1]);
+                  setFinalList(FilterFunction(list, actulizedObject));
                 } else {
                   const removed = [];
-                  let toRemove = ev.target.id;
                   newObject.location.forEach((item) => {
                     if (item != ev.target.id) {
                       removed.push(item);
                     }
                   });
-                  setNewObject({
-                    ...newObject,
-                    location: [...removed],
-                  });
-                  removed.push(toRemove);
                   const actulizedObject = {
                     ...newObject,
                     location: [...removed],
                   };
-                  const filtered = FilterFunction(
-                    list,
-                    unalteredList,
-                    newObject,
-                    actulizedObject,
-                  );
-                  setBothList(filtered);
-                  setUnalteredList(filtered[0]);
-                  setFinalList(filtered[1]);
+                  setNewObject({
+                    ...newObject,
+                    location: [...removed],
+                  });
+                  setFinalList(FilterFunction(list, actulizedObject));
                 }
               }}
             />
