@@ -1,3 +1,5 @@
+import '.Bestiary.css';
+
 import { useContext, useEffect, useState } from 'react';
 
 import { PageContext } from '../context/PageContext';
@@ -102,7 +104,7 @@ const Bestiary = () => {
   });
   return (
     <Divflex variant={'#10101C'} gap={'5rem'}>
-      <div>
+      <div className="filter-container">
         <InputData
           type={'text'}
           placeholder={name}
