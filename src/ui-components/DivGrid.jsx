@@ -2,17 +2,17 @@ import styled from 'styled-components';
 
 const DivGridStyled = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: ${({ cols }) => (cols ? cols : '1fr 1fr')};
   grid-auto-rows: minmax(100px, auto);
-  grid-gap: 40px;
+  grid-gap: ${({ gridgap }) => (gridgap ? gridgap : '40px')};
   background-color: ${({ variant }) => (variant ? variant : 'none')};
   width: ${({ width }) => width};
   height: ${({ height }) => height};
 `;
 
-const DivGrid = ({ children, variant, width, height }) => {
+const DivGrid = ({ gap, children, variant, width, height, cols }) => {
   return (
-    <DivGridStyled width={width} height={height} variant={variant}>
+    <DivGridStyled gap={gap} cols={cols} width={width} height={height} variant={variant}>
       {children}
     </DivGridStyled>
   );
