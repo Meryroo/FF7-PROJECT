@@ -10,7 +10,9 @@ import DataMain from '../ui-components/DataMain';
 import DataModal from '../ui-components/DataModal';
 import DivFlex from '../ui-components/Divflex';
 import InputData from '../ui-components/InputData';
+import Main from '../ui-components/Main';
 import Spinner from '../ui-components/Spinner';
+import TextComponent from '../ui-components/TextComponent';
 
 const Data = () => {
   const { setPage } = useContext(PageContext);
@@ -47,7 +49,17 @@ const Data = () => {
   const [currentLocation, setCurrentLocation] = useState('');
 
   const [error, setError] = useState();
-  const [editEnemy, setEditEnemy] = useState({ ...resetEnemy });
+  const [editEnemy, setEditEnemy] = useState({
+    name: '',
+    img: '',
+    level: '',
+    atributes: '',
+    earned: '',
+    items: '',
+    strategy: '',
+    enemy_skill: '',
+    location: [],
+  });
   const [editAppear, setEditAppear] = useState(false);
 
   const getEnemies = async () => {
@@ -119,10 +131,12 @@ const Data = () => {
   }, []);
 
   return (
-    <div>
+    <Main>
       <DataMain>
         <DivFlex gap="2rem" direction="column">
-          <h2>CREATE ENEMY</h2>
+          <h2>
+            <TextComponent color="black" text="CREATE ENEMY" />
+          </h2>
           <DataForm onSubmit={(ev) => createEnemies(ev)}>
             <InputData
               value={newEnemy.img}
@@ -204,7 +218,7 @@ const Data = () => {
               onChange={(ev) =>
                 setNewEnemy({
                   ...newEnemy,
-                  items: { ...newEnemy.items, drop: ev.target.value },
+                  items: { ...newEnemy.items, drop: [ev.target.value] },
                 })
               }
             />
@@ -215,7 +229,7 @@ const Data = () => {
               onChange={(ev) =>
                 setNewEnemy({
                   ...newEnemy,
-                  items: { ...newEnemy.items, morph: ev.target.value },
+                  items: { ...newEnemy.items, morph: [ev.target.value] },
                 })
               }
             />
@@ -226,7 +240,7 @@ const Data = () => {
               onChange={(ev) =>
                 setNewEnemy({
                   ...newEnemy,
-                  items: { ...newEnemy.items, steal: ev.target.value },
+                  items: { ...newEnemy.items, steal: [ev.target.value] },
                 })
               }
             />
@@ -237,7 +251,7 @@ const Data = () => {
               onChange={(ev) =>
                 setNewEnemy({
                   ...newEnemy,
-                  strategy: { ...newEnemy.strategy, weakness: ev.target.value },
+                  strategy: { ...newEnemy.strategy, weakness: [ev.target.value] },
                 })
               }
             />
@@ -248,7 +262,7 @@ const Data = () => {
               onChange={(ev) =>
                 setNewEnemy({
                   ...newEnemy,
-                  strategy: { ...newEnemy.strategy, immune: ev.target.value },
+                  strategy: { ...newEnemy.strategy, immune: [ev.target.value] },
                 })
               }
             />
@@ -259,7 +273,7 @@ const Data = () => {
               onChange={(ev) =>
                 setNewEnemy({
                   ...newEnemy,
-                  strategy: { ...newEnemy.strategy, absorbs: ev.target.value },
+                  strategy: { ...newEnemy.strategy, absorbs: [ev.target.value] },
                 })
               }
             />
@@ -268,7 +282,7 @@ const Data = () => {
               type="text"
               ph="Enemy Skill"
               onChange={(ev) =>
-                setNewEnemy({ ...newEnemy, enemy_skill: ev.target.value })
+                setNewEnemy({ ...newEnemy, enemy_skill: [ev.target.value] })
               }
             />
             <InputData
@@ -304,11 +318,19 @@ const Data = () => {
             enemies.map((enemy) => (
               <DataEnemyCard key={enemy.id}>
                 <img src={enemy.img} alt={enemy.name} />
-                <h3>{enemy.name}</h3>
-                <h3>Level: {enemy.level}</h3>
-                <h4>Atributes</h4>
-                <p>HP: {enemy.atributes.HP}</p>
-                <p>MP: {enemy.atributes.MP}</p>
+                <h3>
+                  <TextComponent text={enemy.name} />
+                </h3>
+                <h3>
+                  <TextComponent text={`LEVEL: ${enemy.level}`} />
+                </h3>
+
+                <p>
+                  <TextComponent text={`HP: ${enemy.atributes.HP}`} />
+                </p>
+                <p>
+                  <TextComponent text={`MP: ${enemy.atributes.MP}`} />
+                </p>
 
                 <DivFlex gap="1rem">
                   <Button
@@ -334,13 +356,15 @@ const Data = () => {
       {editAppear && (
         <DataModal>
           <DataDivModal>
-            <h2 className="h2data">EDIT ENEMY</h2>
-            <DataFormModal onSubmit={(ev) => handleEditEnemy(ev, editEnemy.id)}>
+            <h2>EDIT ENEMY</h2>
+            <DataFormModal>
               <InputData
                 type="text"
                 ph="Imagen URL"
                 value={editEnemy.img}
-                onChange={(ev) => setEditEnemy({ ...editEnemy, img: ev.target.value })}
+                onChange={(ev) => {
+                  setEditEnemy({ ...editEnemy, img: ev.target.value });
+                }}
               />
               <InputData
                 type="text"
@@ -416,7 +440,7 @@ const Data = () => {
                 onChange={(ev) =>
                   setEditEnemy({
                     ...editEnemy,
-                    items: { ...editEnemy.items, drop: ev.target.value },
+                    items: { ...editEnemy.items, drop: [ev.target.value] },
                   })
                 }
               />
@@ -427,7 +451,7 @@ const Data = () => {
                 onChange={(ev) =>
                   editEnemy({
                     ...editEnemy,
-                    items: { ...editEnemy.items, morph: ev.target.value },
+                    items: { ...editEnemy.items, morph: [ev.target.value] },
                   })
                 }
               />
@@ -438,18 +462,18 @@ const Data = () => {
                 onChange={(ev) =>
                   setEditEnemy({
                     ...editEnemy,
-                    items: { ...editEnemy.items, steal: ev.target.value },
+                    items: { ...editEnemy.items, steal: [ev.target.value] },
                   })
                 }
               />
               <InputData
                 type="text"
                 ph="Weakness"
-                value={editEnemy.strategy.steal}
+                value={editEnemy.strategy.weakness}
                 onChange={(ev) =>
                   setEditEnemy({
                     ...editEnemy,
-                    strategy: { ...editEnemy.strategy, weakness: ev.target.value },
+                    strategy: { ...editEnemy.strategy, weakness: [ev.target.value] },
                   })
                 }
               />
@@ -460,7 +484,7 @@ const Data = () => {
                 onChange={(ev) =>
                   setEditEnemy({
                     ...editEnemy,
-                    strategy: { ...editEnemy.strategy, immune: ev.target.value },
+                    strategy: { ...editEnemy.strategy, immune: [ev.target.value] },
                   })
                 }
               />
@@ -471,7 +495,7 @@ const Data = () => {
                 onChange={(ev) =>
                   setEditEnemy({
                     ...editEnemy,
-                    strategy: { ...editEnemy.strategy, absorbs: ev.target.value },
+                    strategy: { ...editEnemy.strategy, absorbs: [ev.target.value] },
                   })
                 }
               />
@@ -480,14 +504,17 @@ const Data = () => {
                 ph="Enemy Skill"
                 value={editEnemy.enemy_skill}
                 onChange={(ev) =>
-                  setEditEnemy({ ...editEnemy, enemy_skill: ev.target.value })
+                  setEditEnemy({ ...editEnemy, enemy_skill: [ev.target.value] })
                 }
               />
               <Button
                 variant={'dark'}
                 text="Edit Enemy"
                 type="submit"
-                action={() => setEditAppear(false)}
+                action={(ev) => {
+                  handleEditEnemy(ev, editEnemy.id);
+                  setEditAppear(false);
+                }}
               />
             </DataFormModal>
 
@@ -495,7 +522,7 @@ const Data = () => {
           </DataDivModal>
         </DataModal>
       )}
-    </div>
+    </Main>
   );
 };
 

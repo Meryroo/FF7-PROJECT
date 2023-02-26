@@ -4,8 +4,6 @@ const DataMainStyled = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: cadetblue;
-  color: #526f80;
   width: 100vw;
   padding: 4rem;
   gap: 5rem;
