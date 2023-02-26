@@ -27,7 +27,7 @@ const Login = () => {
   const [see, setSee] = useState(false);
   const [register, setRegister] = useState(email == null ? 'login' : 'register');
   return (
-    <Main image="url(https://res.cloudinary.com/dysog0ybg/image/upload/v1677166232/de4nhhn-2e6aa750-cab6-4a2d-9155-2147aaa877a8_ow4ui8.jpg)">
+    <Main image="url(https://res.cloudinary.com/dysog0ybg/image/upload/v1677166232/de4nhhn-2e6aa750-cab6-4a2d-9155-2147aaa877a8_ow4ui8.jpg) !important">
       <Form
         size="lg"
         action={(ev) => {

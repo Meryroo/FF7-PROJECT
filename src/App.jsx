@@ -14,6 +14,7 @@ function App() {
       <LayaoutGeneral>
         <Header align={'center'} height={'35vh'} color={'transparent'}>
           <Image
+            width={'550px'}
             src="https://res.cloudinary.com/dysog0ybg/image/upload/v1677165723/cropped-FFVII_logo_w4hdry.png"
             alt="logo"
           />
