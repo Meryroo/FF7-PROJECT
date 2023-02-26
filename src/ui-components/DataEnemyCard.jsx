@@ -3,9 +3,9 @@ import styled from 'styled-components';
 const EnemyCardDataStyled = styled.div`
   display: flex;
   flex-wrap: wrap;
-  border: 2px solid hsl(202, 22%, 41%);
-  border-radius: 0.5rem;
+  border: 3px solid hsl(202, 22%, 41%);
   padding: 1rem;
+  gap: 1rem;
 `;
 
 const DataEnemyCard = ({ children }) => {

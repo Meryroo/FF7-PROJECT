@@ -14,7 +14,7 @@ const ButtonStyled = styled.button`
   width: fit-content;
   font-family: 'Helvetica';
   font-size: ${({ size }) =>
-    size === 'lg' ? '25px' : size === 'sm' ? '14px' : size === 'xm' ? '10px' : '20px'};
+    size === 'lg' ? '25px' : size === 'sm' ? '14px' : size === 'xm' ? '10px' : '16px'};
 
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -26,7 +26,7 @@ const ButtonStyled = styled.button`
       ? '8px 16px'
       : size === 'xm'
       ? '0.2rem 0.3rem'
-      : '0.8rem 4.3rem'};
+      : '0.4rem 4rem'};
   text-transform: uppercase;
   transition: 0.5s ease-in-out;
   &:hover {
