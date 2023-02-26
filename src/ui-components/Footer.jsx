@@ -59,36 +59,46 @@ const Footer = ({ justify, align, color, height, padding, margin, variant }) => 
       variant={variant}
     >
       <div className="footerscuared">
-        <img
-          src="https://res.cloudinary.com/dysog0ybg/image/upload/v1677165711/se_logo-3x-GCifjuXox_wlxvuy.webp"
-          alt="scuared Logo"
-        />
+        <a title="square enix" href="https://www.square-enix-games.com/es_ES/home">
+          <img
+            src="https://res.cloudinary.com/dysog0ybg/image/upload/v1677165711/se_logo-3x-GCifjuXox_wlxvuy.webp"
+            alt="square Logo"
+          />
+        </a>
       </div>
       <div className="iconsfooter">
         <ul>
           <li>
-            <img
-              src="https://res.cloudinary.com/dnkacmdmh/image/upload/v1677165419/insta_tecmmc.webp"
-              alt="Istagram Icon"
-            />
+            <a title="Instagram Icon" href="https://www.instagram.com/FinalFantasyVII/">
+              <img
+                src="https://res.cloudinary.com/dnkacmdmh/image/upload/v1677165419/insta_tecmmc.webp"
+                alt="Instagram Icon"
+              />
+            </a>
           </li>
           <li>
-            <img
-              src="https://res.cloudinary.com/dnkacmdmh/image/upload/v1677165423/twi_kx2e6n.webp"
-              alt="Twitter Icon"
-            />
+            <a title="Twitter Icon" href="https://twitter.com/FinalFantasyVII">
+              <img
+                src="https://res.cloudinary.com/dnkacmdmh/image/upload/v1677165423/twi_kx2e6n.webp"
+                alt="Twitter Icon"
+              />
+            </a>
           </li>
           <li>
-            <img
-              src="https://res.cloudinary.com/dnkacmdmh/image/upload/v1677165421/face_spq3ck.webp"
-              alt="Facebook Icon"
-            />
+            <a title="Facebook Icon" href="https://www.facebook.com/finalfantasyvii/">
+              <img
+                src="https://res.cloudinary.com/dnkacmdmh/image/upload/v1677165421/face_spq3ck.webp"
+                alt="Facebook Icon"
+              />
+            </a>
           </li>
           <li>
-            <img
-              src="https://res.cloudinary.com/dnkacmdmh/image/upload/v1677165425/you_o61n62.webp"
-              alt="Youtube Icon"
-            />
+            <a title="Youtube Icon" href="https://www.youtube.com/FinalFantasy">
+              <img
+                src="https://res.cloudinary.com/dnkacmdmh/image/upload/v1677165425/you_o61n62.webp"
+                alt="Youtube Icon"
+              />
+            </a>
           </li>
         </ul>
       </div>
