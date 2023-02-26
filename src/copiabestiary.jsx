@@ -1,10 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 
 import { PageContext } from '../context/PageContext';
-import Divflex from '../ui-components/Divflex';
-import DivGrid from '../ui-components/DivGrid';
-import EnemyCard from '../ui-components/EnemyCard';
-import InputData from '../ui-components/InputData';
 import MinMaxFilter from '../ui-components/MinMaxFilter';
 import FilterFunction from '../utils/FilterFunction';
 import GetMinMax from '../utils/GetMinMax';
@@ -24,18 +20,6 @@ import mock from '../utils/Mock';
     location: [],
   }; */
 const Bestiary = () => {
-  const [enemies, setEnemies] = useState([]);
-  const getEnemies = async () => {
-    const res = await fetch('https://63f26f29f28929a9df5a9085.mockapi.io/enemies');
-    const data = await res.json();
-    setEnemies(data);
-  };
-
-  useEffect(() => {
-    getEnemies();
-    console.log(enemies);
-  }, []);
-
   const { setPage } = useContext(PageContext);
   useEffect(() => {
     setPage('bestiary');
@@ -53,6 +37,7 @@ const Bestiary = () => {
     return [min, max];
   };
   const list = mock.slice(0, 5); //resultado del filter
+  const [finalList, setFinalList] = useState(list); //finallist
   const items = GetUnics(list, 'items');
   const strategy = GetUnics(list, 'strategy');
   const enemy_skill = GetUnics(list, 'enemy_skill');
@@ -101,15 +86,15 @@ const Bestiary = () => {
     location: [],
   });
   return (
-    <Divflex variant={'#10101C'} gap={'5rem'}>
+    <div style={{ display: 'flex' }}>
       <div>
-        <InputData
-          type={'text'}
-          placeholder={name}
+        <input
+          type="text"
+          placeholder="name"
           onChange={(ev) => {
             setNewObject({ ...newObject, name: ev.target.value });
             const actulizedObject = { ...newObject, name: ev.target.value };
-            setEnemies(FilterFunction(list, actulizedObject));
+            setFinalList(FilterFunction(list, actulizedObject));
           }}
         />
         <h4>Level</h4>
@@ -120,7 +105,7 @@ const Bestiary = () => {
             setMaxLevel(minmax[1]);
             setNewObject({ ...newObject, level: [minmax[0], minmax[1]] });
             const actulizedObject = { ...newObject, level: [minmax[0], minmax[1]] };
-            setEnemies(FilterFunction(list, actulizedObject));
+            setFinalList(FilterFunction(list, actulizedObject));
           }}
           minMin={minMinLevel}
           maxMin={maxMinLevel}
@@ -135,7 +120,7 @@ const Bestiary = () => {
             setMaxHP(minmax[1]);
             setNewObject({ ...newObject, HP: [minmax[0], minmax[1]] });
             const actulizedObject = { ...newObject, HP: [minmax[0], minmax[1]] };
-            setEnemies(FilterFunction(list, actulizedObject));
+            setFinalList(FilterFunction(list, actulizedObject));
           }}
           minMin={minMinHP}
           maxMin={maxMinHP}
@@ -150,7 +135,7 @@ const Bestiary = () => {
             setMaxMP(minmax[1]);
             setNewObject({ ...newObject, MP: [minmax[0], minmax[1]] });
             const actulizedObject = { ...newObject, MP: [minmax[0], minmax[1]] };
-            setEnemies(FilterFunction(list, actulizedObject));
+            setFinalList(FilterFunction(list, actulizedObject));
           }}
           minMin={minMinMP}
           maxMin={maxMinMP}
@@ -165,7 +150,7 @@ const Bestiary = () => {
             setMaxExp(minmax[1]);
             setNewObject({ ...newObject, exp: [minmax[0], minmax[1]] });
             const actulizedObject = { ...newObject, exp: [minmax[0], minmax[1]] };
-            setEnemies(FilterFunction(list, actulizedObject));
+            setFinalList(FilterFunction(list, actulizedObject));
           }}
           minMin={minMinExp}
           maxMin={maxMinExp}
@@ -180,7 +165,7 @@ const Bestiary = () => {
             setMaxAP(minmax[1]);
             setNewObject({ ...newObject, AP: [minmax[0], minmax[1]] });
             const actulizedObject = { ...newObject, AP: [minmax[0], minmax[1]] };
-            setEnemies(FilterFunction(list, actulizedObject));
+            setFinalList(FilterFunction(list, actulizedObject));
           }}
           minMin={minMinAP}
           maxMin={maxMinAP}
@@ -195,7 +180,7 @@ const Bestiary = () => {
             setMaxGil(minmax[1]);
             setNewObject({ ...newObject, gil: [minmax[0], minmax[1]] });
             const actulizedObject = { ...newObject, gil: [minmax[0], minmax[1]] };
-            setEnemies(FilterFunction(list, actulizedObject));
+            setFinalList(FilterFunction(list, actulizedObject));
           }}
           minMin={minMinGil}
           maxMin={maxMinGil}
@@ -219,7 +204,7 @@ const Bestiary = () => {
                         ...newObject,
                         items: [...newObject.items, ev.target.id],
                       });
-                      setEnemies(FilterFunction(list, actulizedObject));
+                      setFinalList(FilterFunction(list, actulizedObject));
                     } else {
                       const removed = [];
                       newObject.items.forEach((item) => {
@@ -235,7 +220,7 @@ const Bestiary = () => {
                         ...newObject,
                         items: removed,
                       });
-                      setEnemies(FilterFunction(list, actulizedObject));
+                      setFinalList(FilterFunction(list, actulizedObject));
                     }
                   }}
                 />
@@ -263,7 +248,7 @@ const Bestiary = () => {
                         ...newObject,
                         strategy: [...newObject.strategy, ev.target.id],
                       });
-                      setEnemies(FilterFunction(list, actulizedObject));
+                      setFinalList(FilterFunction(list, actulizedObject));
                     } else {
                       const removed = [];
                       newObject.strategy.forEach((item) => {
@@ -275,7 +260,7 @@ const Bestiary = () => {
                         ...newObject,
                         strategy: removed,
                       };
-                      setEnemies(FilterFunction(list, actulizedObject));
+                      setFinalList(FilterFunction(list, actulizedObject));
                     }
                   }}
                 />
@@ -303,7 +288,7 @@ const Bestiary = () => {
                         ...newObject,
                         enemy_skill: [...newObject.enemy_skill, ev.target.id],
                       });
-                      setEnemies(FilterFunction(list, actulizedObject));
+                      setFinalList(FilterFunction(list, actulizedObject));
                     } else {
                       const removed = [];
                       newObject.enemy_skill.forEach((item) => {
@@ -319,7 +304,7 @@ const Bestiary = () => {
                         ...newObject,
                         enemy_skill: removed,
                       });
-                      setEnemies(FilterFunction(list, actulizedObject));
+                      setFinalList(FilterFunction(list, actulizedObject));
                     }
                   }}
                 />
@@ -346,7 +331,7 @@ const Bestiary = () => {
                       ...newObject,
                       location: [...newObject.location, ev.target.id],
                     });
-                    setEnemies(FilterFunction(list, actulizedObject));
+                    setFinalList(FilterFunction(list, actulizedObject));
                   } else {
                     const removed = [];
                     newObject.location.forEach((item) => {
@@ -362,7 +347,7 @@ const Bestiary = () => {
                       ...newObject,
                       location: [...removed],
                     });
-                    setEnemies(FilterFunction(list, actulizedObject));
+                    setFinalList(FilterFunction(list, actulizedObject));
                   }
                 }}
               />
@@ -371,12 +356,29 @@ const Bestiary = () => {
           ))}
         </div>
       </div>
-      <DivGrid gap={'2rem'} cols={'300px 300px 300px 300px'}>
-        {enemies.map((enemy) => (
-          <EnemyCard enemy={enemy} key={enemy.id} />
+      <div>
+        {finalList.map((enemy) => (
+          <div key={enemy.id}>
+            <h4>{enemy.name}</h4>
+            <h4>{enemy.level}</h4>
+            <h4>{enemy.atributes.HP}</h4>
+            <h4>{enemy.atributes.MP}</h4>
+            <h4>{enemy.earned.exp}</h4>
+            <h4>{enemy.earned.AP}</h4>
+            <h4>{enemy.earned.gil}</h4>
+            <h4>{enemy.items.drop}</h4>
+            <h4>{enemy.items.morph}</h4>
+            <h4>{enemy.items.steal}</h4>
+            <h4>{enemy.strategy.weakness}</h4>
+            <h4>{enemy.strategy.inmune}</h4>
+            <h4>{enemy.strategy.absorbs}</h4>
+            <h4>{enemy.enemy_skill}</h4>
+            <h4>{enemy.location}</h4>
+            <p>---------</p>
+          </div>
         ))}
-      </DivGrid>
-    </Divflex>
+      </div>
+    </div>
   );
 };
 export default Bestiary;

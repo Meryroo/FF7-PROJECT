@@ -31,6 +31,7 @@ const HeaderStyled = styled.header`
       ? 'space-between'
       : 'center'};
   background-color: ${({ variant }) => (variant ? variant : '#10101C')};
+  background: linear-gradient(#264a5f, #10101c);
   color: ${({ color }) => (color ? color : 'inherit')};
   height: ${({ height }) => height};
   width: 100vw;
