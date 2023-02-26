@@ -39,9 +39,11 @@ const StyledDiv = styled.div`
   position: ${({ position }) => position};
   overflow-x: ${({ flowx }) => flowx};
   overflow-y: ${({ flowy }) => flowy};
+  position: ${({ position }) => position};
 `;
 
 const DivFlex = ({
+  align,
   direction,
   children,
   margin,
@@ -58,6 +60,7 @@ const DivFlex = ({
 }) => {
   return (
     <StyledDiv
+      align={align}
       flowx={flowx}
       flowy={flowy}
       direction={direction}

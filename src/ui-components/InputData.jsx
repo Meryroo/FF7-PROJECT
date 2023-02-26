@@ -9,10 +9,11 @@ const InputDataStyled = styled.input`
   width: ${({ width }) => width};
   ::placeholder {
     color: ${({ letter }) => (letter ? letter : 'white')};
+    position: ${({ position }) => position};
   }
 `;
 
-const InputData = ({ ph, type, onChange, value, color, back, letter }) => {
+const InputData = ({ position, ph, type, onChange, value, color, back, letter }) => {
   return (
     <InputDataStyled
       placeholder={ph}
@@ -22,6 +23,7 @@ const InputData = ({ ph, type, onChange, value, color, back, letter }) => {
       color={color}
       variant={back}
       letter={letter}
+      position={position}
     />
   );
 };

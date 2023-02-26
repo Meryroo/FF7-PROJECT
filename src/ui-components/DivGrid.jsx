@@ -10,11 +10,19 @@ const DivGridStyled = styled.div`
   height: ${({ height }) => height};
   overflow-x: ${({ flowx }) => flowx};
   overflow-y: ${({ flowy }) => flowy};
+  padding: ${({ padding }) => padding};
 `;
 
-const DivGrid = ({ gap, children, variant, width, height, cols }) => {
+const DivGrid = ({ padding, gridgap, children, variant, width, height, cols }) => {
   return (
-    <DivGridStyled gap={gap} cols={cols} width={width} height={height} variant={variant}>
+    <DivGridStyled
+      padding={padding}
+      gridgap={gridgap}
+      cols={cols}
+      width={width}
+      height={height}
+      variant={variant}
+    >
       {children}
     </DivGridStyled>
   );
