@@ -2,23 +2,24 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 const StyledHero = styled.div`
-  width: 100%;
-  height: 100%;
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
   overflow: hidden;
+  object-fit: contain;
+  border-radius: 0.8rem;
 
   & video {
+    transform: scale(1.5);
     width: 100%;
-    transform: scale(1.2);
-    object-fit: cover;
+    height: 100%;
   }
 
   & .mute {
     z-index: 100;
     position: absolute;
     background: none;
+    left: 47%;
     padding: 1rem;
-    right: 0;
-    top: 20%;
     border: none;
   }
 
@@ -27,7 +28,7 @@ const StyledHero = styled.div`
   }
 `;
 
-const Video = () => {
+const Video = ({ width, height }) => {
   const [muted, setMuted] = useState(true);
   const toggleMute = (ev) => {
     setMuted(!muted);
@@ -37,7 +38,7 @@ const Video = () => {
   };
 
   return (
-    <StyledHero>
+    <StyledHero height={height} width={width}>
       <button className="mute" onClick={(ev) => toggleMute(ev)}>
         {muted ? (
           <img

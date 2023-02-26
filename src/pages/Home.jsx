@@ -4,7 +4,7 @@ import { PageContext } from '../context/PageContext';
 import Palette from '../styles/Palette';
 import DivFlex from '../ui-components/Divflex';
 import Heading from '../ui-components/Heading';
-import Image from '../ui-components/Image';
+import Hero from '../ui-components/Hero';
 import Main from '../ui-components/Main';
 import TextHome from '../ui-components/TextHome';
 
@@ -17,12 +17,7 @@ const Home = () => {
     <Main homeheight={'100%'}>
       <Heading headcolor={`${Palette.main.primary}`} as={'h1'} size={'xl'}></Heading>
       <DivFlex variant="transparent" padding={'2rem 4rem'}>
-        <Image
-          width={'50%'}
-          height={'400px'}
-          src="https://res.cloudinary.com/dysog0ybg/image/upload/v1677166204/1366_2000_exzuxa.jpg"
-          alt="character"
-        />
+        <Hero width={'50%'} height={'400px'} />
         <TextHome
           width={'50%'}
           variant="transparent"
