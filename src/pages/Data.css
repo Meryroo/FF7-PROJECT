@@ -1,10 +1,9 @@
-  
-  .data-container {
+.data-container {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #10101c;
-  color:#526F80;
+  color: #526f80;
   width: 100vw;
   padding: 4rem;
   gap: 15rem;
@@ -18,7 +17,7 @@
   align-items: center;
   gap: 1rem;
   padding: 5rem;
-  background-color:rgba(45, 62, 72, 0.5);
+  background-color: rgba(45, 62, 72, 0.5);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 1rem;
   width: 70%;
@@ -36,35 +35,30 @@
   border-radius: 0.5rem;
   padding: 0.5rem;
   background: none;
-  
 }
 .data-container form input::placeholder {
-  color: #526F80;
-  
+  color: #526f80;
 }
 
 .btnform {
   width: auto;
-  background-color: #526F80 ;
+  background-color: #526f80;
   padding: 0.5rem;
-  border: 1px solid #526F80 ;
+  border: 1px solid #526f80;
   border-radius: 0.5rem;
-  color:#10101C;
+  color: #10101c;
 }
-.data-container form button:hover{
-  background-color: #10101C;
-  color: #526F80;
+.data-container form button:hover {
+  background-color: #10101c;
+  color: #526f80;
 }
-
 
 .enemycard {
   display: flex;
-flex-wrap: wrap;
+  flex-wrap: wrap;
   border: 2px solid hsl(202, 22%, 41%);
   border-radius: 0.5rem;
   padding: 1rem;
-
-  
 }
 
 .modal-overlay {
@@ -75,8 +69,6 @@ flex-wrap: wrap;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.918);
   z-index: 999;
-
-  
 }
 
 .editform {
@@ -88,14 +80,13 @@ flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color:#526F80;
+  background-color: #526f80;
   border-radius: 5%;
-gap: 2rem;
+  gap: 2rem;
   width: 50%;
   height: 90%;
-  
 }
-.editform h2{
+.editform h2 {
   color: #163435;
   font-size: 1.8rem;
 }
@@ -104,22 +95,21 @@ gap: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-gap: 2rem;
-flex-wrap: wrap;
-  
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .editform > form > input {
   border-radius: 0.5rem;
   padding: 0.5rem;
-  background-color: #526F80;
-  color:#10101c;
+  background-color: #526f80;
+  color: #10101c;
 }
-.editform button{
-border: #163435;
+.editform button {
+  border: #163435;
 }
 
-.enemies-container{
+.enemies-container {
   display: flex;
   flex-direction: column;
   gap: 2rem;
