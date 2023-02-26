@@ -6,6 +6,7 @@ const InputDataStyled = styled.input`
   padding: ${({ padding }) => padding};
   background: ${({ back }) => (back ? back : 'none')};
   color: ${({ color }) => color};
+  width: ${({ width }) => width};
 `;
 
 const InputData = ({ ph, type, onChange, value, color, back }) => {

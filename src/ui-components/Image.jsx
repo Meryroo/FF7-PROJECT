@@ -33,12 +33,13 @@ const StyledImage = styled.img`
   position: ${({ position }) => position};
   border-radius: 0.8rem;
   object-fit: cover;
-  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  filter: ${({ filter }) => filter};
 `;
 
-const Image = ({ justify, align, src, alt, height, width, position }) => {
+const Image = ({ filter, justify, align, src, alt, height, width, position }) => {
   return (
     <StyledImage
+      filter={filter}
       justify={justify}
       align={align}
       src={src}
