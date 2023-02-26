@@ -7,9 +7,12 @@ const InputDataStyled = styled.input`
   background: ${({ back }) => (back ? back : 'none')};
   color: ${({ color }) => color};
   width: ${({ width }) => width};
+  ::placeholder {
+    color: ${({ letter }) => (letter ? letter : 'white')};
+  }
 `;
 
-const InputData = ({ ph, type, onChange, value, color, back }) => {
+const InputData = ({ ph, type, onChange, value, color, back, letter }) => {
   return (
     <InputDataStyled
       placeholder={ph}
@@ -18,6 +21,7 @@ const InputData = ({ ph, type, onChange, value, color, back }) => {
       value={value}
       color={color}
       variant={back}
+      letter={letter}
     />
   );
 };

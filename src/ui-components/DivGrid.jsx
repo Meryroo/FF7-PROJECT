@@ -8,11 +8,19 @@ const DivGridStyled = styled.div`
   background-color: ${({ variant }) => (variant ? variant : 'none')};
   width: ${({ width }) => width};
   height: ${({ height }) => height};
+  overflow-x: ${({ flowx }) => flowx};
+  overflow-y: ${({ flowy }) => flowy};
 `;
 
-const DivGrid = ({ children, variant, width, height }) => {
+const DivGrid = ({ children, variant, width, height, flowx, flowy }) => {
   return (
-    <DivGridStyled width={width} height={height} variant={variant}>
+    <DivGridStyled
+      flowx={flowx}
+      flowy={flowy}
+      width={width}
+      height={height}
+      variant={variant}
+    >
       {children}
     </DivGridStyled>
   );

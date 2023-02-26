@@ -6,40 +6,48 @@ import DataDivModal from '../ui-components/DataDivModal';
 import DataEnemyCard from '../ui-components/DataEnemyCard';
 import DataForm from '../ui-components/DataForm';
 import DataFormModal from '../ui-components/DataFormModal';
+import DataMain from '../ui-components/DataMain';
 import DataModal from '../ui-components/DataModal';
 import DivFlex from '../ui-components/Divflex';
-import DivGrid from '../ui-components/DivGrid';
 import InputData from '../ui-components/InputData';
-import SectionFlex from '../ui-components/SectionFlex';
+import Spinner from '../ui-components/Spinner';
 
 const Data = () => {
   const { setPage } = useContext(PageContext);
   const [enemies, setEnemies] = useState([]);
   const [loaded, setloaded] = useState(false);
   const [locationInput, setLocationInput] = useState([]);
-  const [newEnemy, setNewEnemy] = useState({
-    img: '',
+  const resetEnemy = {
     name: '',
-    level: '',
-    atributes: '',
-    earned: '',
-    items: '',
-    strategy: '',
+    img: '',
+    level: 0,
+    atributes: {
+      HP: 0,
+      MP: 0,
+    },
+    earned: {
+      exp: 0,
+      AP: 0,
+      gil: 0,
+    },
+    items: {
+      drop: '',
+      morph: '',
+      steal: '',
+    },
+    strategy: {
+      weakness: '',
+      immune: '',
+      absorbs: '',
+    },
     enemy_skill: '',
     location: [],
-  });
+  };
+  const [newEnemy, setNewEnemy] = useState({ ...resetEnemy });
+  const [currentLocation, setCurrentLocation] = useState('');
+
   const [error, setError] = useState();
-  const [editEnemy, setEditEnemy] = useState({
-    img: '',
-    name: '',
-    level: '',
-    atributes: '',
-    earned: '',
-    items: '',
-    strategy: '',
-    enemy_skill: '',
-    location: [],
-  });
+  const [editEnemy, setEditEnemy] = useState({ ...resetEnemy });
   const [editAppear, setEditAppear] = useState(false);
 
   const getEnemies = async () => {
@@ -51,7 +59,23 @@ const Data = () => {
 
   const createEnemies = (ev) => {
     ev.preventDefault();
-    if (!newEnemy.img) {
+    if (
+      !newEnemy.img ||
+      !newEnemy.name ||
+      !newEnemy.level ||
+      !newEnemy.atributes.HP ||
+      !newEnemy.atributes.MP ||
+      !newEnemy.earned.exp ||
+      !newEnemy.earned.AP ||
+      !newEnemy.earned.gil ||
+      !newEnemy.items.drop ||
+      !newEnemy.items.morph ||
+      !newEnemy.items.steal ||
+      !newEnemy.strategy.weakness ||
+      !newEnemy.strategy.immune ||
+      !newEnemy.strategy.absorbs ||
+      !newEnemy.enemy_skill
+    ) {
       setError('Formulario imcompleto');
     } else {
       setError(null);
@@ -96,26 +120,30 @@ const Data = () => {
 
   return (
     <div>
-      <SectionFlex>
+      <DataMain>
         <DivFlex gap="2rem" direction="column">
           <h2>CREATE ENEMY</h2>
           <DataForm onSubmit={(ev) => createEnemies(ev)}>
             <InputData
+              value={newEnemy.img}
               type="text"
               ph="Imagen URL"
               onChange={(ev) => setNewEnemy({ ...newEnemy, img: ev.target.value })}
             />
             <InputData
+              value={newEnemy.name}
               type="text"
               ph="name"
               onChange={(ev) => setNewEnemy({ ...newEnemy, name: ev.target.value })}
             />
             <InputData
+              value={newEnemy.level}
               type="number"
               ph="level"
               onChange={(ev) => setNewEnemy({ ...newEnemy, level: ev.target.value })}
             />
             <InputData
+              value={newEnemy.atributes.HP}
               type="number"
               ph="HP"
               onChange={(ev) =>
@@ -126,6 +154,7 @@ const Data = () => {
               }
             />
             <InputData
+              value={newEnemy.atributes.MP}
               type="number"
               ph="MP"
               onChange={(ev) =>
@@ -136,6 +165,7 @@ const Data = () => {
               }
             />
             <InputData
+              value={newEnemy.earned.exp}
               type="number"
               ph="exp"
               onChange={(ev) =>
@@ -146,6 +176,7 @@ const Data = () => {
               }
             />
             <InputData
+              value={newEnemy.earned.AP}
               type="number"
               ph="AP"
               onChange={(ev) =>
@@ -156,6 +187,7 @@ const Data = () => {
               }
             />
             <InputData
+              value={newEnemy.earned.gil}
               type="number"
               ph="gil"
               onChange={(ev) =>
@@ -166,6 +198,7 @@ const Data = () => {
               }
             />
             <InputData
+              value={newEnemy.items.drop}
               type="text"
               ph="drop"
               onChange={(ev) =>
@@ -176,6 +209,7 @@ const Data = () => {
               }
             />
             <InputData
+              value={newEnemy.items.morph}
               type="text"
               ph="morph"
               onChange={(ev) =>
@@ -186,6 +220,7 @@ const Data = () => {
               }
             />
             <InputData
+              value={newEnemy.items.steal}
               type="text"
               ph="steal"
               onChange={(ev) =>
@@ -196,6 +231,7 @@ const Data = () => {
               }
             />
             <InputData
+              value={newEnemy.strategy.weakness}
               type="text"
               ph="Weakness"
               onChange={(ev) =>
@@ -206,6 +242,7 @@ const Data = () => {
               }
             />
             <InputData
+              value={newEnemy.strategy.immune}
               type="text"
               ph="Immune"
               onChange={(ev) =>
@@ -216,6 +253,7 @@ const Data = () => {
               }
             />
             <InputData
+              value={newEnemy.strategy.absorbs}
               type="text"
               ph="Absorbs"
               onChange={(ev) =>
@@ -226,33 +264,42 @@ const Data = () => {
               }
             />
             <InputData
+              value={newEnemy.enemy_skill}
               type="text"
               ph="Enemy Skill"
               onChange={(ev) =>
                 setNewEnemy({ ...newEnemy, enemy_skill: ev.target.value })
               }
             />
-            <InputData type="text" ph="Location" />
+            <InputData
+              type="text"
+              ph="Location"
+              value={currentLocation}
+              onChange={(ev) => setCurrentLocation(ev.target.value)}
+            />
             <Button
+              variant={'dark'}
               type="button"
               text="Add Location"
               action={(ev) => {
                 setLocationInput([...locationInput, ev.target.previousSibling.value]);
                 const updateInput = [...locationInput, ev.target.previousSibling.value];
                 setNewEnemy({ ...newEnemy, location: updateInput });
+                setCurrentLocation('');
               }}
             />
 
-            <Button type="submit" text="Create Enemy" />
+            <Button variant={'dark'} type="submit" text="Create Enemy" />
             <Button
+              variant={'dark'}
               type="button"
               text="Reset Data"
-              action={() => setNewEnemy(...newEnemy, newEnemy)}
+              action={() => setNewEnemy({ ...resetEnemy }) & setCurrentLocation('')}
             />
           </DataForm>
           {error && <h3>{error}</h3>}
         </DivFlex>
-        <DivGrid>
+        <DivFlex gap="2rem" padding="5rem" height="550px" flowx="hidden" flowy="scroll">
           {loaded ? (
             enemies.map((enemy) => (
               <DataEnemyCard key={enemy.id}>
@@ -262,27 +309,17 @@ const Data = () => {
                 <h4>Atributes</h4>
                 <p>HP: {enemy.atributes.HP}</p>
                 <p>MP: {enemy.atributes.MP}</p>
-                {/* <h4>Earned</h4>
-                <p>Exp: {enemy.earned.exp}</p>
-                <p>AP: {enemy.earned.AP}</p>
-                <p>gil: {enemy.earned.gil}</p>
-                <h4>Items</h4>
-                <p>Drop: {enemy.items.drop}</p>
-                <p>Morph: {enemy.items.morph}</p>
-                <p>Steal: {enemy.items.steal}</p>
-                <h4>Strategy</h4>
-                <p>Weakness: {enemy.strategy.weakness}</p>
-                <p>Immune: {enemy.strategy.immune}</p>
-                <p>Absorbs: {enemy.strategy.absorbs}</p>
-                <h4>{enemy.enemy_skill}</h4> */}
+
                 <DivFlex gap="1rem">
                   <Button
                     size="sm"
+                    variant={'dark'}
                     text="Edit"
                     action={() => setEditEnemy(enemy) & setEditAppear(true)}
                   />
                   <Button
                     size="sm"
+                    variant={'dark'}
                     text="delete"
                     action={() => deleteEnemies(enemy.id)}
                   />
@@ -290,10 +327,10 @@ const Data = () => {
               </DataEnemyCard>
             ))
           ) : (
-            <h2>Loading...</h2>
+            <Spinner />
           )}
-        </DivGrid>
-      </SectionFlex>
+        </DivFlex>
+      </DataMain>
       {editAppear && (
         <DataModal>
           <DataDivModal>
@@ -446,9 +483,15 @@ const Data = () => {
                   setEditEnemy({ ...editEnemy, enemy_skill: ev.target.value })
                 }
               />
+              <Button
+                variant={'dark'}
+                text="Edit Enemy"
+                type="submit"
+                action={() => setEditAppear(false)}
+              />
             </DataFormModal>
-            <Button text="Edit Enemy" type="submit" action={() => setEditAppear(false)} />
-            <Button text="Close" action={() => setEditAppear(false)} />
+
+            <Button variant={'dark'} text="Close" action={() => setEditAppear(false)} />
           </DataDivModal>
         </DataModal>
       )}
