@@ -2,8 +2,8 @@ import './globeMap.css';
 
 import { useState } from 'react';
 
-import Texture from './components/prueba';
-import TextureGlobe from './components/prueba3';
+import TextureGlobe from './Globe3D';
+import Texture from './Map3D';
 const MapModal = () => {
   const [change, setChange] = useState(false);
   return (
@@ -15,9 +15,8 @@ const MapModal = () => {
           setChange(!change);
         }}
       >
-        {change ? 'globe' : 'map'}
+        {change ? 'Show globe' : 'Show map'}
       </button>
-      <button className="btnMap btnClose">Close</button>
     </div>
   );
 };
