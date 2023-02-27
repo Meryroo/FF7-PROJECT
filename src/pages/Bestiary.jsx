@@ -26,15 +26,16 @@ import mock from '../utils/Mock';
   }; */
 const Bestiary = () => {
   const [enemies, setEnemies] = useState([]);
+  let list = [];
   const getEnemies = async () => {
     const res = await fetch('https://63f26f29f28929a9df5a9085.mockapi.io/enemies');
     const data = await res.json();
     setEnemies(data);
+    list = data;
   };
 
   useEffect(() => {
     getEnemies();
-    console.log(enemies);
   }, []);
 
   const { setPage } = useContext(PageContext);
@@ -53,17 +54,17 @@ const Bestiary = () => {
     }
     return [min, max];
   };
-  const list = mock.slice(0, 5); //resultado del filter
+  list = mock;
   const items = GetUnics(list, 'items');
   const strategy = GetUnics(list, 'strategy');
   const enemy_skill = GetUnics(list, 'enemy_skill');
   const location = GetUnics(list, 'location');
-  const minMaxLevelValues = GetMinMax(mock.slice(0, 5), ['level']);
-  const minMaxHPValues = GetMinMax(mock.slice(0, 5), ['atributes', 'HP']);
-  const minMaxMPValues = GetMinMax(mock.slice(0, 5), ['atributes', 'MP']);
-  const minMaxExpValues = GetMinMax(mock.slice(0, 5), ['earned', 'exp']);
-  const minMaxAPValues = GetMinMax(mock.slice(0, 5), ['earned', 'AP']);
-  const minMaxGilValues = GetMinMax(mock.slice(0, 5), ['earned', 'gil']);
+  const minMaxLevelValues = GetMinMax(list, ['level']);
+  const minMaxHPValues = GetMinMax(list, ['atributes', 'HP']);
+  const minMaxMPValues = GetMinMax(list, ['atributes', 'MP']);
+  const minMaxExpValues = GetMinMax(list, ['earned', 'exp']);
+  const minMaxAPValues = GetMinMax(list, ['earned', 'AP']);
+  const minMaxGilValues = GetMinMax(list, ['earned', 'gil']);
   const maxMaxLevel = minMaxLevelValues[1];
   const minMinLevel = minMaxLevelValues[0];
   const maxMaxHP = minMaxHPValues[1];
@@ -90,18 +91,19 @@ const Bestiary = () => {
   const [maxMinGil, setMaxGil] = useState(maxMaxGil);
   const [newObject, setNewObject] = useState({
     name: '',
-    level: [0, 100],
-    HP: [0, 100],
-    MP: [0, 100],
-    exp: [0, 100],
-    AP: [0, 100],
-    gil: [0, 100],
+    level: [minMinLevel, maxMaxLevel],
+    HP: [minMinHP, maxMaxHP],
+    MP: [minMinMP, maxMaxMP],
+    exp: [minMinExp, maxMaxExp],
+    AP: [minMinAP, maxMaxAP],
+    gil: [minMinGil, maxMaxGil],
     items: [],
     strategy: [],
     enemy_skill: [],
     location: [],
   });
   const [map, setMap] = useState(false);
+  const [filtersArray, setFilterArray] = useState([]);
   return (
     <Divflex variant={'#10101C'} gap={'5rem'}>
       <div>
@@ -137,7 +139,7 @@ const Bestiary = () => {
           </button>
         )}
         {map && <MapModal />}
-        <DivGrid gridgap={'15rem'} padding={'r1em 8rem'}>
+        <DivGrid gridgap={'1rem'} padding={'r1em 8rem'}>
           <div>
             <h4>Level</h4>
             <MinMaxFilter
@@ -232,19 +234,18 @@ const Bestiary = () => {
           </div>
           <div>
             <Divflex gap={'1.5rem'}>
-              <Divflex
-                justify={'center'}
-                align={'flex-start'}
-                direction={'column'}
-                name="items"
-                id="items"
-              >
+              <div className="filtersDivsBestiary">
                 {items.map((item) =>
                   item != 'None' ? (
                     <Divflex gap={'0.8rem'} key={item}>
                       <input
                         type="checkbox"
                         id={item}
+                        checked={
+                          filtersArray.filter((filt) => filt == item).length == 0
+                            ? false
+                            : true
+                        }
                         onChange={(ev) => {
                           if (ev.target.checked) {
                             const actulizedObject = {
@@ -256,6 +257,7 @@ const Bestiary = () => {
                               items: [...newObject.items, ev.target.id],
                             });
                             setEnemies(FilterFunction(list, actulizedObject));
+                            setFilterArray([...filtersArray, ev.target.id]);
                           } else {
                             const removed = [];
                             newObject.items.forEach((item) => {
@@ -272,6 +274,13 @@ const Bestiary = () => {
                               items: removed,
                             });
                             setEnemies(FilterFunction(list, actulizedObject));
+                            const removedFilter = [];
+                            filtersArray.forEach((filter) => {
+                              if (filter != ev.target.id) {
+                                removedFilter.push(filter);
+                              }
+                            });
+                            setFilterArray([...removedFilter]);
                           }
                         }}
                       />
@@ -281,20 +290,19 @@ const Bestiary = () => {
                     <div key={item}></div>
                   ),
                 )}
-              </Divflex>
-              <Divflex
-                justify={'center'}
-                align={'flex-start'}
-                direction={'column'}
-                name="strategy"
-                id="strategy"
-              >
+              </div>
+              <div className="filtersDivsBestiary">
                 {strategy.map((item) =>
                   item != 'None' ? (
                     <Divflex key={item}>
                       <input
                         type="checkbox"
                         id={item}
+                        checked={
+                          filtersArray.filter((filt) => filt == item).length == 0
+                            ? false
+                            : true
+                        }
                         onChange={(ev) => {
                           if (ev.target.checked) {
                             const actulizedObject = {
@@ -306,6 +314,7 @@ const Bestiary = () => {
                               strategy: [...newObject.strategy, ev.target.id],
                             });
                             setEnemies(FilterFunction(list, actulizedObject));
+                            setFilterArray([...filtersArray, ev.target.id]);
                           } else {
                             const removed = [];
                             newObject.strategy.forEach((item) => {
@@ -318,6 +327,13 @@ const Bestiary = () => {
                               strategy: removed,
                             };
                             setEnemies(FilterFunction(list, actulizedObject));
+                            const removedFilter = [];
+                            filtersArray.forEach((filter) => {
+                              if (filter != ev.target.id) {
+                                removedFilter.push(filter);
+                              }
+                            });
+                            setFilterArray([...removedFilter]);
                           }
                         }}
                       />
@@ -327,20 +343,19 @@ const Bestiary = () => {
                     <div key={item}></div>
                   ),
                 )}
-              </Divflex>
-              <Divflex
-                justify={'center'}
-                align={'flex-start'}
-                direction={'column'}
-                name="enemy_skill"
-                id="enemy_skill"
-              >
+              </div>
+              <div className="filtersDivsBestiary">
                 {enemy_skill.map((item) =>
                   item != 'None' ? (
                     <div key={item}>
                       <input
                         type="checkbox"
                         id={item}
+                        checked={
+                          filtersArray.filter((filt) => filt == item).length == 0
+                            ? false
+                            : true
+                        }
                         onChange={(ev) => {
                           if (ev.target.checked) {
                             const actulizedObject = {
@@ -352,6 +367,7 @@ const Bestiary = () => {
                               enemy_skill: [...newObject.enemy_skill, ev.target.id],
                             });
                             setEnemies(FilterFunction(list, actulizedObject));
+                            setFilterArray([...filtersArray, ev.target.id]);
                           } else {
                             const removed = [];
                             newObject.enemy_skill.forEach((item) => {
@@ -368,6 +384,13 @@ const Bestiary = () => {
                               enemy_skill: removed,
                             });
                             setEnemies(FilterFunction(list, actulizedObject));
+                            const removedFilter = [];
+                            filtersArray.forEach((filter) => {
+                              if (filter != ev.target.id) {
+                                removedFilter.push(filter);
+                              }
+                            });
+                            setFilterArray([...removedFilter]);
                           }
                         }}
                       />
@@ -377,19 +400,18 @@ const Bestiary = () => {
                     <div key={item}></div>
                   ),
                 )}
-              </Divflex>
-              <Divflex
-                justify={'center'}
-                align={'flex-start'}
-                direction={'column'}
-                name="location"
-                id="location"
-              >
+              </div>
+              <div className="filtersDivsBestiary">
                 {location.map((item) => (
                   <Divflex key={item}>
                     <input
                       type="checkbox"
                       id={item}
+                      checked={
+                        filtersArray.filter((filt) => filt == item).length == 0
+                          ? false
+                          : true
+                      }
                       onChange={(ev) => {
                         if (ev.target.checked) {
                           const actulizedObject = {
@@ -401,6 +423,7 @@ const Bestiary = () => {
                             location: [...newObject.location, ev.target.id],
                           });
                           setEnemies(FilterFunction(list, actulizedObject));
+                          setFilterArray([...filtersArray, ev.target.id]);
                         } else {
                           const removed = [];
                           newObject.location.forEach((item) => {
@@ -417,14 +440,57 @@ const Bestiary = () => {
                             location: [...removed],
                           });
                           setEnemies(FilterFunction(list, actulizedObject));
+                          const removedFilter = [];
+                          filtersArray.forEach((filter) => {
+                            if (filter != ev.target.id) {
+                              removedFilter.push(filter);
+                            }
+                          });
+                          setFilterArray([...removedFilter]);
                         }
                       }}
                     />
                     <h4>{item}</h4>
                   </Divflex>
                 ))}
-              </Divflex>
+              </div>
             </Divflex>
+          </div>
+          <div className="filtersdiv">
+            {filtersArray.map((filter) => (
+              <div key={filter}>
+                <h4>{filter}</h4>
+                <button
+                  onClick={(ev) => {
+                    const removedFilter = [];
+                    const value = ev.currentTarget.previousSibling.firstChild.nodeValue;
+                    filtersArray.forEach((filter) => {
+                      if (filter != value) {
+                        removedFilter.push(filter);
+                      }
+                    });
+                    setFilterArray([...removedFilter]);
+                    const removed = [];
+                    newObject.items.forEach((item) => {
+                      if (item != value) {
+                        removed.push(item);
+                      }
+                    });
+                    const actulizedObject = {
+                      ...newObject,
+                      items: removed,
+                    };
+                    setNewObject({
+                      ...newObject,
+                      items: removed,
+                    });
+                    setEnemies(FilterFunction(list, actulizedObject));
+                  }}
+                >
+                  X
+                </button>
+              </div>
+            ))}
           </div>
         </DivGrid>
       </div>

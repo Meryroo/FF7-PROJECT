@@ -34,3 +34,24 @@
   border-radius: 2px;
   z-index: 6;
 }
+.filtersDivsBestiary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 200px;
+  width: 250px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.filtersDivsBestiary::-webkit-scrollbar {
+  width: 15px;
+}
+.filtersdiv {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.filtersdiv div {
+  display: flex;
+  height: min-content;
+}
