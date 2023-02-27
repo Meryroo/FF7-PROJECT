@@ -1082,7 +1082,7 @@ const mock = [
     },
     enemy_skill: ['None'],
     location: ['Underwater reactor (Glass passage)'],
-    img: 'public/corvette.png',
+    img: 'https://res.cloudinary.com/di0zpa5yw/image/upload/v1674826135/ff7_enemies/corvette_gl5gxf.png',
   },
   {
     id: 41,
