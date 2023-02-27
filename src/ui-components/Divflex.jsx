@@ -28,6 +28,9 @@ const StyledDiv = styled.div`
       : 'center'};
   flex-direction: ${({ direction }) => (direction === 'column' ? 'column' : 'row')};
   background-color: ${({ variant }) => (variant ? variant : 'none')};
+  background: ${({ background }) => background};
+  background-size: cover;
+  background-attachment: fixed;
   color: ${({ color }) => (color === 'white' ? 'white' : '#526F80')};
   margin: ${({ margin }) => margin};
   padding: ${({ padding }) => padding};
@@ -44,6 +47,7 @@ const StyledDiv = styled.div`
 
 const DivFlex = ({
   align,
+  background,
   direction,
   children,
   margin,
@@ -61,6 +65,7 @@ const DivFlex = ({
   return (
     <StyledDiv
       align={align}
+      background={background}
       flowx={flowx}
       flowy={flowy}
       direction={direction}

@@ -105,7 +105,11 @@ const Bestiary = () => {
   const [map, setMap] = useState(false);
   const [filtersArray, setFilterArray] = useState([]);
   return (
-    <Divflex variant={'#10101C'} gap={'5rem'}>
+    <Divflex
+      background="linear-gradient(transparent, #264a5f),
+    url(https://res.cloudinary.com/dvdoak5et/image/upload/v1677431074/Bestiary/ff-sword-hero_1_tnzvmn.jpg)"
+      gap={'5rem'}
+    >
       <div>
         <Divflex padding={'4rem'} align={'flex-end'} direction={'column'}>
           <InputData
