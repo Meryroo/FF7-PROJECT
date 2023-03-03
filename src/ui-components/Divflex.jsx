@@ -47,6 +47,7 @@ const StyledDiv = styled.div`
 
 const DivFlex = ({
   align,
+  justify,
   background,
   direction,
   children,
@@ -64,6 +65,7 @@ const DivFlex = ({
 }) => {
   return (
     <StyledDiv
+      justify={justify}
       align={align}
       background={background}
       flowx={flowx}

@@ -18,7 +18,7 @@ const FilterNumberOrName = (list, filter) => {
   const listMP =
     filter.MP[0] == 0 && filter.MP[1] == 100
       ? listHP
-      : FilterNumbers(listLevel, ['atributes', 'MP'], filter.MP);
+      : FilterNumbers(listHP, ['atributes', 'MP'], filter.MP);
   const listExp =
     filter.exp[0] == 0 && filter.exp[1] == 100
       ? listMP

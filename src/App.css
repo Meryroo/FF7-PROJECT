@@ -6,16 +6,54 @@
   text-decoration: none;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.inputsFilter {
+  position: relative;
+}
 .maxInput {
   position: absolute;
   top: 0px;
   right: 0px;
+  opacity: 0%;
 }
 .minInput {
   position: absolute;
-  top: 0px;
+  top: 10px;
   left: 0px;
+  opacity: 0%;
 }
+.circleTrackInputs {
+  position: absolute;
+  z-index: 1000;
+  height: 35px;
+  width: 30px;
+  pointer-events: none;
+  background-color: #33d6c9;
+}
+.trackInputs {
+  width: 100%;
+  height: 20px;
+  background-color: #83847e;
+  border-radius: 10px;
+}
+.maxh4Input {
+  position: absolute;
+  top: -15px;
+  right: 0;
+}
+.minh4Input {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.maxTrackInputs {
+  top: -2px;
+  clip-path: polygon(50% 50%, 0 0, 100% 0);
+}
+.minTrackInputs {
+  top: -7px;
+  clip-path: polygon(50% 50%, 0% 100%, 100% 100%);
+}
+
 .openMap {
   position: fixed;
   padding: 0.5rem 1rem;
@@ -42,16 +80,97 @@
   width: 250px;
   overflow-y: scroll;
   overflow-x: hidden;
+  background-color: rgba(0, 0, 0, 0.274);
+  padding: 1rem;
+  border-radius: 5px;
 }
 .filtersDivsBestiary::-webkit-scrollbar {
-  width: 15px;
+  width: 10px;
+}
+.filtersDivsBestiary::-webkit-scrollbar-track {
+  background: #f1f1f100;
+}
+.filtersDivsBestiary::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+.filtersDivsBestiary::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.NavOfFilters::-webkit-scrollbar {
+  width: 10px;
+}
+.NavOfFilters::-webkit-scrollbar-track {
+  background: #f1f1f100;
+}
+.NavOfFilters::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+.NavOfFilters::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.enemiesDivBestiary::-webkit-scrollbar {
+  width: 10px;
+}
+.enemiesDivBestiary::-webkit-scrollbar-track {
+  background: #f1f1f100;
+}
+.enemiesDivBestiary::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+.enemiesDivBestiary::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 .filtersdiv {
   display: flex;
   gap: 0.4rem;
   flex-wrap: wrap;
+  height: 100px;
+  background-color: rgba(0, 0, 0, 0.233);
+  margin-bottom: 10px;
+  padding: 0.5rem;
 }
 .filtersdiv div {
   display: flex;
   height: min-content;
+}
+.NavOfFilters {
+  width: 400px;
+  position: absolute;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  left: 0;
+  top: 0;
+  padding: 0.3rem 0.5rem;
+  padding-bottom: 3rem;
+  background-color: rgba(0, 0, 0, 0.274);
+}
+.BestiaryLayoutDiv {
+  display: flex;
+  width: 100%;
+  position: relative;
+  background: linear-gradient(transparent, #264a5f),
+    url(https://res.cloudinary.com/dvdoak5et/image/upload/v1677431074/Bestiary/ff-sword-hero_1_tnzvmn.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 0 5rem;
+  padding-left: 500px;
+}
+.enemiesDivBestiary {
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.headingMinMax {
+  color: whitesmoke;
+  width: 100px;
+}
+.filterBox {
+  color: whitesmoke;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.274);
+  padding: 0.2rem 0.4rem;
 }
