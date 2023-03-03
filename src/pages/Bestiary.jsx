@@ -105,23 +105,8 @@ const Bestiary = () => {
   const [map, setMap] = useState(false);
   const [filtersArray, setFilterArray] = useState([]);
   return (
-    <Divflex
-      background="linear-gradient(transparent, #264a5f),
-    url(https://res.cloudinary.com/dvdoak5et/image/upload/v1677431074/Bestiary/ff-sword-hero_1_tnzvmn.jpg)"
-      gap={'5rem'}
-    >
-      <div>
-        <Divflex padding={'4rem'} align={'flex-end'} direction={'column'}>
-          <InputData
-            type={'text'}
-            placeholder={name}
-            onChange={(ev) => {
-              setNewObject({ ...newObject, name: ev.target.value });
-              const actulizedObject = { ...newObject, name: ev.target.value };
-              setEnemies(FilterFunction(list, actulizedObject));
-            }}
-          />
-        </Divflex>
+    <div className="BestiaryLayoutDiv">
+      <div className="NavOfFilters">
         {map == false && (
           <button
             className="openMap"
@@ -143,9 +128,22 @@ const Bestiary = () => {
           </button>
         )}
         {map && <MapModal />}
-        <DivGrid gridgap={'1rem'} padding={'r1em 8rem'}>
+        <div>
+          <Divflex padding={'1rem 4rem'} align={'flex-end'} direction={'column'}>
+            <h4>Search by name</h4>
+            <InputData
+              width={'110%'}
+              type={'text'}
+              placeholder={name}
+              onChange={(ev) => {
+                setNewObject({ ...newObject, name: ev.target.value });
+                const actulizedObject = { ...newObject, name: ev.target.value };
+                setEnemies(FilterFunction(list, actulizedObject));
+              }}
+            />
+          </Divflex>
           <div>
-            <h4>Level</h4>
+            <h4 className="headingMinMax">Level</h4>
             <MinMaxFilter
               action={(ev) => {
                 const minmax = handleChange(ev);
@@ -160,7 +158,7 @@ const Bestiary = () => {
               minMax={minMaxLevel}
               maxMax={maxMaxLevel}
             />
-            <h4>HP</h4>
+            <h4 className="headingMinMax">HP</h4>
             <MinMaxFilter
               action={(ev) => {
                 const minmax = handleChange(ev);
@@ -175,7 +173,7 @@ const Bestiary = () => {
               minMax={minMaxHP}
               maxMax={maxMaxHP}
             />
-            <h4>MP</h4>
+            <h4 className="headingMinMax">MP</h4>
             <MinMaxFilter
               action={(ev) => {
                 const minmax = handleChange(ev);
@@ -190,7 +188,7 @@ const Bestiary = () => {
               minMax={minMaxMP}
               maxMax={maxMaxMP}
             />
-            <h4>exp</h4>
+            <h4 className="headingMinMax">exp</h4>
             <MinMaxFilter
               action={(ev) => {
                 const minmax = handleChange(ev);
@@ -205,7 +203,7 @@ const Bestiary = () => {
               minMax={minMaxExp}
               maxMax={maxMaxExp}
             />
-            <h4>AP</h4>
+            <h4 className="headingMinMax">AP</h4>
             <MinMaxFilter
               action={(ev) => {
                 const minmax = handleChange(ev);
@@ -220,7 +218,7 @@ const Bestiary = () => {
               minMax={minMaxAP}
               maxMax={maxMaxAP}
             />
-            <h4>Gil</h4>
+            <h4 className="headingMinMax">Gil</h4>
             <MinMaxFilter
               action={(ev) => {
                 const minmax = handleChange(ev);
@@ -236,8 +234,69 @@ const Bestiary = () => {
               maxMax={maxMaxGil}
             />
           </div>
+          <div className="filtersdiv">
+            {filtersArray.map((filter) => (
+              <div key={filter} className="filterBox">
+                <h4>{filter}</h4>
+                <button
+                  onClick={(ev) => {
+                    const removedFilter = [];
+                    const value = ev.currentTarget.previousSibling.firstChild.nodeValue;
+                    filtersArray.forEach((filter) => {
+                      if (filter != value) {
+                        removedFilter.push(filter);
+                      }
+                    });
+                    setFilterArray([...removedFilter]);
+                    const removedItems = [];
+                    const removedStrategy = [];
+                    const removedES = [];
+                    const removedLocation = [];
+                    newObject.items.forEach((item) => {
+                      if (item != value) {
+                        removedItems.push(item);
+                      }
+                    });
+                    newObject.strategy.forEach((item) => {
+                      if (item != value) {
+                        removedStrategy.push(item);
+                      }
+                    });
+                    newObject.enemy_skill.forEach((item) => {
+                      if (item != value) {
+                        removedES.push(item);
+                      }
+                    });
+                    newObject.location.forEach((item) => {
+                      if (item != value) {
+                        removedLocation.push(item);
+                      }
+                    });
+                    const actulizedObject = {
+                      ...newObject,
+                      items: removedItems,
+                      enemy_skill: removedES,
+                      location: removedLocation,
+                      strategy: removedStrategy,
+                    };
+                    setNewObject({
+                      ...newObject,
+                      items: removedItems,
+                      enemy_skill: removedES,
+                      location: removedLocation,
+                      strategy: removedStrategy,
+                    });
+                    setEnemies(FilterFunction(list, actulizedObject));
+                  }}
+                >
+                  X
+                </button>
+              </div>
+            ))}
+          </div>
           <div>
             <Divflex gap={'1.5rem'}>
+              <h4 className="headingMinMax">Items</h4>
               <div className="filtersDivsBestiary">
                 {items.map((item) =>
                   item != 'None' ? (
@@ -295,6 +354,7 @@ const Bestiary = () => {
                   ),
                 )}
               </div>
+              <h4 className="headingMinMax">Strategy</h4>
               <div className="filtersDivsBestiary">
                 {strategy.map((item) =>
                   item != 'None' ? (
@@ -330,6 +390,10 @@ const Bestiary = () => {
                               ...newObject,
                               strategy: removed,
                             };
+                            setNewObject({
+                              ...newObject,
+                              strategy: removed,
+                            });
                             setEnemies(FilterFunction(list, actulizedObject));
                             const removedFilter = [];
                             filtersArray.forEach((filter) => {
@@ -348,10 +412,11 @@ const Bestiary = () => {
                   ),
                 )}
               </div>
+              <h4 className="headingMinMax">Enemy Skill</h4>
               <div className="filtersDivsBestiary">
                 {enemy_skill.map((item) =>
                   item != 'None' ? (
-                    <div key={item}>
+                    <Divflex key={item}>
                       <input
                         type="checkbox"
                         id={item}
@@ -399,15 +464,16 @@ const Bestiary = () => {
                         }}
                       />
                       <h4>{item}</h4>
-                    </div>
+                    </Divflex>
                   ) : (
                     <div key={item}></div>
                   ),
                 )}
               </div>
+              <h4 className="headingMinMax">Locations</h4>
               <div className="filtersDivsBestiary">
                 {location.map((item) => (
-                  <Divflex key={item}>
+                  <Divflex key={item} width={'max-content'}>
                     <input
                       type="checkbox"
                       id={item}
@@ -460,51 +526,21 @@ const Bestiary = () => {
               </div>
             </Divflex>
           </div>
-          <div className="filtersdiv">
-            {filtersArray.map((filter) => (
-              <div key={filter}>
-                <h4>{filter}</h4>
-                <button
-                  onClick={(ev) => {
-                    const removedFilter = [];
-                    const value = ev.currentTarget.previousSibling.firstChild.nodeValue;
-                    filtersArray.forEach((filter) => {
-                      if (filter != value) {
-                        removedFilter.push(filter);
-                      }
-                    });
-                    setFilterArray([...removedFilter]);
-                    const removed = [];
-                    newObject.items.forEach((item) => {
-                      if (item != value) {
-                        removed.push(item);
-                      }
-                    });
-                    const actulizedObject = {
-                      ...newObject,
-                      items: removed,
-                    };
-                    setNewObject({
-                      ...newObject,
-                      items: removed,
-                    });
-                    setEnemies(FilterFunction(list, actulizedObject));
-                  }}
-                >
-                  X
-                </button>
-              </div>
-            ))}
-          </div>
+        </div>
+      </div>
+      <div className="enemiesDivBestiary">
+        <DivGrid
+          gap={'2rem'}
+          cols={'260px 260px 260px 260px'}
+          padding={'4rem 1rem'}
+          variant={'rgba(0, 0, 0, 0.274)'}
+        >
+          {enemies.map((enemy) => (
+            <EnemyCard enemy={enemy} key={enemy.id} />
+          ))}
         </DivGrid>
       </div>
-
-      <DivGrid gap={'2rem'} cols={'300px 300px 300px 300px'}>
-        {enemies.map((enemy) => (
-          <EnemyCard enemy={enemy} key={enemy.id} />
-        ))}
-      </DivGrid>
-    </Divflex>
+    </div>
   );
 };
 export default Bestiary;

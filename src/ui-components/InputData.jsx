@@ -13,9 +13,20 @@ const InputDataStyled = styled.input`
   }
 `;
 
-const InputData = ({ position, ph, type, onChange, value, color, back, letter }) => {
+const InputData = ({
+  position,
+  ph,
+  type,
+  onChange,
+  value,
+  color,
+  back,
+  letter,
+  width,
+}) => {
   return (
     <InputDataStyled
+      width={width}
       placeholder={ph}
       type={type}
       onChange={onChange}
