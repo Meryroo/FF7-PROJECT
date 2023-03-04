@@ -7,8 +7,7 @@ const InputStyled = styled.input`
   padding: 10px;
   margin: 10px;
   background: transparent;
-  border: none;
-  border-radius: 3px;
+  border-radius: 10px;
   color: ${Palette.main.highlight};
   ::placeholder {
     color: #e8dcb6;
