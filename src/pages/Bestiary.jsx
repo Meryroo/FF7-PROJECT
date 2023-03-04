@@ -132,6 +132,7 @@ const Bestiary = () => {
           <Divflex padding={'1rem 4rem'} align={'flex-end'} direction={'column'}>
             <h4>Search by name</h4>
             <InputData
+              color={'whitesmoke'}
               width={'110%'}
               type={'text'}
               placeholder={name}

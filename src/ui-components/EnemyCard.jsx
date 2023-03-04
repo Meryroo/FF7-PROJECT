@@ -6,7 +6,26 @@ const EnemyCardStyled = styled.div`
     display: none !important;
   }
   & .enemycard {
+    color: whitesmoke;
     position: relative;
+    border: solid 1px white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px;
+    background-color: #466e85;
+    width: 200px;
+  }
+  & .enemycard > img {
+    position: relative;
+    left: 25px;
+  }
+  & .enemycard > h3 {
+    display: flex;
+    justify-content: center;
+  }
+  & .enemycard > button {
+    position: relative;
+    left: 55px;
+    border-radius: 5px;
   }
   & .modal {
     display: flex;
@@ -36,7 +55,11 @@ const EnemyCardStyled = styled.div`
     background-position: center;
     background-color: #0000008d;
   }
+  & .modal-container > button {
+    width: 50px;
+  }
   & .divmodalflex {
+    color: whitesmoke;
     display: flex;
     padding: 0.6rem;
     width: 100%;
@@ -107,7 +130,7 @@ const EnemyCard = ({ enemy }) => {
                 setModal(!modal);
               }}
             >
-              x
+              Close
             </button>
           </div>
         </div>
