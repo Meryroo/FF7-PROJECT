@@ -140,24 +140,26 @@ const Data = () => {
             <InputData
               value={newEnemy.img}
               type="text"
-              ph="Imagen URL"
+              ph="Add an Image"
               onChange={(ev) => setNewEnemy({ ...newEnemy, img: ev.target.value })}
             />
             <InputData
               value={newEnemy.name}
               type="text"
-              ph="name"
+              ph="Name"
               onChange={(ev) => setNewEnemy({ ...newEnemy, name: ev.target.value })}
             />
             <InputData
               value={newEnemy.level}
               type="number"
+              color="white"
               ph="level"
               onChange={(ev) => setNewEnemy({ ...newEnemy, level: ev.target.value })}
             />
             <InputData
               value={newEnemy.atributes.HP}
               type="number"
+              color="white"
               ph="HP"
               onChange={(ev) =>
                 setNewEnemy({
@@ -169,6 +171,7 @@ const Data = () => {
             <InputData
               value={newEnemy.atributes.MP}
               type="number"
+              color="white"
               ph="MP"
               onChange={(ev) =>
                 setNewEnemy({
@@ -180,6 +183,7 @@ const Data = () => {
             <InputData
               value={newEnemy.earned.exp}
               type="number"
+              color="white"
               ph="exp"
               onChange={(ev) =>
                 setNewEnemy({
@@ -191,6 +195,7 @@ const Data = () => {
             <InputData
               value={newEnemy.earned.AP}
               type="number"
+              color="white"
               ph="AP"
               onChange={(ev) =>
                 setNewEnemy({
@@ -202,6 +207,7 @@ const Data = () => {
             <InputData
               value={newEnemy.earned.gil}
               type="number"
+              color="white"
               ph="gil"
               onChange={(ev) =>
                 setNewEnemy({
