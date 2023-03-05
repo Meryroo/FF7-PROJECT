@@ -139,18 +139,22 @@ const Data = () => {
           <DataForm onSubmit={(ev) => createEnemies(ev)}>
             <InputData
               value={newEnemy.img}
+              width="150px"
               type="text"
               ph="Add an Image"
               onChange={(ev) => setNewEnemy({ ...newEnemy, img: ev.target.value })}
             />
             <InputData
               value={newEnemy.name}
+              width="150px"
               type="text"
               ph="Name"
               onChange={(ev) => setNewEnemy({ ...newEnemy, name: ev.target.value })}
             />
             <InputData
               value={newEnemy.level}
+              width="150px"
+              inputMode="numeric"
               type="number"
               color="white"
               ph="level"
@@ -158,6 +162,7 @@ const Data = () => {
             />
             <InputData
               value={newEnemy.atributes.HP}
+              width="150px"
               type="number"
               color="white"
               ph="HP"
@@ -170,6 +175,7 @@ const Data = () => {
             />
             <InputData
               value={newEnemy.atributes.MP}
+              width="150px"
               type="number"
               color="white"
               ph="MP"
@@ -182,6 +188,7 @@ const Data = () => {
             />
             <InputData
               value={newEnemy.earned.exp}
+              width="150px"
               type="number"
               color="white"
               ph="exp"
@@ -194,6 +201,7 @@ const Data = () => {
             />
             <InputData
               value={newEnemy.earned.AP}
+              width="150px"
               type="number"
               color="white"
               ph="AP"
@@ -206,6 +214,7 @@ const Data = () => {
             />
             <InputData
               value={newEnemy.earned.gil}
+              width="150px"
               type="number"
               color="white"
               ph="gil"
@@ -218,6 +227,7 @@ const Data = () => {
             />
             <InputData
               value={newEnemy.items.drop}
+              width="150px"
               type="text"
               ph="drop"
               onChange={(ev) =>
@@ -229,6 +239,7 @@ const Data = () => {
             />
             <InputData
               value={newEnemy.items.morph}
+              width="150px"
               type="text"
               ph="morph"
               onChange={(ev) =>
@@ -240,6 +251,7 @@ const Data = () => {
             />
             <InputData
               value={newEnemy.items.steal}
+              width="150px"
               type="text"
               ph="steal"
               onChange={(ev) =>
@@ -251,6 +263,7 @@ const Data = () => {
             />
             <InputData
               value={newEnemy.strategy.weakness}
+              width="150px"
               type="text"
               ph="Weakness"
               onChange={(ev) =>
@@ -262,6 +275,7 @@ const Data = () => {
             />
             <InputData
               value={newEnemy.strategy.immune}
+              width="150px"
               type="text"
               ph="Immune"
               onChange={(ev) =>
@@ -273,6 +287,7 @@ const Data = () => {
             />
             <InputData
               value={newEnemy.strategy.absorbs}
+              width="150px"
               type="text"
               ph="Absorbs"
               onChange={(ev) =>
@@ -284,6 +299,7 @@ const Data = () => {
             />
             <InputData
               value={newEnemy.enemy_skill}
+              width="150px"
               type="text"
               ph="Enemy Skill"
               onChange={(ev) =>
@@ -291,6 +307,7 @@ const Data = () => {
               }
             />
             <InputData
+              width="150px"
               type="text"
               ph="Location"
               value={currentLocation}

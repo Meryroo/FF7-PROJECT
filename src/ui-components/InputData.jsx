@@ -23,6 +23,7 @@ const InputData = ({
   back,
   letter,
   width,
+  inputMode,
 }) => {
   return (
     <InputDataStyled
@@ -35,6 +36,7 @@ const InputData = ({
       variant={back}
       letter={letter}
       position={position}
+      inputMode={inputMode}
     />
   );
 };
